@@ -45,7 +45,9 @@ function tag(block, name) {
   return m ? m[1] : "";
 }
 
-// Parse RSS 2.0 XML into raw items.
+// Parse RSS 2.0 XML into raw items. `content:encoded` (the full-body element
+// most bridge/aggregator feeds use, e.g. WeChat→RSS bridges) is kept separately
+// as `content`, preserving paragraph breaks as blank lines.
 export function parseRss(xml) {
   const items = [];
   const blocks = String(xml || "").match(/<item[\s\S]*?<\/item>/gi) || [];
@@ -54,10 +56,29 @@ export function parseRss(xml) {
       title: cleanText(tag(block, "title")),
       link: cleanText(tag(block, "link")),
       description: cleanText(tag(block, "description")),
+      content: cleanHtmlBody(tag(block, "content:encoded")),
       pubDate: cleanText(tag(block, "pubDate")),
     });
   }
   return items;
+}
+
+// Clean an HTML fragment into plain text, keeping paragraph breaks as blank
+// lines (so paragraphsToUnits can preserve them downstream).
+export function cleanHtmlBody(raw) {
+  let s = String(raw || "");
+  if (!s) return "";
+  s = s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1");
+  s = s.replace(/<br\s*\/?>/gi, "\n");
+  s = s.replace(/<\/(p|div|li|h[1-6]|section)>/gi, "\n\n");
+  s = s.replace(/<(script|style)[\s\S]*?<\/\1>/gi, " ");
+  s = s.replace(/<[^>]+>/g, " ");
+  s = decodeEntities(s).replace(/[　]/g, " ");
+  const paras = s
+    .split(/\n{2,}/)
+    .map((p) => p.replace(/[ \t]*\n[ \t]*/g, " ").replace(/[ \t]+/g, " ").trim())
+    .filter(Boolean);
+  return paras.join("\n\n");
 }
 
 // Study body = the article text ONLY (the description here; the full story body
@@ -174,4 +195,40 @@ export async function fetchRssArticles(opts = {}, fetchImpl = fetch) {
     }
   }
   return out;
+}
+
+// ── Custom secondary feed (e.g. a WeChat 公眾號 → RSS bridge) ─────────────────
+// V2 can mix a second source alongside RTHK: point WECHAT_FEED_URL at any
+// RSS 2.0 feed (typically a WeChat→RSS bridge for the Bain Portfolio News
+// 公眾號). Bridge feeds usually carry the full article in <content:encoded>,
+// so no per-article page fetch is needed. Fails soft: any error returns [].
+export async function fetchCustomFeedArticles(
+  { url, source = "Custom feed", max = 4, ...filter } = {},
+  fetchImpl = fetch,
+) {
+  if (!url) return [];
+  try {
+    const res = await fetchImpl(url, { redirect: "follow" });
+    if (!res.ok) return [];
+    const xml = await res.text();
+    const out = [];
+    for (const it of parseRss(xml)) {
+      // Prefer the full <content:encoded> body; fall back to the summary.
+      const content = (it.content || "").trim();
+      const summary = (it.description || "").trim();
+      const body = cjkCount(content) > cjkCount(summary) ? content : summary;
+      if (!isStudyable(body, filter)) continue;
+      out.push({
+        title: it.title,
+        body,
+        url: it.link,
+        publishedAt: it.pubDate,
+        source,
+      });
+      if (out.length >= max) break;
+    }
+    return out;
+  } catch {
+    return [];
+  }
 }

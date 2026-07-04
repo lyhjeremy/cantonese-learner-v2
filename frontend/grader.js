@@ -6,6 +6,12 @@
 // accepts homophones — if the recogniser hears a different character with the
 // same/similar Cantonese pronunciation, it still counts (right sound, wrong
 // character = a soft/amber match).
+//
+// V2: the recogniser often returns Arabic digits ("2020年") while the target
+// displays the anchor reading (二零二零年), so the heard text is passed through
+// the same context-aware numeral speller before comparing.
+
+import { spellOutNumbers } from "./numbers.js";
 
 function isCjkIdeograph(ch) {
   const o = ch.codePointAt(0);
@@ -89,7 +95,9 @@ export function gradeText(target, heard, normalizeChar = (c) => c, jyutpingOf = 
   // script normaliser (e.g. Traditional->Simplified) so 學 == 学 too.
   const canon = (ch) => normalizeChar(COLLOQ_TO_STD[ch] || ch);
   const orig = cjkOnly(target);
-  const heardChars = cjkOnly(heard);
+  // Digits in the transcript become their spoken reading (2020年 -> 二零二零年)
+  // so reading a spelled-out number correctly is never marked wrong.
+  const heardChars = cjkOnly(spellOutNumbers(heard));
   const pairs = alignSequences(orig.map(canon), heardChars.map(canon));
   const marks = orig.map((char) => ({ char, ok: false, sound: false }));
   for (const p of pairs) {

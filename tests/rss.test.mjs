@@ -122,3 +122,48 @@ test("newsScore ranks a policy story above a pure market-ticker report", () => {
 test("digitDensity is higher for number-heavy text", () => {
   assert.ok(digitDensity("升400點 1.54% 23232點") > digitDensity("政府宣布推出新的監管政策"));
 });
+
+// ── V2: custom secondary feed (WeChat 公眾號 bridge) ──────────────────────────
+
+import { fetchCustomFeedArticles, cleanHtmlBody } from "../backend/rss.js";
+
+const WECHAT_FIXTURE = `<?xml version="1.0"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel><title>Bain Portfolio News</title>
+<item>
+  <title><![CDATA[投資組合公司季度表現回顧]]></title>
+  <link>https://mp.weixin.qq.com/s/abc123</link>
+  <description><![CDATA[短摘要。]]></description>
+  <content:encoded><![CDATA[<p>投資組合公司本季度收入增長百分之十五，表現理想。</p><p>管理層認為未來需求持續，計劃擴充產能，同時關注成本控制。</p>]]></content:encoded>
+  <pubDate>Thu, 02 Jul 2026 06:00:00 GMT</pubDate>
+</item>
+<item>
+  <title><![CDATA[English only item]]></title>
+  <link>https://mp.weixin.qq.com/s/def456</link>
+  <description><![CDATA[English content, not studyable.]]></description>
+  <pubDate>Thu, 02 Jul 2026 07:00:00 GMT</pubDate>
+</item>
+</channel></rss>`;
+
+test("V2: fetchCustomFeedArticles takes the full content:encoded body and keeps paragraphs", async () => {
+  const mockFetch = async () => ({ ok: true, text: async () => WECHAT_FIXTURE });
+  const out = await fetchCustomFeedArticles(
+    { url: "https://bridge.example/feed.xml", source: "Bain Portfolio News", minChars: 20 },
+    mockFetch,
+  );
+  assert.equal(out.length, 1); // English item filtered out
+  assert.equal(out[0].source, "Bain Portfolio News");
+  assert.ok(out[0].body.includes("\n\n"), "paragraph break preserved");
+  assert.ok(out[0].body.includes("擴充產能"));
+});
+
+test("V2: fetchCustomFeedArticles fails soft", async () => {
+  assert.deepEqual(await fetchCustomFeedArticles({ url: "" }), []);
+  const boom = async () => { throw new Error("net down"); };
+  assert.deepEqual(await fetchCustomFeedArticles({ url: "https://x" }, boom), []);
+});
+
+test("V2: cleanHtmlBody strips tags, keeps blank-line paragraphs", () => {
+  const out = cleanHtmlBody("<p>第一段。</p><p>第二段。</p>");
+  assert.equal(out, "第一段。\n\n第二段。");
+});

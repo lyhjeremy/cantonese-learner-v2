@@ -174,3 +174,56 @@ body {
 
 /* On short viewports, also cap the feedback panel so the reader stays on-screen. */
 .feedback { margin: 10px 0 2px; }
+
+/* ── V2 additions ─────────────────────────────────────────────────────────── */
+
+/* Verified-by-reviewer banner */
+.verified-banner {
+  background: var(--ok-soft); color: var(--ok); border-radius: 12px;
+  padding: 8px 14px; font-size: 13px; font-weight: 550; margin: 6px 0 4px;
+}
+
+/* Conversations section */
+.conv-blurb { color: var(--muted); font-size: 14px; margin: -6px 0 12px; }
+.conv-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.conv-head .card-title { margin: 0; }
+.conv-emoji { font-size: 26px; line-height: 1; }
+#conv-block { margin-top: 28px; }
+
+/* Speaker labels (conversation dialogue lines) */
+.spk { color: var(--accent); font-weight: 650; font-size: 0.85em; margin-right: 2px; }
+.il-block > .spk { display: block; font-size: 13px; margin-bottom: 2px; }
+
+/* Aligned written↔spoken phrase segments (current sentence only).
+   .seg-diff marks phrases that actually differ — dotted underline hints
+   they're tappable; tapping lights up the counterpart in the other pane. */
+.seg { cursor: pointer; border-radius: 6px; }
+.seg-diff { text-decoration: underline dotted var(--muted) 1.5px; text-underline-offset: 4px; }
+.seg.seg-hl, .seg.seg-hl .hz { background: var(--accent-soft); }
+.seg.seg-hl { box-shadow: 0 0 0 2px var(--accent-soft); }
+.tap-hint { text-align: center; color: var(--muted); font-size: 12.5px; margin: 6px 0 0; }
+
+/* English gloss under the panes (conversation lines, EN interface) */
+.gloss { text-align: center; color: var(--muted); font-size: 15px; font-style: italic; margin: 8px 0 0; }
+
+/* Auto-play button state */
+.tbtn.active { background: var(--accent); color: #fff; border-color: transparent; }
+.tbtn.active .key { color: rgba(255, 255, 255, 0.8); }
+
+/* Interleaved view: hidden on wide screens, replaces the two panes on narrow
+   ones. Written line sits directly above its spoken counterpart, so the eye
+   never has to travel between two stacked panes. */
+.interleaved { display: none; }
+#interleaved-pane { max-height: 52vh; overflow-y: auto; font-family: var(--cjk); line-height: 2.0; }
+.il-block { padding: 8px 10px; border-radius: 10px; opacity: 0.55; cursor: pointer; }
+.il-block.current { opacity: 1; background: var(--accent-soft); }
+.il-formal { font-size: 17px; color: var(--muted); letter-spacing: 0.35em; }
+.il-block.current .il-formal { font-size: 19px; color: var(--text); }
+.il-colloquial { margin-top: 2px; }
+.il-colloquial .cc { font-size: 20px; }
+.il-block.current .il-colloquial .cc { font-size: 24px; }
+
+@media (max-width: 720px) {
+  .panes { display: none; }
+  .interleaved { display: block; }
+}

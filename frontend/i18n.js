@@ -49,6 +49,34 @@ export const STR = {
     hant: "粵語轉換暫時無法提供 — 顯示書面語。",
     hans: "粤语转换暂时无法提供 — 显示书面语。",
   },
+  newsSection: { en: "Today's news", hant: "今日新聞", hans: "今日新闻" },
+  convSection: {
+    en: "Everyday Hong Kong conversations",
+    hant: "香港日常會話",
+    hans: "香港日常会话",
+  },
+  convBlurb: {
+    en: "Order at a cha chaan teng, take a taxi, survive the office — one line at a time.",
+    hant: "茶餐廳點餐、搭的士、返工傾偈 — 一句一句學。",
+    hans: "茶餐厅点餐、搭的士、上班聊天 — 一句一句学。",
+  },
+  autoplay: { en: "Auto", hant: "自動播放", hans: "自动播放" },
+  verifiedNote: {
+    en: "✓ Cantonese cross-checked by an independent AI reviewer",
+    hant: "✓ 粵語已由獨立 AI 審核員覆核",
+    hans: "✓ 粤语已由独立 AI 审核员复核",
+  },
+  tapHint: {
+    en: "Tap an underlined phrase to see its written ↔ spoken match.",
+    hant: "㩒有底線嘅詞組，對照書面語同口語。",
+    hans: "点击带下划线的词组，对照书面语和口语。",
+  },
+  lines: { en: "lines", hant: "句", hans: "句" },
+  levelNames: {
+    en: (l) => ({ 1: "Beginner", 2: "Intermediate", 3: "Advanced" })[l] || "",
+    hant: (l) => ({ 1: "入門", 2: "進階", 3: "高級" })[l] || "",
+    hans: (l) => ({ 1: "入门", 2: "进阶", 3: "高级" })[l] || "",
+  },
   noTts: {
     en: "No zh-HK voice in this browser — install a Cantonese voice, or try Chrome/Safari.",
     hant: "此瀏覽器沒有粵語語音 — 請安裝粵語語音，或試用 Chrome/Safari。",
@@ -64,7 +92,7 @@ export const STR = {
     hant: "語音評分需要 Chrome（語音辨識）。聆聽同閱讀仍然可用。",
     hans: "语音评分需要 Chrome（语音识别）。聆听和阅读仍然可用。",
   },
-  micHint: { en: "Space Play · R Record · ← Prev · → Next", hant: "空白鍵 播放 · R 錄音 · ← 上一句 · → 下一句", hans: "空格 播放 · R 录音 · ← 上一句 · → 下一句" },
+  micHint: { en: "Space Play · R Record · A Auto-play · ← Prev · → Next", hant: "空白鍵 播放 · R 錄音 · A 自動播放 · ← 上一句 · → 下一句", hans: "空格 播放 · R 录音 · A 自动播放 · ← 上一句 · → 下一句" },
   back: { en: "← All articles", hant: "← 所有文章", hans: "← 所有文章" },
   sentenceOf: { en: (a, b) => `Sentence ${a} of ${b}`, hant: (a, b) => `第 ${a} 句，共 ${b} 句`, hans: (a, b) => `第 ${a} 句，共 ${b} 句` },
 };

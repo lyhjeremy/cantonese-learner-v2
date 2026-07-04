@@ -26,8 +26,16 @@
       <!-- Article list -->
       <section id="list">
         <p id="banner" class="banner"></p>
+        <p id="verified-banner" class="verified-banner" hidden></p>
         <h2 id="list-title" class="section-title"></h2>
         <div id="cards" class="cards"></div>
+
+        <!-- Everyday conversations (bundled curriculum) -->
+        <div id="conv-block" hidden>
+          <h2 id="conv-title" class="section-title"></h2>
+          <p id="conv-blurb" class="conv-blurb"></p>
+          <div id="conv-cards" class="cards"></div>
+        </div>
       </section>
 
       <!-- Reader -->
@@ -44,6 +52,7 @@
           <span id="counter" class="counter"></span>
         </div>
 
+        <!-- Side-by-side panes (desktop / wide screens) -->
         <div class="panes">
           <div class="pane">
             <div id="formal-label" class="pane-label"></div>
@@ -55,11 +64,22 @@
           </div>
         </div>
 
+        <!-- Interleaved view (narrow screens): written line directly above its
+             spoken counterpart, pair by pair, so they can be compared without
+             scrolling between two stacked panes. -->
+        <div id="interleaved" class="pane interleaved">
+          <div id="interleaved-pane" class="pane-body"></div>
+        </div>
+
+        <p id="gloss" class="gloss" hidden></p>
+        <p id="tap-hint" class="tap-hint" hidden></p>
+
         <div id="feedback" class="feedback" hidden></div>
 
         <div class="transport">
           <button id="btn-prev" class="tbtn"><span class="key">←</span><span class="lbl"></span></button>
           <button id="btn-play" class="tbtn primary"><span class="key">Space</span><span class="lbl"></span></button>
+          <button id="btn-auto" class="tbtn"><span class="key">A</span><span class="lbl"></span></button>
           <button id="btn-record" class="tbtn record"><span class="key">R</span><span class="lbl"></span></button>
           <button id="btn-replay" class="tbtn"><span class="key">↻</span><span class="lbl"></span></button>
           <button id="btn-next" class="tbtn"><span class="key">→</span><span class="lbl"></span></button>

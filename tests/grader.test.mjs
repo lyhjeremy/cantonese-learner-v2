@@ -72,3 +72,15 @@ test("punctuation is ignored in scoring", () => {
   assert.equal(r.marks.length, 2);
   assert.equal(r.accuracy, 1);
 });
+
+// ── V2: digit normalisation of the heard transcript ───────────────────────────
+
+test("V2: heard digits match the spelled-out target (2020年 == 二零二零年)", () => {
+  const r = gradeText("二零二零年經濟好", "2020年經濟好");
+  assert.equal(r.accuracy, 1);
+});
+
+test("V2: heard cardinal digits match quantities (500個 == 五百個)", () => {
+  const r = gradeText("賣出五百個", "賣出500個");
+  assert.equal(r.accuracy, 1);
+});

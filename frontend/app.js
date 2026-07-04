@@ -1,6 +1,8 @@
-// app.js — the karaoke reader: data loading, side-by-side panes, jyutping ruby,
-// transport, toggles, keyboard shortcuts, tri-lingual UI, and graceful
-// degradation for missing TTS / speech-recognition.
+// app.js — the karaoke reader: data loading, side-by-side + interleaved panes,
+// jyutping ruby, aligned written↔spoken phrase segments (tap to compare),
+// auto-play, the everyday-conversations curriculum, transport, toggles,
+// keyboard shortcuts, tri-lingual UI, and graceful degradation for missing
+// TTS / speech-recognition.
 
 import { LANGS, LANG_LABELS, t } from "./i18n.js";
 import { initTts, speak, stopSpeaking, voiceName } from "./tts.js";
@@ -15,7 +17,7 @@ const el = (tag, cls, text) => {
 };
 
 // ── Persistent settings (client-side only, per the non-goals) ────────────────
-const SETTINGS_KEY = "cfl.settings.v1";
+const SETTINGS_KEY = "cfl.settings.v2";
 const defaults = { lang: "en", theme: "light", speed: 1.0, script: "trad" };
 function loadSettings() {
   try {
@@ -43,11 +45,13 @@ function saveSettings() {
 const state = {
   ...loadSettings(),
   lessons: null,
+  conversations: null,
   article: null,
   idx: 0,
   tts: { available: false, voices: {} },
   asrOk: asrAvailable(),
   recording: null,
+  autoplay: null, // token while auto-play is running
 };
 
 // ── Script conversion (OpenCC via CDN; identity fallback) ────────────────────
@@ -74,6 +78,12 @@ function forScript(s) {
   if (!openccOk) return s;
   return state.script === "simp" ? t2s(s) : s2t(s);
 }
+// Segment-safe display conversion: falls back to the original text when the
+// conversion would change the character count (would break jyutping/marks).
+function forScriptAligned(s) {
+  const converted = forScript(s);
+  return [...converted].length === [...s].length ? converted : s;
+}
 
 // ── Jyutping dictionary (for homophone-lenient grading) ──────────────────────
 let jyutDict = null;
@@ -94,7 +104,7 @@ function jyutpingOf(ch) {
   return val ? val.split(" ") : null;
 }
 
-// ── Data loading: backend if configured, else bundled sample ─────────────────
+// ── Data loading: daily news + bundled conversations ─────────────────────────
 async function loadLessons() {
   // Live news baked daily by GitHub Actions (RSS + rewrite). Falls back to the
   // bundled curated sample so the app always works offline.
@@ -111,9 +121,37 @@ async function loadLessons() {
   return res.json();
 }
 
+async function loadConversations() {
+  try {
+    const res = await fetch("./data/conversations.json");
+    if (res.ok) {
+      const data = await res.json();
+      if (data && Array.isArray(data.scenarios) && data.scenarios.length) return data;
+    }
+  } catch {
+    /* conversations are optional */
+  }
+  return null;
+}
+
+// Adapt a conversation scenario to the article shape the reader renders.
+function scenarioAsArticle(sc) {
+  return {
+    id: sc.id,
+    conversation: true,
+    emoji: sc.emoji || "💬",
+    title: (sc.title && (sc.title[state.lang] ?? sc.title.en)) || sc.id,
+    source: t("convSection", state.lang),
+    url: "",
+    converted: true,
+    sentences: sc.sentences,
+  };
+}
+
 // ── Rendering: article list ──────────────────────────────────────────────────
 function renderList() {
   state.article = null;
+  stopAutoplay();
   $("#reader").hidden = true;
   $("#list").hidden = false;
 
@@ -123,10 +161,13 @@ function renderList() {
   } else {
     banner.textContent = `${state.lessons.source || ""}${state.lessons.date ? " · " + state.lessons.date : ""}`;
   }
+  const vb = $("#verified-banner");
+  vb.hidden = state.lessons.method !== "llm+verify";
+  vb.textContent = t("verifiedNote", state.lang);
 
   const list = $("#cards");
   list.innerHTML = "";
-  $("#list-title").textContent = t("pickArticle", state.lang);
+  $("#list-title").textContent = `${t("newsSection", state.lang)} — ${t("pickArticle", state.lang)}`;
   state.lessons.articles.forEach((a) => {
     const card = el("button", "card");
     card.appendChild(el("h3", "card-title", forScript(a.title)));
@@ -142,12 +183,39 @@ function renderList() {
     card.addEventListener("click", () => openArticle(a));
     list.appendChild(card);
   });
+
+  // Everyday conversations section.
+  const block = $("#conv-block");
+  if (state.conversations) {
+    block.hidden = false;
+    $("#conv-title").textContent = t("convSection", state.lang);
+    $("#conv-blurb").textContent = t("convBlurb", state.lang);
+    const conv = $("#conv-cards");
+    conv.innerHTML = "";
+    state.conversations.scenarios.forEach((sc) => {
+      const a = scenarioAsArticle(sc);
+      const card = el("button", "card conv-card");
+      const head = el("div", "conv-head");
+      head.appendChild(el("span", "conv-emoji", a.emoji));
+      head.appendChild(el("h3", "card-title", a.title));
+      card.appendChild(head);
+      const meta = el("div", "card-meta");
+      meta.appendChild(el("span", "src", t("levelNames", state.lang, sc.level || 1)));
+      meta.appendChild(el("span", "cnt", `${a.sentences.length} ${t("lines", state.lang)}`));
+      card.appendChild(meta);
+      card.addEventListener("click", () => openArticle(scenarioAsArticle(sc)));
+      conv.appendChild(card);
+    });
+  } else {
+    block.hidden = true;
+  }
 }
 
 // ── Rendering: reader ────────────────────────────────────────────────────────
 function openArticle(a) {
   state.article = a;
   state.idx = 0;
+  stopAutoplay();
   $("#list").hidden = true;
   $("#reader").hidden = false;
   renderReader();
@@ -163,35 +231,95 @@ function paragraphsOf(a) {
   return [...map.values()];
 }
 
+function speakerLabel(s) {
+  if (!s.speaker) return null;
+  if (typeof s.speaker === "string") return s.speaker;
+  return s.speaker[state.lang] ?? s.speaker.hant ?? s.speaker.en;
+}
+
+// Toggle the shared phrase highlight across all rendered copies of segment k.
+let activeSeg = null;
+function activateSeg(k) {
+  document.querySelectorAll(".seg.seg-hl").forEach((e) => e.classList.remove("seg-hl"));
+  activeSeg = activeSeg === k ? null : k;
+  if (activeSeg == null) return;
+  document
+    .querySelectorAll(`.seg[data-seg="${activeSeg}"]`)
+    .forEach((e) => e.classList.add("seg-hl"));
+}
+
+function segSpan(k, diff) {
+  const s = el("span", "seg" + (diff ? " seg-diff" : ""));
+  s.dataset.seg = k;
+  s.addEventListener("click", (e) => {
+    e.stopPropagation();
+    activateSeg(k);
+  });
+  return s;
+}
+
+// Render the FORMAL text of the current sentence as tappable segments.
+function renderFormalSegments(sentence) {
+  const wrap = el("span");
+  sentence.pairs.forEach((p, k) => {
+    if (!p.f) return;
+    const seg = segSpan(k, p.f !== p.c);
+    seg.textContent = forScript(p.f);
+    wrap.appendChild(seg);
+  });
+  return wrap;
+}
+
 // Render one colloquial sentence as ruby (char + jyutping). marks (optional) is
-// the CJK-only grading result applied in order.
-function renderColloquial(sentence, marks) {
+// the CJK-only grading result applied in order. When `withSegs` and the
+// sentence has aligned pairs, the cells are grouped into tappable segments.
+function renderColloquial(sentence, marks, withSegs = false) {
   const wrap = el("span", "cc-sentence");
-  const chars = [...forScript(sentence.colloquial)];
   const jy = sentence.jyutping || [];
   let cjkSeen = 0;
-  chars.forEach((ch, i) => {
-    const isCjk = /[㐀-䶿一-鿿豈-﫿]/.test(ch);
-    // Each character is a uniform, fixed-width cell: jyutping row on top, glyph
-    // below — consistent gaps regardless of jyutping length.
-    const cell = el("span", "cc" + (isCjk ? "" : " punct"));
-    cell.appendChild(el("span", "jp", isCjk ? jy[i] || "" : ""));
-    cell.appendChild(el("span", "hz", ch));
-    if (isCjk) {
-      if (marks) {
-        const m = marks[cjkSeen];
-        if (m) cell.classList.add(m.ok ? "ok" : m.sound ? "soft" : "bad");
+  let charOffset = 0;
+
+  const emitChars = (text, container) => {
+    const display = forScriptAligned(text);
+    const origChars = [...text];
+    const dispChars = [...display];
+    origChars.forEach((origCh, i) => {
+      const ch = dispChars[i] ?? origCh;
+      const isCjk = /[㐀-䶿一-鿿豈-﫿]/.test(ch);
+      // Each character is a uniform, fixed-width cell: jyutping row on top,
+      // glyph below — consistent gaps regardless of jyutping length.
+      const cell = el("span", "cc" + (isCjk ? "" : " punct"));
+      cell.appendChild(el("span", "jp", isCjk ? jy[charOffset] || "" : ""));
+      cell.appendChild(el("span", "hz", ch));
+      if (isCjk) {
+        if (marks) {
+          const m = marks[cjkSeen];
+          if (m) cell.classList.add(m.ok ? "ok" : m.sound ? "soft" : "bad");
+        }
+        cjkSeen++;
       }
-      cjkSeen++;
-    }
-    wrap.appendChild(cell);
-  });
+      charOffset++;
+      container.appendChild(cell);
+    });
+  };
+
+  if (withSegs && sentence.pairs) {
+    sentence.pairs.forEach((p, k) => {
+      if (!p.c) return;
+      const seg = segSpan(k, p.f !== p.c);
+      emitChars(p.c, seg);
+      wrap.appendChild(seg);
+    });
+  } else {
+    emitChars(sentence.colloquial, wrap);
+  }
   return wrap;
 }
 
 function renderReader(marks) {
   const a = state.article;
   const cur = a.sentences[state.idx];
+  activeSeg = null;
 
   $("#reader-title").textContent = forScript(a.title);
   $("#reader-src").textContent = a.source || "";
@@ -205,42 +333,89 @@ function renderReader(marks) {
 
   const formalPane = $("#formal-pane");
   const ccPane = $("#colloquial-pane");
+  const ilPane = $("#interleaved-pane");
   formalPane.innerHTML = "";
   ccPane.innerHTML = "";
+  ilPane.innerHTML = "";
+
+  const isCur = (s) => s.id === cur.id && (s.paragraph_id ?? 0) === (cur.paragraph_id ?? 0);
 
   paragraphsOf(a).forEach((para) => {
     const fp = el("p", "para");
     const cp = el("p", "para");
     para.forEach((s) => {
-      const isCur = s.id === cur.id && s.paragraph_id === cur.paragraph_id;
-      const fspan = el("span", "sentence" + (isCur ? " current" : ""), forScript(s.formal));
+      const current = isCur(s);
+      const spk = speakerLabel(s);
+
+      // Written pane.
+      const fspan = el("span", "sentence" + (current ? " current" : ""));
+      if (spk) fspan.appendChild(el("span", "spk", spk + "："));
+      if (current && s.pairs) fspan.appendChild(renderFormalSegments(s));
+      else fspan.appendChild(document.createTextNode(forScript(s.formal)));
       fspan.addEventListener("click", () => jumpTo(a.sentences.indexOf(s)));
       fp.appendChild(fspan);
 
-      const cspan = el("span", "sentence" + (isCur ? " current" : ""));
+      // Spoken pane.
+      const cspan = el("span", "sentence" + (current ? " current" : ""));
+      if (spk) cspan.appendChild(el("span", "spk", spk + "："));
       if (s.colloquial && s.jyutping && s.jyutping.length) {
-        cspan.appendChild(renderColloquial(s, isCur ? marks : null));
+        cspan.appendChild(renderColloquial(s, current ? marks : null, current));
       } else {
-        cspan.textContent = forScript(s.colloquial || s.formal);
+        cspan.appendChild(document.createTextNode(forScript(s.colloquial || s.formal)));
       }
       cspan.addEventListener("click", () => jumpTo(a.sentences.indexOf(s)));
       cp.appendChild(cspan);
+
+      // Interleaved view (narrow screens): written directly above spoken.
+      const block = el("div", "il-block" + (current ? " current" : ""));
+      if (spk) block.appendChild(el("div", "spk", spk));
+      const ilFormal = el("div", "il-formal");
+      if (current && s.pairs) ilFormal.appendChild(renderFormalSegments(s));
+      else ilFormal.textContent = forScript(s.formal);
+      block.appendChild(ilFormal);
+      const ilCC = el("div", "il-colloquial");
+      if (s.colloquial && s.jyutping && s.jyutping.length) {
+        ilCC.appendChild(renderColloquial(s, current ? marks : null, current));
+      } else {
+        ilCC.textContent = forScript(s.colloquial || s.formal);
+      }
+      block.appendChild(ilCC);
+      block.addEventListener("click", () => jumpTo(a.sentences.indexOf(s)));
+      ilPane.appendChild(block);
     });
     formalPane.appendChild(fp);
     ccPane.appendChild(cp);
   });
 
-  // Scroll current sentence into view.
-  const curEl = ccPane.querySelector(".current");
+  // English gloss for conversation lines (when the UI is in English).
+  const gloss = $("#gloss");
+  if (cur.en && state.lang === "en") {
+    gloss.hidden = false;
+    gloss.textContent = cur.en;
+  } else {
+    gloss.hidden = true;
+  }
+
+  // Hint that the phrase segments are tappable (only when there's a real diff).
+  const hint = $("#tap-hint");
+  hint.hidden = !(cur.pairs && cur.pairs.some((p) => p.f !== p.c));
+  hint.textContent = t("tapHint", state.lang);
+
+  // Scroll current sentence into view (whichever pane is visible).
+  const target = ilPane.offsetParent ? ilPane : ccPane;
+  const curEl = target.querySelector(".current");
   if (curEl) curEl.scrollIntoView({ block: "center", behavior: "smooth" });
 
   updateControls();
 }
 
-function jumpTo(i) {
+function jumpTo(i, keepAutoplay = false) {
   if (i < 0 || i >= state.article.sentences.length) return;
   state.idx = i;
-  stopSpeaking();
+  if (!keepAutoplay) {
+    stopAutoplay();
+    stopSpeaking();
+  }
   clearFeedback();
   renderReader();
 }
@@ -261,6 +436,37 @@ async function play() {
   await speak(forScript(s.colloquial || s.formal), state.speed);
 }
 
+// Auto-play: listen through the whole article hands-free — each sentence is
+// spoken, then the reader advances, until the end (or the learner stops it).
+async function toggleAutoplay() {
+  if (state.autoplay) {
+    stopAutoplay();
+    return;
+  }
+  if (!state.tts.available || !state.article) return;
+  const token = Symbol("autoplay");
+  state.autoplay = token;
+  $("#btn-auto").classList.add("active");
+  clearFeedback();
+  while (state.autoplay === token && state.article) {
+    await play();
+    if (state.autoplay !== token) return;
+    if (state.idx + 1 >= state.article.sentences.length) break;
+    await new Promise((r) => setTimeout(r, 500)); // a beat between sentences
+    if (state.autoplay !== token) return;
+    jumpTo(state.idx + 1, true);
+  }
+  if (state.autoplay === token) stopAutoplay();
+}
+
+function stopAutoplay() {
+  if (!state.autoplay) return;
+  state.autoplay = null;
+  stopSpeaking();
+  const btn = $("#btn-auto");
+  if (btn) btn.classList.remove("active");
+}
+
 function clearFeedback() {
   const fb = $("#feedback");
   fb.hidden = true;
@@ -269,6 +475,7 @@ function clearFeedback() {
 
 async function record() {
   if (!state.asrOk || state.recording) return;
+  stopAutoplay();
   const btn = $("#btn-record");
   btn.classList.add("active");
   const fb = $("#feedback");
@@ -311,6 +518,7 @@ function showFeedback(result, heard) {
 // ── Controls / labels ────────────────────────────────────────────────────────
 function updateControls() {
   $("#btn-play").querySelector(".lbl").textContent = t("play", state.lang);
+  $("#btn-auto").querySelector(".lbl").textContent = t("autoplay", state.lang);
   $("#btn-record").querySelector(".lbl").textContent = t("record", state.lang);
   $("#btn-prev").querySelector(".lbl").textContent = t("prev", state.lang);
   $("#btn-next").querySelector(".lbl").textContent = t("next", state.lang);
@@ -327,6 +535,7 @@ function updateControls() {
   $("#script-sel").value = state.script;
   $("#script-sel").disabled = !openccOk;
   $("#btn-play").disabled = !state.tts.available;
+  $("#btn-auto").disabled = !state.tts.available;
   $("#btn-record").hidden = !state.asrOk;
 
   // Degradation notes: no voice at all, OR only a non-Cantonese fallback voice.
@@ -370,8 +579,15 @@ function renderLangButtons() {
 // ── Wiring ───────────────────────────────────────────────────────────────────
 function wire() {
   $("#back-btn").addEventListener("click", renderList);
-  $("#btn-play").addEventListener("click", play);
-  $("#btn-replay").addEventListener("click", play);
+  $("#btn-play").addEventListener("click", () => {
+    stopAutoplay();
+    play();
+  });
+  $("#btn-replay").addEventListener("click", () => {
+    stopAutoplay();
+    play();
+  });
+  $("#btn-auto").addEventListener("click", toggleAutoplay);
   $("#btn-next").addEventListener("click", next);
   $("#btn-prev").addEventListener("click", prev);
   $("#btn-record").addEventListener("click", () => (state.recording ? stopRecord() : record()));
@@ -398,13 +614,19 @@ function wire() {
     if (tag === "input" || tag === "select" || tag === "textarea") return;
     if (e.code === "Space") {
       e.preventDefault();
+      stopAutoplay();
       play();
     } else if (e.key === "r" || e.key === "R") {
       state.recording ? stopRecord() : record();
+    } else if (e.key === "a" || e.key === "A") {
+      toggleAutoplay();
     } else if (e.key === "ArrowRight") {
       next();
     } else if (e.key === "ArrowLeft") {
       prev();
+    } else if (e.key === "Escape") {
+      stopAutoplay();
+      stopSpeaking();
     }
   });
 }
@@ -417,8 +639,13 @@ async function main() {
   $("#banner").textContent = t("loading", state.lang);
 
   state.tts = await initTts();
-  const [lessons] = await Promise.all([loadLessons(), loadJyutDict()]);
+  const [lessons, conversations] = await Promise.all([
+    loadLessons(),
+    loadConversations(),
+    loadJyutDict(),
+  ]);
   state.lessons = lessons;
+  state.conversations = conversations;
   renderList();
   updateControls();
   window.__CFL_READY = true; // signal for e2e tests
