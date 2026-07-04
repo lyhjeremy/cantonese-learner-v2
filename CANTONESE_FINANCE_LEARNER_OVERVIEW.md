@@ -6,6 +6,38 @@
 > and the **browser's own speech engine** (not edge-tts / Whisper). See
 > **[`README.md`](./README.md)** for how the shipped app actually works.
 
+---
+
+## ✅ V2 build status & handoff (updated 2026-07-04)
+
+**Status: V2 built, tested, and published.** This repo is **V2** — a fork of
+[cantonese-learner](https://github.com/lyhjeremy/cantonese-learner) (V1, which
+stays live and untouched). The README describes the current state; this spec is
+kept for the original rationale.
+
+**Where it lives**
+- GitHub (public): https://github.com/lyhjeremy/cantonese-learner-v2
+- Live site (GitHub Pages, rebuilt daily 06:00 HKT):
+  https://lyhjeremy.github.io/cantonese-learner-v2/
+
+**What V2 added over V1**
+1. Two-pass Claude rewrite (Opus 4.8 rewrite + independent verifier that
+   repairs mangled compounds like 唔足) with aligned written↔spoken phrase
+   pairs — activates when an `ANTHROPIC_API_KEY` secret is added; currently
+   running keyless on the hardened rule converter (~10× larger protect table).
+2. Context-aware numeral readings (2020年→二零二零年, 2020個→二千零二十個,
+   15%→百分之十五) with jyutping, TTS, and digit-tolerant grading.
+3. A 10-scenario everyday-conversations curriculum (99 lines, cross-checked by
+   three independent AI reviewers; 23 fixes applied).
+4. Tap-to-compare phrase segments + an interleaved mobile view.
+5. Auto-play (hands-free listen-through).
+6. A Bain-relevant secondary news source: a WeChat 公眾號 RSS bridge when
+   configured, else a keyless web-scrape fallback (Google News zh-HK →
+   publisher-URL decode → generic body extraction) for 貝恩資本 coverage.
+
+**Verification:** 79 unit + Playwright e2e tests green; data validator covers
+sample lessons, conversations, pair alignment, and the daily build output.
+
 > A hand-off / spec document for building a **daily financial-news → interactive
 > Cantonese learning web app**. It is a sibling of the *Mandarin Learning Reader*
 > and the *EPUB→Audiobook Generator*, and it reuses their proven ideas

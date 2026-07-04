@@ -18,6 +18,8 @@ which written phrase became which spoken phrase.
 No sign-up, no install, no keys. Use **Chrome** for the speaking/scoring
 feature — other browsers can listen and read.
 
+![The reader on a Bain Capital story: written Chinese on the left, spoken Cantonese with jyutping on the right, 4% spelled out as 百分之四, and the tap-to-compare hint below.](docs/reader-light.png)
+
 ---
 
 ## What's new in V2
