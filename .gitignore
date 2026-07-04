@@ -1,0 +1,8 @@
+node_modules/
+package-lock.json
+.DS_Store
+*.log
+.wrangler/
+.dev.vars
+# Generated daily by the Pages workflow (RSS + rule-based rewrite); not committed.
+frontend/data/today.json

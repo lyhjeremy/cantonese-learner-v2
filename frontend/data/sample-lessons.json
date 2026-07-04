@@ -1,0 +1,87 @@
+{
+  "date": "2026-07-01",
+  "source": "Sample data (offline demo — no live news / no API key required)",
+  "generatedAt": "2026-07-01T06:00:00+08:00",
+  "sample": true,
+  "articles": [
+    {
+      "id": "a0",
+      "title": "恒指造好 科技股帶動大市",
+      "source": "Sample",
+      "url": "https://example.com/hk-market",
+      "publishedAt": "2026-07-01T01:30:00Z",
+      "converted": true,
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "formal": "恒生指數今日高開，收市升幅超過百分之二。",
+          "colloquial": "恒生指數今日高開，收市升咗超過百分之二。",
+          "jyutping": ["hang4","sang1","zi2","sou3","gam1","jat6","gou1","hoi1","","sau1","si5","sing1","zo2","ciu1","gwo3","baak3","fan1","zi1","ji6",""]
+        },
+        {
+          "id": 1,
+          "paragraph_id": 0,
+          "formal": "分析師指出，科技股帶動大市造好。",
+          "colloquial": "分析員話，科技股帶動個市造好。",
+          "jyutping": ["fan1","sik1","jyun4","waa6","","fo1","gei6","gu2","daai3","dung6","go3","si5","zou6","hou2",""]
+        },
+        {
+          "id": 2,
+          "paragraph_id": 1,
+          "formal": "市場預期央行短期內不會加息。",
+          "colloquial": "市場預期央行短期內唔會加息。",
+          "jyutping": ["si5","coeng4","jyu6","kei4","joeng1","hong4","dyun2","kei4","noi6","m4","wui5","gaa1","sik1",""]
+        }
+      ]
+    },
+    {
+      "id": "a1",
+      "title": "季度盈利勝預期 管理層看好前景",
+      "source": "Sample",
+      "url": "https://example.com/earnings",
+      "publishedAt": "2026-07-01T02:10:00Z",
+      "converted": true,
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "formal": "該公司公布季度盈利按年增長百分之十五。",
+          "colloquial": "呢間公司公布季度盈利按年升咗百分之十五。",
+          "jyutping": ["ni1","gaan1","gung1","si1","gung1","bou3","gwai3","dou6","jing4","lei6","on3","nin4","sing1","zo2","baak3","fan1","zi1","sap6","ng5",""]
+        },
+        {
+          "id": 1,
+          "paragraph_id": 0,
+          "formal": "管理層對下半年前景保持樂觀。",
+          "colloquial": "管理層對下半年前景都幾樂觀。",
+          "jyutping": ["gun2","lei5","cang4","deoi3","haa6","bun3","nin4","cin4","ging2","dou1","gei2","lok6","gun1",""]
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "title": "分析員提醒 留意經濟潛在風險",
+      "source": "Sample",
+      "url": "https://example.com/risk",
+      "publishedAt": "2026-07-01T03:05:00Z",
+      "converted": true,
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "formal": "市場分析人士指出，該趨勢預示著潛在的經濟風險。",
+          "colloquial": "市場分析員話，呢個趨勢可能反映經濟有潛在風險。",
+          "jyutping": ["si5","coeng4","fan1","sik1","jyun4","waa6","","ni1","go3","ceoi1","sai3","ho2","nang4","faan2","jing2","ging1","zai3","jau5","cim4","zoi6","fung1","him2",""]
+        },
+        {
+          "id": 1,
+          "paragraph_id": 0,
+          "formal": "投資者宜保持審慎，分散風險。",
+          "colloquial": "投資者最好保持謹慎，分散風險。",
+          "jyutping": ["tau4","zi1","ze2","zeoi3","hou2","bou2","ci4","gan2","san6","","fan1","saan3","fung1","him2",""]
+        }
+      ]
+    }
+  ]
+}

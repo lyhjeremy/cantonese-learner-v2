@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Cantonese Learner</title>
+    <meta name="description" content="Daily Hong Kong news as HK news-anchor Cantonese speaking lessons." />
+    <link rel="stylesheet" href="./styles.css" />
+    <!-- OpenCC (Traditional <-> Simplified). Optional: the script toggle simply
+         disables if this fails to load. -->
+    <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/full.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <h1 id="app-title">Cantonese Learner</h1>
+        <p id="tagline" class="tagline"></p>
+      </div>
+      <div class="top-controls">
+        <div id="lang-switch" class="lang-switch" aria-label="UI language"></div>
+        <button id="theme-btn" class="icon-btn" title="Toggle theme">☾</button>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <!-- Article list -->
+      <section id="list">
+        <p id="banner" class="banner"></p>
+        <h2 id="list-title" class="section-title"></h2>
+        <div id="cards" class="cards"></div>
+      </section>
+
+      <!-- Reader -->
+      <section id="reader" hidden>
+        <div class="reader-head">
+          <button id="back-btn" class="text-btn"></button>
+          <div class="reader-titlewrap">
+            <h2 id="reader-title" class="reader-title"></h2>
+            <div class="reader-sub">
+              <span id="reader-src" class="src"></span>
+              <a id="orig-link" class="orig-link" target="_blank" rel="noopener"></a>
+            </div>
+          </div>
+          <span id="counter" class="counter"></span>
+        </div>
+
+        <div class="panes">
+          <div class="pane">
+            <div id="formal-label" class="pane-label"></div>
+            <div id="formal-pane" class="pane-body formal"></div>
+          </div>
+          <div class="pane">
+            <div id="colloquial-label" class="pane-label"></div>
+            <div id="colloquial-pane" class="pane-body colloquial"></div>
+          </div>
+        </div>
+
+        <div id="feedback" class="feedback" hidden></div>
+
+        <div class="transport">
+          <button id="btn-prev" class="tbtn"><span class="key">←</span><span class="lbl"></span></button>
+          <button id="btn-play" class="tbtn primary"><span class="key">Space</span><span class="lbl"></span></button>
+          <button id="btn-record" class="tbtn record"><span class="key">R</span><span class="lbl"></span></button>
+          <button id="btn-replay" class="tbtn"><span class="key">↻</span><span class="lbl"></span></button>
+          <button id="btn-next" class="tbtn"><span class="key">→</span><span class="lbl"></span></button>
+        </div>
+
+        <div class="toggles">
+          <label class="toggle"><span id="lbl-speed"></span>
+            <select id="speed-sel">
+              <option value="0.75">0.75×</option>
+              <option value="1">1.0×</option>
+              <option value="1.25">1.25×</option>
+            </select>
+          </label>
+          <label class="toggle"><span id="lbl-script"></span>
+            <select id="script-sel">
+              <option id="opt-trad" value="trad"></option>
+              <option id="opt-simp" value="simp"></option>
+            </select>
+          </label>
+        </div>
+
+        <p id="note-tts" class="note" hidden></p>
+        <p id="note-asr" class="note" hidden></p>
+        <p id="kbd-hint" class="kbd-hint"></p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>Cantonese Learner</span>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

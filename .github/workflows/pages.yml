@@ -1,0 +1,50 @@
+name: Build daily lessons and deploy to Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 22 * * *" # 06:00 HKT (Cloudflare/GitHub cron is UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Only the runtime dep (to-jyutping) is needed; skip devDeps (Playwright).
+      - run: npm install --omit=dev --no-audit --no-fund
+      - name: Compute Hong Kong build date
+        run: |
+          echo "BUILD_DATE=$(TZ=Asia/Hong_Kong date +%F)" >> "$GITHUB_ENV"
+          echo "BUILD_TIME=$(TZ=Asia/Hong_Kong date --iso-8601=seconds)" >> "$GITHUB_ENV"
+      # Keyless by default: fetch free RSS news, chunk, rule-convert to
+      # Cantonese, add jyutping. Fail-soft -> if it writes nothing, the site
+      # serves samples. OPTIONAL: set an ANTHROPIC_API_KEY repo secret to switch
+      # the rewrite to Claude (Opus 4.8) for much higher quality — see README.
+      - name: Build today's lessons
+        run: node scripts/build-lessons.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - uses: actions/configure-pages@v5
+      - name: Upload frontend/ (including generated today.json) as Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend
+      - id: deployment
+        uses: actions/deploy-pages@v4
