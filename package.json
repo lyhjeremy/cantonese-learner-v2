@@ -12,7 +12,8 @@
     "build:jyutping": "node scripts/build-jyutping-dict.mjs",
     "screenshots": "node scripts/screenshot.mjs",
     "serve": "node scripts/serve.mjs",
-    "validate:data": "node scripts/validate-data.mjs"
+    "validate:data": "node scripts/validate-data.mjs",
+    "build:conversations": "node scripts/build-conversations.mjs"
   },
   "devDependencies": {
     "playwright": "^1.48.0"

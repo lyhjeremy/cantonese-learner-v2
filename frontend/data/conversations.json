@@ -1,0 +1,2569 @@
+{
+  "version": 1,
+  "scenarios": [
+    {
+      "id": "greetings",
+      "emoji": "👋",
+      "level": 1,
+      "title": {
+        "en": "Greetings & introductions",
+        "hant": "打招呼同自我介紹",
+        "hans": "打招呼和自我介绍"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "早晨！你好，我叫David，初次見面，請多多指教。",
+          "colloquial": "早晨！你好呀，我叫David，第一次見面，請多多指教。",
+          "jyutping": [
+            "zou2",
+            "san4",
+            "",
+            "nei5",
+            "hou2",
+            "aa3",
+            "",
+            "ngo5",
+            "giu3",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "dai6",
+            "jat1",
+            "ci3",
+            "gin3",
+            "min6",
+            "",
+            "ceng2",
+            "do1",
+            "do1",
+            "zi2",
+            "gaau3",
+            ""
+          ],
+          "en": "Good morning! Hi, I'm David — nice to meet you."
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "你好，我是陳小姐，叫我阿珍就可以了。",
+          "colloquial": "你好呀，我係陳小姐，叫我阿珍就得喇。",
+          "jyutping": [
+            "nei5",
+            "hou2",
+            "aa3",
+            "",
+            "ngo5",
+            "hai6",
+            "can4",
+            "siu2",
+            "ze2",
+            "",
+            "giu3",
+            "ngo5",
+            "aa3",
+            "zan1",
+            "zau6",
+            "dak1",
+            "laa3",
+            ""
+          ],
+          "en": "Hello, I'm Ms Chan — just call me Ah Jan."
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "很高興認識你。",
+          "colloquial": "好開心識到你。",
+          "jyutping": [
+            "hou2",
+            "hoi1",
+            "sam1",
+            "sik1",
+            "dou2",
+            "nei5",
+            ""
+          ],
+          "en": "Very happy to meet you."
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "你是新來的同事嗎？",
+          "colloquial": "你係唔係新嚟嘅同事呀？",
+          "jyutping": [
+            "nei5",
+            "hai6",
+            "m4",
+            "hai6",
+            "san1",
+            "lai4",
+            "ge3",
+            "tung4",
+            "si6",
+            "aa3",
+            ""
+          ],
+          "en": "Are you the new colleague?"
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "是的，我剛從倫敦調過來。",
+          "colloquial": "係呀，我啱啱由倫敦調過嚟。",
+          "jyutping": [
+            "hai6",
+            "aa3",
+            "",
+            "ngo5",
+            "ngaam1",
+            "ngaam1",
+            "jau4",
+            "leon4",
+            "deon1",
+            "diu6",
+            "gwo3",
+            "lai4",
+            ""
+          ],
+          "en": "Yes, I just transferred over from London."
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "歡迎你！習慣香港的生活嗎？",
+          "colloquial": "歡迎你呀！香港嘅生活習唔習慣呀？",
+          "jyutping": [
+            "fun1",
+            "jing4",
+            "nei5",
+            "aa3",
+            "",
+            "hoeng1",
+            "gong2",
+            "ge3",
+            "sang1",
+            "wut6",
+            "zaap6",
+            "m4",
+            "zaap6",
+            "gwaan3",
+            "aa3",
+            ""
+          ],
+          "en": "Welcome! Are you getting used to life in Hong Kong?"
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "還可以，就是天氣有點熱。",
+          "colloquial": "都OK，不過天氣有啲熱。",
+          "jyutping": [
+            "dou1",
+            "",
+            "",
+            "",
+            "bat1",
+            "gwo3",
+            "tin1",
+            "hei3",
+            "jau5",
+            "di1",
+            "jit6",
+            ""
+          ],
+          "en": "It's okay — the weather is a bit hot though."
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "慢慢就會習慣了。有需要隨時找我。",
+          "colloquial": "慢慢就會習慣㗎喇。有咩需要隨時搵我。",
+          "jyutping": [
+            "maan6",
+            "maan2",
+            "zau6",
+            "wui5",
+            "zaap6",
+            "gwaan3",
+            "gaa3",
+            "laa3",
+            "",
+            "jau5",
+            "me1",
+            "seoi1",
+            "jiu3",
+            "ceoi4",
+            "si4",
+            "wan2",
+            "ngo5",
+            ""
+          ],
+          "en": "You'll get used to it. Come find me any time you need something."
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "謝謝你！",
+          "colloquial": "唔該晒你！",
+          "jyutping": [
+            "m4",
+            "goi1",
+            "saai3",
+            "nei5",
+            ""
+          ],
+          "en": "Thank you so much!"
+        },
+        {
+          "id": 9,
+          "paragraph_id": 9,
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "不用客氣。",
+          "colloquial": "唔使客氣。",
+          "jyutping": [
+            "m4",
+            "sai2",
+            "haak3",
+            "hei3",
+            ""
+          ],
+          "en": "You're welcome."
+        }
+      ]
+    },
+    {
+      "id": "cha-chaan-teng",
+      "emoji": "🍳",
+      "level": 1,
+      "title": {
+        "en": "Breakfast at a cha chaan teng",
+        "hant": "茶餐廳食早餐",
+        "hans": "茶餐厅吃早餐"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "早晨，幾位？",
+          "colloquial": "早晨，幾多位呀？",
+          "jyutping": [
+            "zou2",
+            "san4",
+            "",
+            "gei2",
+            "do1",
+            "wai6",
+            "aa3",
+            ""
+          ],
+          "en": "Morning — how many?"
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "一位，謝謝。",
+          "colloquial": "一個人，唔該。",
+          "jyutping": [
+            "jat1",
+            "go3",
+            "jan4",
+            "",
+            "m4",
+            "goi1",
+            ""
+          ],
+          "en": "Just one, thanks."
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "這邊坐。想吃什麼？",
+          "colloquial": "呢邊坐啦。想食咩呀？",
+          "jyutping": [
+            "ni1",
+            "bin1",
+            "zo6",
+            "laa1",
+            "",
+            "soeng2",
+            "sik6",
+            "me1",
+            "aa3",
+            ""
+          ],
+          "en": "Sit over here. What would you like?"
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "我要一個A餐，火腿通粉配炒蛋。",
+          "colloquial": "我要個A餐，火腿通粉配炒蛋。",
+          "jyutping": [
+            "ngo5",
+            "jiu3",
+            "go3",
+            "",
+            "caan1",
+            "",
+            "fo2",
+            "teoi2",
+            "tung1",
+            "fan2",
+            "pui3",
+            "caau2",
+            "daan2",
+            ""
+          ],
+          "en": "I'll have set A — ham macaroni with scrambled eggs."
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "飲品呢？凍飲加兩元。",
+          "colloquial": "飲嘢呢？凍飲加兩蚊。",
+          "jyutping": [
+            "jam2",
+            "je5",
+            "ne1",
+            "",
+            "dung3",
+            "jam2",
+            "gaa1",
+            "loeng5",
+            "man1",
+            ""
+          ],
+          "en": "And to drink? Cold drinks are two dollars extra."
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "熱奶茶，少甜。",
+          "colloquial": "熱奶茶，少甜，唔該。",
+          "jyutping": [
+            "jit6",
+            "naai5",
+            "caa4",
+            "",
+            "siu2",
+            "tim4",
+            "",
+            "m4",
+            "goi1",
+            ""
+          ],
+          "en": "Hot milk tea, less sweet please."
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "多士要牛油還是果醬？",
+          "colloquial": "多士要牛油定果醬呀？",
+          "jyutping": [
+            "do1",
+            "si2",
+            "jiu3",
+            "ngau4",
+            "jau4",
+            "ding6",
+            "gwo2",
+            "zoeng3",
+            "aa3",
+            ""
+          ],
+          "en": "Butter or jam on the toast?"
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "牛油就可以了。",
+          "colloquial": "牛油就得喇。",
+          "jyutping": [
+            "ngau4",
+            "jau4",
+            "zau6",
+            "dak1",
+            "laa3",
+            ""
+          ],
+          "en": "Butter is fine."
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "好的，馬上來。",
+          "colloquial": "好，即刻嚟。",
+          "jyutping": [
+            "hou2",
+            "",
+            "zik1",
+            "hak1",
+            "lai4",
+            ""
+          ],
+          "en": "Got it, coming right up."
+        },
+        {
+          "id": 9,
+          "paragraph_id": 9,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "麻煩你，結帳。",
+          "colloquial": "唔該，埋單！",
+          "jyutping": [
+            "m4",
+            "goi1",
+            "",
+            "maai4",
+            "daan1",
+            ""
+          ],
+          "en": "Excuse me — the bill, please!"
+        },
+        {
+          "id": 10,
+          "paragraph_id": 10,
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "一共三十八元。",
+          "colloquial": "總共三十八蚊。",
+          "jyutping": [
+            "zung2",
+            "gung6",
+            "saam1",
+            "sap6",
+            "baat3",
+            "man1",
+            ""
+          ],
+          "en": "Thirty-eight dollars in total."
+        }
+      ]
+    },
+    {
+      "id": "dim-sum",
+      "emoji": "🥟",
+      "level": 1,
+      "title": {
+        "en": "Dim sum with friends",
+        "hant": "同朋友飲茶",
+        "hans": "和朋友饮茶"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "Staff",
+            "hant": "知客",
+            "hans": "知客"
+          },
+          "formal": "兩位，有預約嗎？",
+          "colloquial": "兩位，有冇訂位呀？",
+          "jyutping": [
+            "loeng5",
+            "wai6",
+            "",
+            "jau5",
+            "mou5",
+            "deng6",
+            "wai2",
+            "aa3",
+            ""
+          ],
+          "en": "Two of you — do you have a reservation?"
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "沒有，要等多久？",
+          "colloquial": "冇呀，要等幾耐？",
+          "jyutping": [
+            "mou5",
+            "aa3",
+            "",
+            "jiu3",
+            "dang2",
+            "gei2",
+            "noi6",
+            ""
+          ],
+          "en": "No — how long is the wait?"
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "Staff",
+            "hant": "知客",
+            "hans": "知客"
+          },
+          "formal": "大約十五分鐘。",
+          "colloquial": "大概十五分鐘左右。",
+          "jyutping": [
+            "daai6",
+            "koi3",
+            "sap6",
+            "ng5",
+            "fan1",
+            "zung1",
+            "zo2",
+            "jau2",
+            ""
+          ],
+          "en": "About fifteen minutes."
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "好，我們等一下。",
+          "colloquial": "好呀，我哋等陣先。",
+          "jyutping": [
+            "hou2",
+            "aa3",
+            "",
+            "ngo5",
+            "dei6",
+            "dang2",
+            "zan6",
+            "sin1",
+            ""
+          ],
+          "en": "Fine, we'll wait."
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "Staff",
+            "hant": "知客",
+            "hans": "知客"
+          },
+          "formal": "想喝什麼茶？",
+          "colloquial": "想飲咩茶呀？",
+          "jyutping": [
+            "soeng2",
+            "jam2",
+            "me1",
+            "caa4",
+            "aa3",
+            ""
+          ],
+          "en": "What tea would you like?"
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "普洱，謝謝。",
+          "colloquial": "普洱，唔該。",
+          "jyutping": [
+            "pou2",
+            "lei2",
+            "",
+            "m4",
+            "goi1",
+            ""
+          ],
+          "en": "Pu-erh, please."
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "要一籠蝦餃、一籠燒賣，還有叉燒包。",
+          "colloquial": "要一籠蝦餃、一籠燒賣，仲有叉燒包。",
+          "jyutping": [
+            "jiu3",
+            "jat1",
+            "lung4",
+            "haa1",
+            "gaau2",
+            "",
+            "jat1",
+            "lung4",
+            "siu1",
+            "maai2",
+            "",
+            "zung6",
+            "jau5",
+            "caa1",
+            "siu1",
+            "baau1",
+            ""
+          ],
+          "en": "A basket of har gow, a basket of siu mai, and char siu buns."
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Staff",
+            "hant": "知客",
+            "hans": "知客"
+          },
+          "formal": "還需要什麼嗎？",
+          "colloquial": "仲要啲咩嗎？",
+          "jyutping": [
+            "zung6",
+            "jiu3",
+            "di1",
+            "me1",
+            "maa1",
+            ""
+          ],
+          "en": "Anything else?"
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "先這樣，不夠再點。",
+          "colloquial": "住咁多先，唔夠再叫。",
+          "jyutping": [
+            "zyu6",
+            "gam3",
+            "do1",
+            "sin1",
+            "",
+            "m4",
+            "gau3",
+            "zoi3",
+            "giu3",
+            ""
+          ],
+          "en": "That's it for now — we'll order more if it's not enough."
+        },
+        {
+          "id": 9,
+          "paragraph_id": 9,
+          "speaker": {
+            "en": "Staff",
+            "hant": "知客",
+            "hans": "知客"
+          },
+          "formal": "好的。",
+          "colloquial": "好嘅。",
+          "jyutping": [
+            "hou2",
+            "ge3",
+            ""
+          ],
+          "en": "Sure."
+        }
+      ]
+    },
+    {
+      "id": "taxi",
+      "emoji": "🚕",
+      "level": 1,
+      "title": {
+        "en": "Taking a taxi",
+        "hant": "搭的士",
+        "hans": "搭出租车"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "去哪裡？",
+          "colloquial": "去邊呀？",
+          "jyutping": [
+            "heoi3",
+            "bin1",
+            "aa3",
+            ""
+          ],
+          "en": "Where to?"
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "麻煩去中環國際金融中心。",
+          "colloquial": "唔該去中環IFC。",
+          "jyutping": [
+            "m4",
+            "goi1",
+            "heoi3",
+            "zung1",
+            "waan4",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "en": "To IFC in Central, please."
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "走隧道可以嗎？",
+          "colloquial": "行隧道得唔得呀？",
+          "jyutping": [
+            "haang4",
+            "seoi6",
+            "dou6",
+            "dak1",
+            "m4",
+            "dak1",
+            "aa3",
+            ""
+          ],
+          "en": "Is the tunnel okay?"
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "可以，哪條快就走哪條。",
+          "colloquial": "得，邊條快行邊條啦。",
+          "jyutping": [
+            "dak1",
+            "",
+            "bin1",
+            "tiu4",
+            "faai3",
+            "haang4",
+            "bin1",
+            "tiu4",
+            "laa1",
+            ""
+          ],
+          "en": "Sure — whichever is faster."
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "今天塞車，可能要二十分鐘。",
+          "colloquial": "今日塞車，可能要二十分鐘。",
+          "jyutping": [
+            "gam1",
+            "jat6",
+            "sak1",
+            "ce1",
+            "",
+            "ho2",
+            "nang4",
+            "jiu3",
+            "ji6",
+            "sap6",
+            "fan1",
+            "zung1",
+            ""
+          ],
+          "en": "Traffic is bad today — could take twenty minutes."
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "沒關係，不趕時間。",
+          "colloquial": "唔緊要，唔趕時間。",
+          "jyutping": [
+            "m4",
+            "gan2",
+            "jiu3",
+            "",
+            "m4",
+            "gon2",
+            "si4",
+            "gaan3",
+            ""
+          ],
+          "en": "No problem, I'm not in a hurry."
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "前面路口停就可以了。",
+          "colloquial": "前面路口停就得喇。",
+          "jyutping": [
+            "cin4",
+            "min6",
+            "lou6",
+            "hau2",
+            "ting4",
+            "zau6",
+            "dak1",
+            "laa3",
+            ""
+          ],
+          "en": "You can stop at the junction ahead."
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "好，八十五元。",
+          "colloquial": "好，八十五蚊。",
+          "jyutping": [
+            "hou2",
+            "",
+            "baat3",
+            "sap6",
+            "ng5",
+            "man1",
+            ""
+          ],
+          "en": "Okay — eighty-five dollars."
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "給你一百，不用找了。",
+          "colloquial": "畀一百你，唔使找喇。",
+          "jyutping": [
+            "bei2",
+            "jat1",
+            "baak3",
+            "nei5",
+            "",
+            "m4",
+            "sai2",
+            "zaau2",
+            "laa3",
+            ""
+          ],
+          "en": "Here's a hundred — keep the change."
+        },
+        {
+          "id": 9,
+          "paragraph_id": 9,
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "謝謝，慢走！",
+          "colloquial": "多謝晒，慢慢行！",
+          "jyutping": [
+            "do1",
+            "ze6",
+            "saai3",
+            "",
+            "maan6",
+            "maan6",
+            "hang4",
+            ""
+          ],
+          "en": "Thanks a lot — take care!"
+        }
+      ]
+    },
+    {
+      "id": "mtr",
+      "emoji": "🚇",
+      "level": 1,
+      "title": {
+        "en": "MTR & asking directions",
+        "hant": "搭港鐵問路",
+        "hans": "搭港铁问路"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "請問，往中環方向的月台在哪邊？",
+          "colloquial": "唔該，去中環嗰邊嘅月台喺邊呀？",
+          "jyutping": [
+            "m4",
+            "goi1",
+            "",
+            "heoi3",
+            "zung1",
+            "waan4",
+            "go2",
+            "bin1",
+            "ge3",
+            "jyut6",
+            "toi4",
+            "hai2",
+            "bin1",
+            "aa3",
+            ""
+          ],
+          "en": "Excuse me, which platform is for trains towards Central?"
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "在對面，走樓梯下去就是。",
+          "colloquial": "喺對面，行樓梯落去就係。",
+          "jyutping": [
+            "hai2",
+            "deoi3",
+            "min6",
+            "",
+            "haang4",
+            "lau4",
+            "tai1",
+            "lok6",
+            "heoi3",
+            "zau6",
+            "hai6",
+            ""
+          ],
+          "en": "It's on the other side — take the stairs down."
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "需要轉車嗎？",
+          "colloquial": "使唔使轉車呀？",
+          "jyutping": [
+            "sai2",
+            "m4",
+            "sai2",
+            "zyun3",
+            "ce1",
+            "aa3",
+            ""
+          ],
+          "en": "Do I need to change trains?"
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "在金鐘轉港島綫。",
+          "colloquial": "喺金鐘轉港島綫。",
+          "jyutping": [
+            "hai2",
+            "gam1",
+            "zung1",
+            "zyun2",
+            "gong2",
+            "dou2",
+            "sin3",
+            ""
+          ],
+          "en": "Change to the Island Line at Admiralty."
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "大約要多久？",
+          "colloquial": "大概要幾耐呀？",
+          "jyutping": [
+            "daai6",
+            "koi3",
+            "jiu3",
+            "gei2",
+            "noi6",
+            "aa3",
+            ""
+          ],
+          "en": "Roughly how long does it take?"
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "十分鐘左右。",
+          "colloquial": "十分鐘度啦。",
+          "jyutping": [
+            "sap6",
+            "fan1",
+            "zung1",
+            "dou6",
+            "laa1",
+            ""
+          ],
+          "en": "About ten minutes."
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "我的八達通沒有錢了，在哪裡增值？",
+          "colloquial": "我張八達通冇錢喇，喺邊度增值呀？",
+          "jyutping": [
+            "ngo5",
+            "zoeng1",
+            "baat3",
+            "daat6",
+            "tung1",
+            "mou5",
+            "cin2",
+            "laa3",
+            "",
+            "hai2",
+            "bin1",
+            "dou6",
+            "zang1",
+            "zik6",
+            "aa3",
+            ""
+          ],
+          "en": "My Octopus card is out of money — where can I top it up?"
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "那邊有增值機，客務中心也可以。",
+          "colloquial": "嗰邊有增值機，客務中心又得。",
+          "jyutping": [
+            "go2",
+            "bin1",
+            "jau5",
+            "zang1",
+            "zik6",
+            "gei1",
+            "",
+            "haak3",
+            "mou6",
+            "zung1",
+            "sam1",
+            "jau6",
+            "dak1",
+            ""
+          ],
+          "en": "There's a top-up machine over there, or the customer service centre."
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "明白了，非常感謝！",
+          "colloquial": "明喇，唔該晒！",
+          "jyutping": [
+            "ming4",
+            "laa3",
+            "",
+            "m4",
+            "goi1",
+            "saai3",
+            ""
+          ],
+          "en": "Got it — thanks so much!"
+        },
+        {
+          "id": 9,
+          "paragraph_id": 9,
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "不客氣。",
+          "colloquial": "唔使唔該。",
+          "jyutping": [
+            "m4",
+            "sai2",
+            "m4",
+            "goi1",
+            ""
+          ],
+          "en": "No need to thank me."
+        }
+      ]
+    },
+    {
+      "id": "market",
+      "emoji": "🛍️",
+      "level": 2,
+      "title": {
+        "en": "Shopping at the market",
+        "hant": "街市買嘢",
+        "hans": "街市买东西"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "老闆，這個怎麼賣？",
+          "colloquial": "老闆，呢個點賣呀？",
+          "jyutping": [
+            "lou5",
+            "baan2",
+            "",
+            "ni1",
+            "go3",
+            "dim2",
+            "maai6",
+            "aa3",
+            ""
+          ],
+          "en": "Boss, how much is this?"
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "三十元一斤。",
+          "colloquial": "三十蚊一斤。",
+          "jyutping": [
+            "saam1",
+            "sap6",
+            "man1",
+            "jat1",
+            "gan1",
+            ""
+          ],
+          "en": "Thirty dollars a catty."
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "有點貴，能便宜一點嗎？",
+          "colloquial": "有啲貴喎，平啲得唔得呀？",
+          "jyutping": [
+            "jau5",
+            "di1",
+            "gwai3",
+            "wo3",
+            "",
+            "peng4",
+            "di1",
+            "dak1",
+            "m4",
+            "dak1",
+            "aa3",
+            ""
+          ],
+          "en": "That's a bit expensive — can you go lower?"
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "買兩斤算你五十。",
+          "colloquial": "買兩斤算你五十啦。",
+          "jyutping": [
+            "maai5",
+            "loeng5",
+            "gan1",
+            "syun3",
+            "nei5",
+            "ng5",
+            "sap6",
+            "laa1",
+            ""
+          ],
+          "en": "Buy two catties and I'll make it fifty."
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "好，那要兩斤。",
+          "colloquial": "好啦，咁要兩斤。",
+          "jyutping": [
+            "hou2",
+            "laa1",
+            "",
+            "gam3",
+            "jiu3",
+            "loeng5",
+            "gan1",
+            ""
+          ],
+          "en": "Deal — two catties then."
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "還要別的嗎？",
+          "colloquial": "仲要唔要第二啲呀？",
+          "jyutping": [
+            "zung6",
+            "jiu3",
+            "m4",
+            "jiu3",
+            "dai6",
+            "ji6",
+            "di1",
+            "aa3",
+            ""
+          ],
+          "en": "Anything else?"
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "這些芒果甜不甜？",
+          "colloquial": "呢啲芒果甜唔甜㗎？",
+          "jyutping": [
+            "ni1",
+            "di1",
+            "mong1",
+            "gwo2",
+            "tim4",
+            "m4",
+            "tim4",
+            "gaa3",
+            ""
+          ],
+          "en": "Are these mangoes sweet?"
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "很甜，不甜不要錢！",
+          "colloquial": "好甜㗎，唔甜唔使錢！",
+          "jyutping": [
+            "hou2",
+            "tim4",
+            "gaa3",
+            "",
+            "m4",
+            "tim4",
+            "m4",
+            "sai2",
+            "cin2",
+            ""
+          ],
+          "en": "Very sweet — free if they're not!"
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "那拿三個。可以用八達通嗎？",
+          "colloquial": "咁攞三個啦。可唔可以嘟八達通呀？",
+          "jyutping": [
+            "gam3",
+            "lo2",
+            "saam1",
+            "go3",
+            "laa1",
+            "",
+            "ho2",
+            "m4",
+            "ho2",
+            "ji5",
+            "dou1",
+            "baat3",
+            "daat6",
+            "tung1",
+            "aa3",
+            ""
+          ],
+          "en": "I'll take three then. Can I pay by Octopus?"
+        },
+        {
+          "id": 9,
+          "paragraph_id": 9,
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "可以，一共七十二元。",
+          "colloquial": "得，總共七十二蚊。",
+          "jyutping": [
+            "dak1",
+            "",
+            "zung2",
+            "gung6",
+            "cat1",
+            "sap6",
+            "ji6",
+            "man1",
+            ""
+          ],
+          "en": "Sure — seventy-two dollars altogether."
+        }
+      ]
+    },
+    {
+      "id": "office-small-talk",
+      "emoji": "💼",
+      "level": 2,
+      "title": {
+        "en": "Office small talk",
+        "hant": "辦公室傾偈",
+        "hans": "办公室聊天"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "早晨！週末過得怎樣？",
+          "colloquial": "早晨！週末點呀？",
+          "jyutping": [
+            "zou2",
+            "san4",
+            "",
+            "zau1",
+            "mut6",
+            "dim2",
+            "aa3",
+            ""
+          ],
+          "en": "Morning! How was your weekend?"
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Ken",
+            "hant": "Ken",
+            "hans": "Ken"
+          },
+          "formal": "不錯，去了行山，走了麥理浩徑。",
+          "colloquial": "幾好呀，去咗行山，行咗麥理浩徑。",
+          "jyutping": [
+            "gei2",
+            "hou2",
+            "aa3",
+            "",
+            "heoi3",
+            "zo2",
+            "haang4",
+            "saan1",
+            "",
+            "haang4",
+            "zo2",
+            "mak6",
+            "lei5",
+            "hou6",
+            "ging3",
+            ""
+          ],
+          "en": "Pretty good — went hiking on the MacLehose Trail."
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "那麼厲害！我整個週末都在加班。",
+          "colloquial": "咁犀利！我成個週末都喺度加班。",
+          "jyutping": [
+            "gam3",
+            "sai1",
+            "lei6",
+            "",
+            "ngo5",
+            "seng4",
+            "go3",
+            "zau1",
+            "mut6",
+            "dou1",
+            "hai2",
+            "dou6",
+            "gaa1",
+            "baan1",
+            ""
+          ],
+          "en": "Impressive! I spent the whole weekend working overtime."
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Ken",
+            "hant": "Ken",
+            "hans": "Ken"
+          },
+          "formal": "辛苦了。項目趕得及嗎？",
+          "colloquial": "辛苦晒。個project趕唔趕得切呀？",
+          "jyutping": [
+            "san1",
+            "fu2",
+            "saai3",
+            "",
+            "go3",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "gon2",
+            "m4",
+            "gon2",
+            "dak1",
+            "cit3",
+            "aa3",
+            ""
+          ],
+          "en": "Poor you. Will the project make the deadline?"
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "應該可以，星期五之前要交給客戶。",
+          "colloquial": "應該得，星期五之前要交畀客戶。",
+          "jyutping": [
+            "jing1",
+            "goi1",
+            "dak1",
+            "",
+            "sing1",
+            "kei4",
+            "ng5",
+            "zi1",
+            "cin4",
+            "jiu3",
+            "gaau1",
+            "bei2",
+            "haak3",
+            "wu6",
+            ""
+          ],
+          "en": "Should be fine — it's due to the client by Friday."
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Ken",
+            "hant": "Ken",
+            "hans": "Ken"
+          },
+          "formal": "有需要幫忙就說一聲。",
+          "colloquial": "有咩要幫手就出聲。",
+          "jyutping": [
+            "jau5",
+            "me1",
+            "jiu3",
+            "bong1",
+            "sau2",
+            "zau6",
+            "ceot1",
+            "seng1",
+            ""
+          ],
+          "en": "Shout if you need a hand."
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "謝謝！中午一起吃飯嗎？",
+          "colloquial": "唔該晒！晏晝一齊食飯吖？",
+          "jyutping": [
+            "m4",
+            "goi1",
+            "saai3",
+            "",
+            "aan3",
+            "zau3",
+            "jat1",
+            "cai4",
+            "sik6",
+            "faan6",
+            "aa1",
+            ""
+          ],
+          "en": "Thanks! Lunch together at noon?"
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Ken",
+            "hant": "Ken",
+            "hans": "Ken"
+          },
+          "formal": "好啊，樓下那間新開的日本菜怎樣？",
+          "colloquial": "好呀，樓下嗰間新開嘅日本嘢點呀？",
+          "jyutping": [
+            "hou2",
+            "aa3",
+            "",
+            "lau4",
+            "haa6",
+            "go2",
+            "gaan1",
+            "san1",
+            "hoi1",
+            "ge3",
+            "jat6",
+            "bun2",
+            "je5",
+            "dim2",
+            "aa3",
+            ""
+          ],
+          "en": "Sure — how about that new Japanese place downstairs?"
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "沒問題，十二點半見。",
+          "colloquial": "冇問題，十二點半見。",
+          "jyutping": [
+            "mou5",
+            "man6",
+            "tai4",
+            "",
+            "sap6",
+            "ji6",
+            "dim2",
+            "bun3",
+            "gin3",
+            ""
+          ],
+          "en": "No problem — see you at half past twelve."
+        }
+      ]
+    },
+    {
+      "id": "meetings",
+      "emoji": "📅",
+      "level": 2,
+      "title": {
+        "en": "Meetings & scheduling",
+        "hant": "開會同夾時間",
+        "hans": "开会和约时间"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "明天下午三點開會，你有空嗎？",
+          "colloquial": "聽日下晝三點開會，你得唔得閒呀？",
+          "jyutping": [
+            "ting1",
+            "jat6",
+            "haa6",
+            "zau3",
+            "saam1",
+            "dim2",
+            "hoi1",
+            "wui2",
+            "",
+            "nei5",
+            "dak1",
+            "m4",
+            "dak1",
+            "haan4",
+            "aa3",
+            ""
+          ],
+          "en": "Meeting at 3pm tomorrow — are you free?"
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Mandy",
+            "hant": "Mandy",
+            "hans": "Mandy"
+          },
+          "formal": "讓我看看日程……三點有另一個會，四點可以嗎？",
+          "colloquial": "等我睇睇個schedule……三點有另一個會，四點得唔得？",
+          "jyutping": [
+            "dang2",
+            "ngo5",
+            "tai2",
+            "tai2",
+            "go3",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "saam1",
+            "dim2",
+            "jau5",
+            "ling6",
+            "jat1",
+            "go3",
+            "wui5",
+            "",
+            "sei3",
+            "dim2",
+            "dak1",
+            "m4",
+            "dak1",
+            ""
+          ],
+          "en": "Let me check my schedule… I have another meeting at three — does four work?"
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "可以，那改到四點。",
+          "colloquial": "得，咁改到四點啦。",
+          "jyutping": [
+            "dak1",
+            "",
+            "gam3",
+            "goi2",
+            "dou3",
+            "sei3",
+            "dim2",
+            "laa1",
+            ""
+          ],
+          "en": "Sure, let's move it to four."
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Mandy",
+            "hant": "Mandy",
+            "hans": "Mandy"
+          },
+          "formal": "在哪個會議室？",
+          "colloquial": "喺邊個會議室呀？",
+          "jyutping": [
+            "hai2",
+            "bin1",
+            "go3",
+            "wui6",
+            "ji5",
+            "sat1",
+            "aa3",
+            ""
+          ],
+          "en": "Which meeting room?"
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "十樓的大會議室，我發邀請給你。",
+          "colloquial": "十樓個大會議室，我send個invite畀你。",
+          "jyutping": [
+            "sap6",
+            "lau2",
+            "go3",
+            "daai6",
+            "wui2",
+            "ji5",
+            "sat1",
+            "",
+            "ngo5",
+            "",
+            "",
+            "",
+            "",
+            "go3",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "bei2",
+            "nei5",
+            ""
+          ],
+          "en": "The big one on the tenth floor — I'll send you an invite."
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Mandy",
+            "hant": "Mandy",
+            "hans": "Mandy"
+          },
+          "formal": "議程是什麼？",
+          "colloquial": "個agenda係咩嚟㗎？",
+          "jyutping": [
+            "go3",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "hai6",
+            "me1",
+            "lai4",
+            "gaa3",
+            ""
+          ],
+          "en": "What's on the agenda?"
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "主要討論下一季度的預算。",
+          "colloquial": "主要傾下個季度嘅預算。",
+          "jyutping": [
+            "zyu2",
+            "jiu3",
+            "king1",
+            "haa6",
+            "go3",
+            "gwai3",
+            "dou6",
+            "ge3",
+            "jyu6",
+            "syun3",
+            ""
+          ],
+          "en": "Mainly next quarter's budget."
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Mandy",
+            "hant": "Mandy",
+            "hans": "Mandy"
+          },
+          "formal": "好，我先準備一下資料。",
+          "colloquial": "好，我準備定啲資料先。",
+          "jyutping": [
+            "hou2",
+            "",
+            "ngo5",
+            "zeon2",
+            "bei6",
+            "ding6",
+            "di1",
+            "zi1",
+            "liu2",
+            "sin1",
+            ""
+          ],
+          "en": "Okay, I'll get some materials ready."
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "麻煩你了，到時見。",
+          "colloquial": "唔該晒，到時見。",
+          "jyutping": [
+            "m4",
+            "goi1",
+            "saai3",
+            "",
+            "dou3",
+            "si4",
+            "gin3",
+            ""
+          ],
+          "en": "Thanks — see you then."
+        }
+      ]
+    },
+    {
+      "id": "portfolio-review",
+      "emoji": "📈",
+      "level": 3,
+      "title": {
+        "en": "Portfolio & finance talk",
+        "hant": "傾業績同投資",
+        "hans": "谈业绩和投资"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "這家公司上一季度的業績怎樣？",
+          "colloquial": "呢間公司上個季度嘅業績點呀？",
+          "jyutping": [
+            "ni1",
+            "gaan1",
+            "gung1",
+            "si1",
+            "soeng6",
+            "go3",
+            "gwai3",
+            "dou6",
+            "ge3",
+            "jip6",
+            "zik1",
+            "dim2",
+            "aa3",
+            ""
+          ],
+          "en": "How did this company do last quarter?"
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "收入按年增長百分之十五，超出預期。",
+          "colloquial": "收入按年升咗百分之十五，好過預期。",
+          "jyutping": [
+            "sau1",
+            "jap6",
+            "on3",
+            "nin4",
+            "sing1",
+            "zo2",
+            "baak3",
+            "fan6",
+            "zi1",
+            "sap6",
+            "ng5",
+            "",
+            "hou2",
+            "gwo3",
+            "jyu6",
+            "kei4",
+            ""
+          ],
+          "en": "Revenue grew fifteen percent year-on-year — better than expected."
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "利潤率呢？",
+          "colloquial": "利潤率呢？",
+          "jyutping": [
+            "lei6",
+            "jeon6",
+            "seot1",
+            "ne1",
+            ""
+          ],
+          "en": "And margins?"
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "毛利率維持在百分之四十左右。",
+          "colloquial": "毛利率維持喺百分之四十度。",
+          "jyutping": [
+            "mou4",
+            "lei6",
+            "leot2",
+            "wai4",
+            "ci4",
+            "hai2",
+            "baak3",
+            "fan6",
+            "zi1",
+            "sei3",
+            "sap6",
+            "dou6",
+            ""
+          ],
+          "en": "Gross margin held at around forty percent."
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "管理層對下半年有什麼看法？",
+          "colloquial": "管理層對下半年有咩睇法呀？",
+          "jyutping": [
+            "gun2",
+            "lei5",
+            "cang4",
+            "deoi3",
+            "haa6",
+            "bun3",
+            "nin4",
+            "jau5",
+            "me1",
+            "tai2",
+            "faat3",
+            "aa3",
+            ""
+          ],
+          "en": "What does management think about the second half?"
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "他們比較樂觀，計劃擴充東南亞市場。",
+          "colloquial": "佢哋比較樂觀，計劃擴充東南亞市場。",
+          "jyutping": [
+            "keoi5",
+            "dei6",
+            "bei2",
+            "gaau3",
+            "lok6",
+            "gun1",
+            "",
+            "gai3",
+            "waak6",
+            "kwong3",
+            "cung1",
+            "dung1",
+            "naam4",
+            "aa3",
+            "si5",
+            "coeng4",
+            ""
+          ],
+          "en": "They're fairly optimistic — planning to expand in Southeast Asia."
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "風險方面要注意什麼？",
+          "colloquial": "風險方面要留意啲咩？",
+          "jyutping": [
+            "fung1",
+            "him2",
+            "fong1",
+            "min6",
+            "jiu3",
+            "lau4",
+            "ji3",
+            "di1",
+            "me1",
+            ""
+          ],
+          "en": "What should we watch on the risk side?"
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "主要是成本上升和匯率波動。",
+          "colloquial": "主要係成本上升同埋匯率波動。",
+          "jyutping": [
+            "zyu2",
+            "jiu3",
+            "hai6",
+            "sing4",
+            "bun2",
+            "soeng6",
+            "sing1",
+            "tung4",
+            "maai4",
+            "wui6",
+            "leot2",
+            "bo1",
+            "dung6",
+            ""
+          ],
+          "en": "Mainly rising costs and currency swings."
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "好，下星期向投資委員會匯報。",
+          "colloquial": "好，下星期同投資委員會匯報。",
+          "jyutping": [
+            "hou2",
+            "",
+            "haa6",
+            "sing1",
+            "kei4",
+            "tung4",
+            "tau4",
+            "zi1",
+            "wai2",
+            "jyun4",
+            "wui2",
+            "wui6",
+            "bou3",
+            ""
+          ],
+          "en": "Good — we'll report to the investment committee next week."
+        },
+        {
+          "id": 9,
+          "paragraph_id": 9,
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "我今晚把報告發給你。",
+          "colloquial": "我今晚send份報告畀你。",
+          "jyutping": [
+            "ngo5",
+            "gam1",
+            "maan5",
+            "",
+            "",
+            "",
+            "",
+            "fan6",
+            "bou3",
+            "gou3",
+            "bei2",
+            "nei5",
+            ""
+          ],
+          "en": "I'll send you the report tonight."
+        }
+      ]
+    },
+    {
+      "id": "after-work-drinks",
+      "emoji": "🍻",
+      "level": 2,
+      "title": {
+        "en": "After-work drinks",
+        "hant": "收工飲返杯",
+        "hans": "下班喝一杯"
+      },
+      "sentences": [
+        {
+          "id": 0,
+          "paragraph_id": 0,
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "今晚下班去喝一杯嗎？",
+          "colloquial": "今晚收工去唔去飲返杯呀？",
+          "jyutping": [
+            "gam1",
+            "maan5",
+            "sau1",
+            "gung1",
+            "heoi3",
+            "m4",
+            "heoi3",
+            "jam2",
+            "faan2",
+            "bui1",
+            "aa3",
+            ""
+          ],
+          "en": "Drinks after work tonight?"
+        },
+        {
+          "id": 1,
+          "paragraph_id": 1,
+          "speaker": {
+            "en": "Wing",
+            "hant": "Wing",
+            "hans": "Wing"
+          },
+          "formal": "好啊，去哪裡？",
+          "colloquial": "好呀，去邊度好？",
+          "jyutping": [
+            "hou2",
+            "aa3",
+            "",
+            "heoi3",
+            "bin1",
+            "dou6",
+            "hou2",
+            ""
+          ],
+          "en": "Sure — where should we go?"
+        },
+        {
+          "id": 2,
+          "paragraph_id": 2,
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "蘭桂坊新開了一間酒吧，聽說不錯。",
+          "colloquial": "蘭桂坊新開咗間酒吧，聽講幾好。",
+          "jyutping": [
+            "laan4",
+            "gwai3",
+            "fong1",
+            "san1",
+            "hoi1",
+            "zo2",
+            "gaan1",
+            "zau2",
+            "baa1",
+            "",
+            "teng1",
+            "gong2",
+            "gei2",
+            "hou2",
+            ""
+          ],
+          "en": "A new bar opened in Lan Kwai Fong — supposedly quite good."
+        },
+        {
+          "id": 3,
+          "paragraph_id": 3,
+          "speaker": {
+            "en": "Wing",
+            "hant": "Wing",
+            "hans": "Wing"
+          },
+          "formal": "幾點去？",
+          "colloquial": "幾點去呀？",
+          "jyutping": [
+            "gei2",
+            "dim2",
+            "heoi3",
+            "aa3",
+            ""
+          ],
+          "en": "What time?"
+        },
+        {
+          "id": 4,
+          "paragraph_id": 4,
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "七點半怎樣？我來訂位。",
+          "colloquial": "七點半點呀？我訂位。",
+          "jyutping": [
+            "cat1",
+            "dim2",
+            "bun3",
+            "dim2",
+            "aa3",
+            "",
+            "ngo5",
+            "deng6",
+            "wai2",
+            ""
+          ],
+          "en": "How about half past seven? I'll book a table."
+        },
+        {
+          "id": 5,
+          "paragraph_id": 5,
+          "speaker": {
+            "en": "Wing",
+            "hant": "Wing",
+            "hans": "Wing"
+          },
+          "formal": "沒問題。要叫其他同事嗎？",
+          "colloquial": "冇問題。使唔使叫埋其他同事呀？",
+          "jyutping": [
+            "mou5",
+            "man6",
+            "tai4",
+            "",
+            "sai2",
+            "m4",
+            "sai2",
+            "giu3",
+            "maai4",
+            "kei4",
+            "taa1",
+            "tung4",
+            "si6",
+            "aa3",
+            ""
+          ],
+          "en": "No problem. Should we invite the other colleagues too?"
+        },
+        {
+          "id": 6,
+          "paragraph_id": 6,
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "好主意，我在群組說一聲。",
+          "colloquial": "好主意，我喺group度講聲。",
+          "jyutping": [
+            "hou2",
+            "zyu2",
+            "ji3",
+            "",
+            "ngo5",
+            "hai2",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "dou6",
+            "gong2",
+            "seng1",
+            ""
+          ],
+          "en": "Good idea — I'll mention it in the group chat."
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
+            "en": "Wing",
+            "hant": "Wing",
+            "hans": "Wing"
+          },
+          "formal": "今天我請客，慶祝項目完成！",
+          "colloquial": "今日我請，慶祝個project搞掂！",
+          "jyutping": [
+            "gam1",
+            "jat6",
+            "ngo5",
+            "ceng2",
+            "",
+            "hing3",
+            "zuk1",
+            "go3",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "gaau2",
+            "dim6",
+            ""
+          ],
+          "en": "My treat today — to celebrate finishing the project!"
+        },
+        {
+          "id": 8,
+          "paragraph_id": 8,
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "那就不客氣了！",
+          "colloquial": "咁就唔客氣喇！",
+          "jyutping": [
+            "gam3",
+            "zau6",
+            "m4",
+            "haak3",
+            "hei3",
+            "laa3",
+            ""
+          ],
+          "en": "Well, don't mind if I do!"
+        }
+      ]
+    }
+  ]
+}
