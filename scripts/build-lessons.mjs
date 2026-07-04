@@ -17,6 +17,7 @@ import {
   newsScore,
 } from "../backend/rss.js";
 import { paragraphsToUnits, convertArticle, makeClient } from "../backend/convert.js";
+import { fetchGoogleNewsArticles, DEFAULT_QUERY } from "../backend/gnews.js";
 import { cjkCount } from "../backend/chunk.js";
 import { toColloquialSegments } from "../backend/convert-rules.js";
 import { spellOutNumbers, splitByNumbers } from "../frontend/numbers.js";
@@ -59,10 +60,14 @@ function pickBalanced(pool, max) {
 const LLM_KEY = process.env.ANTHROPIC_API_KEY || "";
 const LLM_MODEL = process.env.CONVERT_MODEL || undefined;
 
-// Optional secondary feed (e.g. a WeChat 公眾號 → RSS bridge for Bain Portfolio
-// News). Leave WECHAT_FEED_URL unset to run RTHK-only.
+// Secondary source. Preferred: a WeChat 公眾號 → RSS bridge (WECHAT_FEED_URL).
+// Fallback when no bridge is configured: scrape the public web via Google News
+// for Chinese coverage of the topic (default 貝恩資本 — Bain Capital), so the
+// Bain-relevant lessons work with zero setup. Set BAIN_NEWS_QUERY to change
+// the topic, or BAIN_NEWS_QUERY="off" to disable the fallback entirely.
 const WECHAT_FEED_URL = process.env.WECHAT_FEED_URL || "";
-const WECHAT_SOURCE_NAME = process.env.WECHAT_SOURCE_NAME || "Bain Portfolio News 朋友圈";
+const WECHAT_SOURCE_NAME = process.env.WECHAT_SOURCE_NAME || "";
+const BAIN_NEWS_QUERY = process.env.BAIN_NEWS_QUERY || DEFAULT_QUERY;
 
 const OUT = fileURLToPath(new URL("../frontend/data/today.json", import.meta.url));
 
@@ -144,18 +149,25 @@ async function buildArticle(a, idx, client) {
 }
 
 async function main() {
-  // Optional secondary feed first (it gets guaranteed slots), then pool RTHK
-  // candidates across all topic feeds and enrich with full article bodies.
-  const wechat = WECHAT_FEED_URL
-    ? await fetchCustomFeedArticles({
-        url: WECHAT_FEED_URL,
-        source: WECHAT_SOURCE_NAME,
-        max: MAX_WECHAT,
-        minChars: 40,
-      })
-    : [];
+  // Secondary source first (it gets guaranteed slots): the WeChat bridge when
+  // configured, else the Google News web-scrape fallback for Bain coverage.
+  let wechat = [];
   if (WECHAT_FEED_URL) {
-    console.log(`Secondary feed: ${wechat.length} article(s) from ${WECHAT_SOURCE_NAME}`);
+    wechat = await fetchCustomFeedArticles({
+      url: WECHAT_FEED_URL,
+      source: WECHAT_SOURCE_NAME || "Bain Portfolio News 朋友圈",
+      max: MAX_WECHAT,
+      minChars: 40,
+    });
+    console.log(`Secondary feed (bridge): ${wechat.length} article(s)`);
+  }
+  if (!wechat.length && BAIN_NEWS_QUERY && BAIN_NEWS_QUERY !== "off") {
+    wechat = await fetchGoogleNewsArticles({
+      query: BAIN_NEWS_QUERY,
+      max: MAX_WECHAT,
+      source: WECHAT_SOURCE_NAME || "Bain Capital 新聞",
+    });
+    console.log(`Secondary feed (web scrape "${BAIN_NEWS_QUERY}"): ${wechat.length} article(s)`);
   }
 
   const candidates = await fetchRssArticles({ perFeed: 8, minChars: 10 });
@@ -182,7 +194,7 @@ async function main() {
   const lessons = {
     // NOTE: date is stamped by the runner via env to stay deterministic here.
     date: process.env.BUILD_DATE || "",
-    source: wechat.length ? `RTHK 香港電台 + ${WECHAT_SOURCE_NAME}` : "RTHK 香港電台",
+    source: wechat.length ? `RTHK 香港電台 + ${wechat[0].source}` : "RTHK 香港電台",
     method: verified ? "llm+verify" : usedLlm ? "llm" : "rules",
     note: verified
       ? "Rewritten to spoken Cantonese by Claude and cross-checked by an independent Claude reviewer."

@@ -47,6 +47,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           WECHAT_FEED_URL: ${{ secrets.WECHAT_FEED_URL }}
           WECHAT_SOURCE_NAME: ${{ vars.WECHAT_SOURCE_NAME }}
+          BAIN_NEWS_QUERY: ${{ vars.BAIN_NEWS_QUERY }}
       - uses: actions/configure-pages@v5
       - name: Upload frontend/ (including generated today.json) as Pages artifact
         uses: actions/upload-pages-artifact@v3

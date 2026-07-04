@@ -6,7 +6,7 @@
   "description": "Daily Hong Kong news + everyday conversations -> interactive Cantonese speaking-practice web app (V2).",
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "test:unit": "node --test tests/chunk.test.mjs tests/convert.test.mjs tests/grader.test.mjs tests/convert-rules.test.mjs tests/rss.test.mjs tests/numbers.test.mjs",
+    "test:unit": "node --test tests/chunk.test.mjs tests/convert.test.mjs tests/grader.test.mjs tests/convert-rules.test.mjs tests/rss.test.mjs tests/numbers.test.mjs tests/gnews.test.mjs",
     "test:e2e": "node --test tests/e2e.test.mjs",
     "build:news": "node scripts/build-lessons.mjs",
     "build:jyutping": "node scripts/build-jyutping-dict.mjs",

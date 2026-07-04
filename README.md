@@ -134,21 +134,28 @@ real-Hong-Kong accuracy (prices, Octopus, MTR, code-switching habits) — before
 being baked to `frontend/data/conversations.json` with jyutping via
 `npm run build:conversations`.
 
-### The WeChat / Bain Portfolio News feed (optional)
+### The Bain news lessons (works out of the box)
 
-WeChat 公眾號 content has no public API, so V2 ingests it through an **RSS
-bridge** (WeRSS, Wechat2RSS, or similar — anything that turns the 公眾號 into
-an RSS feed with `content:encoded` bodies):
+The daily build reserves up to 4 lesson slots for a second, Bain-relevant
+source, resolved in this order:
 
-1. Set up a bridge for the 公眾號 and get its feed URL.
-2. Add it as a repo **secret** named `WECHAT_FEED_URL` (secret, so the URL
-   isn't public). Optionally set a repo **variable** `WECHAT_SOURCE_NAME` for
-   the label shown on cards (default: "Bain Portfolio News 朋友圈").
-3. The daily build reserves up to 4 lesson slots for that feed, converts the
-   articles exactly like RTHK news, and labels their source.
+1. **WeChat 公眾號 bridge (preferred when configured).** WeChat has no public
+   API, so 公眾號 content can only be ingested through an RSS bridge (WeRSS,
+   Wechat2RSS, or similar). Set the bridge's feed URL as a repo **secret**
+   named `WECHAT_FEED_URL` (plus an optional repo **variable**
+   `WECHAT_SOURCE_NAME` for the card label). Note: the public Wechat2RSS
+   instance only serves its own fixed account list — a custom 公眾號 needs a
+   self-hosted or paid bridge, and if the content actually lives in someone's
+   *Moments* (朋友圈) rather than a subscribable 公眾號, no bridge can reach it.
+2. **Web-scrape fallback (default, zero setup).** With no bridge configured,
+   the build scrapes the public web instead: it queries Google News (zh-HK)
+   for **貝恩資本** (Bain Capital) coverage, resolves each result to the real
+   publisher URL, extracts the article body, and converts it exactly like RTHK
+   news — labelled "Bain Capital 新聞" on the cards. Change the topic with a
+   `BAIN_NEWS_QUERY` secret/variable, or set it to `off` to disable.
 
-If the bridge breaks or the secret is unset, the build carries on RTHK-only —
-nothing else is affected.
+Both paths fail soft: if a feed breaks or finds nothing that day, the build
+carries on RTHK-only and nothing else is affected.
 
 > ⚠️ **A note on confidentiality:** anything the build ingests is published on
 > the public Pages site. Only feed it 公眾號 content that's acceptable to
@@ -185,8 +192,9 @@ Actions):
 | Name | Type | Required? | Purpose |
 |---|---|---|---|
 | `ANTHROPIC_API_KEY` | secret | recommended | Claude rewrite + independent verifier (else: rule-based) |
-| `WECHAT_FEED_URL` | secret | optional | RSS-bridge URL for the WeChat 公眾號 feed |
-| `WECHAT_SOURCE_NAME` | variable | optional | Source label for those lessons |
+| `WECHAT_FEED_URL` | secret | optional | RSS-bridge URL for the WeChat 公眾號 feed (overrides the web-scrape fallback) |
+| `WECHAT_SOURCE_NAME` | variable | optional | Source label for the secondary-feed lessons |
+| `BAIN_NEWS_QUERY` | variable | optional | Web-scrape fallback topic (default 貝恩資本; `off` disables) |
 
 ## Tests
 
