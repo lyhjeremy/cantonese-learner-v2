@@ -19,8 +19,8 @@
             "hant": "David",
             "hans": "David"
           },
-          "formal": "早晨！你好，我叫David，初次見面，請多多指教。",
-          "colloquial": "早晨！你好呀，我叫David，第一次見面，請多多指教。",
+          "formal": "早上好！你好，我叫David，初次見面，請多多指教。",
+          "colloquial": "早晨！你好呀，我叫David，以後請多多指教。",
           "jyutping": [
             "zou2",
             "san4",
@@ -37,12 +37,8 @@
             "",
             "",
             "",
-            "dai6",
-            "jat1",
-            "ci3",
-            "gin3",
-            "min6",
-            "",
+            "ji5",
+            "hau6",
             "ceng2",
             "do1",
             "do1",
@@ -303,7 +299,7 @@
             "hant": "侍應",
             "hans": "侍应"
           },
-          "formal": "早晨，幾位？",
+          "formal": "早上好，幾位？",
           "colloquial": "早晨，幾多位呀？",
           "jyutping": [
             "zou2",
@@ -399,11 +395,11 @@
             "hans": "侍应"
           },
           "formal": "飲品呢？凍飲加兩元。",
-          "colloquial": "飲嘢呢？凍飲加兩蚊。",
+          "colloquial": "飲咩呀？凍飲加兩蚊。",
           "jyutping": [
             "jam2",
-            "je5",
-            "ne1",
+            "me1",
+            "aa3",
             "",
             "dung3",
             "jam2",
@@ -422,21 +418,18 @@
             "hant": "顧客",
             "hans": "顾客"
           },
-          "formal": "熱奶茶，少甜。",
-          "colloquial": "熱奶茶，少甜，唔該。",
+          "formal": "熱奶茶，謝謝。",
+          "colloquial": "熱奶茶，唔該。",
           "jyutping": [
             "jit6",
             "naai5",
             "caa4",
             "",
-            "siu2",
-            "tim4",
-            "",
             "m4",
             "goi1",
             ""
           ],
-          "en": "Hot milk tea, less sweet please."
+          "en": "Hot milk tea, please."
         },
         {
           "id": 6,
@@ -608,8 +601,8 @@
             "hant": "知客",
             "hans": "知客"
           },
-          "formal": "大約十五分鐘。",
-          "colloquial": "大概十五分鐘左右。",
+          "formal": "大約十五分鐘，請先取票等叫號。",
+          "colloquial": "大概十五分鐘，攞張飛等叫號先啦。",
           "jyutping": [
             "daai6",
             "koi3",
@@ -617,11 +610,18 @@
             "ng5",
             "fan1",
             "zung1",
-            "zo2",
-            "jau2",
+            "",
+            "lo2",
+            "zoeng1",
+            "fei1",
+            "dang2",
+            "giu3",
+            "hou6",
+            "sin1",
+            "laa1",
             ""
           ],
-          "en": "About fifteen minutes."
+          "en": "About fifteen minutes — take a ticket and wait for your number."
         },
         {
           "id": 3,
@@ -650,9 +650,9 @@
           "id": 4,
           "paragraph_id": 4,
           "speaker": {
-            "en": "Staff",
-            "hant": "知客",
-            "hans": "知客"
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
           },
           "formal": "想喝什麼茶？",
           "colloquial": "想飲咩茶呀？",
@@ -690,6 +690,36 @@
           "id": 6,
           "paragraph_id": 6,
           "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "這是點心紙，請勾選想吃的交給我。",
+          "colloquial": "呢張係點心紙，剔咗想食嘅畀我啦。",
+          "jyutping": [
+            "ni1",
+            "zoeng1",
+            "hai6",
+            "dim2",
+            "sam1",
+            "zi2",
+            "",
+            "tik1",
+            "zo2",
+            "soeng2",
+            "sik6",
+            "ge3",
+            "bei2",
+            "ngo5",
+            "laa1",
+            ""
+          ],
+          "en": "Here's the dim sum sheet — tick what you'd like and hand it back."
+        },
+        {
+          "id": 7,
+          "paragraph_id": 7,
+          "speaker": {
             "en": "Guest",
             "hant": "客人",
             "hans": "客人"
@@ -718,39 +748,39 @@
           "en": "A basket of har gow, a basket of siu mai, and char siu buns."
         },
         {
-          "id": 7,
-          "paragraph_id": 7,
+          "id": 8,
+          "paragraph_id": 8,
           "speaker": {
-            "en": "Staff",
-            "hant": "知客",
-            "hans": "知客"
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
           },
           "formal": "還需要什麼嗎？",
-          "colloquial": "仲要啲咩嗎？",
+          "colloquial": "仲要啲咩呀？",
           "jyutping": [
             "zung6",
             "jiu3",
             "di1",
             "me1",
-            "maa1",
+            "aa3",
             ""
           ],
           "en": "Anything else?"
         },
         {
-          "id": 8,
-          "paragraph_id": 8,
+          "id": 9,
+          "paragraph_id": 9,
           "speaker": {
             "en": "Guest",
             "hant": "客人",
             "hans": "客人"
           },
           "formal": "先這樣，不夠再點。",
-          "colloquial": "住咁多先，唔夠再叫。",
+          "colloquial": "咁多住先，唔夠再叫。",
           "jyutping": [
-            "zyu6",
             "gam3",
             "do1",
+            "zyu6",
             "sin1",
             "",
             "m4",
@@ -762,12 +792,12 @@
           "en": "That's it for now — we'll order more if it's not enough."
         },
         {
-          "id": 9,
-          "paragraph_id": 9,
+          "id": 10,
+          "paragraph_id": 10,
           "speaker": {
-            "en": "Staff",
-            "hant": "知客",
-            "hans": "知客"
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
           },
           "formal": "好的。",
           "colloquial": "好嘅。",
@@ -839,19 +869,19 @@
             "hant": "司機",
             "hans": "司机"
           },
-          "formal": "走隧道可以嗎？",
-          "colloquial": "行隧道得唔得呀？",
+          "formal": "走西隧還是紅隧？",
+          "colloquial": "行西隧定紅隧呀？",
           "jyutping": [
             "haang4",
+            "sai1",
             "seoi6",
-            "dou6",
-            "dak1",
-            "m4",
-            "dak1",
+            "ding6",
+            "hung4",
+            "seoi6",
             "aa3",
             ""
           ],
-          "en": "Is the tunnel okay?"
+          "en": "Western Harbour Tunnel or the Cross-Harbour Tunnel?"
         },
         {
           "id": 3,
@@ -958,18 +988,18 @@
             "hant": "司機",
             "hans": "司机"
           },
-          "formal": "好，八十五元。",
-          "colloquial": "好，八十五蚊。",
+          "formal": "好，九十八元。",
+          "colloquial": "好，九十八蚊。",
           "jyutping": [
             "hou2",
             "",
-            "baat3",
+            "gau2",
             "sap6",
-            "ng5",
+            "baat3",
             "man1",
             ""
           ],
-          "en": "Okay — eighty-five dollars."
+          "en": "Okay — ninety-eight dollars."
         },
         {
           "id": 8,
@@ -1003,19 +1033,15 @@
             "hant": "司機",
             "hans": "司机"
           },
-          "formal": "謝謝，慢走！",
-          "colloquial": "多謝晒，慢慢行！",
+          "formal": "謝謝！",
+          "colloquial": "多謝晒！",
           "jyutping": [
             "do1",
             "ze6",
             "saai3",
-            "",
-            "maan6",
-            "maan6",
-            "hang4",
             ""
           ],
-          "en": "Thanks a lot — take care!"
+          "en": "Thanks a lot!"
         }
       ]
     },
@@ -1037,8 +1063,8 @@
             "hant": "遊客",
             "hans": "游客"
           },
-          "formal": "請問，往中環方向的月台在哪邊？",
-          "colloquial": "唔該，去中環嗰邊嘅月台喺邊呀？",
+          "formal": "請問，去中環應該在哪個月台上車？",
+          "colloquial": "唔該，去中環應該喺邊個月台上車呀？",
           "jyutping": [
             "m4",
             "goi1",
@@ -1046,17 +1072,19 @@
             "heoi3",
             "zung1",
             "waan4",
-            "go2",
-            "bin1",
-            "ge3",
-            "jyut6",
-            "toi4",
+            "jing1",
+            "goi1",
             "hai2",
             "bin1",
+            "go3",
+            "jyut6",
+            "toi4",
+            "soeng5",
+            "ce1",
             "aa3",
             ""
           ],
-          "en": "Excuse me, which platform is for trains towards Central?"
+          "en": "Excuse me, which platform should I take for Central?"
         },
         {
           "id": 1,
@@ -1207,7 +1235,7 @@
             "hans": "街坊"
           },
           "formal": "那邊有增值機，客務中心也可以。",
-          "colloquial": "嗰邊有增值機，客務中心又得。",
+          "colloquial": "嗰邊有增值機，去客務中心都得。",
           "jyutping": [
             "go2",
             "bin1",
@@ -1216,11 +1244,12 @@
             "zik6",
             "gei1",
             "",
+            "heoi3",
             "haak3",
             "mou6",
             "zung1",
             "sam1",
-            "jau6",
+            "dou1",
             "dak1",
             ""
           ],
@@ -1535,7 +1564,7 @@
             "hant": "Anna",
             "hans": "Anna"
           },
-          "formal": "早晨！週末過得怎樣？",
+          "formal": "早上好！週末過得怎樣？",
           "colloquial": "早晨！週末點呀？",
           "jyutping": [
             "zou2",
@@ -1557,7 +1586,7 @@
             "hant": "Ken",
             "hans": "Ken"
           },
-          "formal": "不錯，去了行山，走了麥理浩徑。",
+          "formal": "不錯，去了遠足，走了麥理浩徑。",
           "colloquial": "幾好呀，去咗行山，行咗麥理浩徑。",
           "jyutping": [
             "gei2",
@@ -1824,12 +1853,12 @@
             "hans": "Mandy"
           },
           "formal": "讓我看看日程……三點有另一個會，四點可以嗎？",
-          "colloquial": "等我睇睇個schedule……三點有另一個會，四點得唔得？",
+          "colloquial": "等我睇吓個schedule……三點有另一個會，四點得唔得？",
           "jyutping": [
             "dang2",
             "ngo5",
             "tai2",
-            "tai2",
+            "haa2",
             "go3",
             "",
             "",
@@ -1949,7 +1978,7 @@
             "hans": "Mandy"
           },
           "formal": "議程是什麼？",
-          "colloquial": "個agenda係咩嚟㗎？",
+          "colloquial": "個agenda係咩呀？",
           "jyutping": [
             "go3",
             "",
@@ -1960,8 +1989,7 @@
             "",
             "hai6",
             "me1",
-            "lai4",
-            "gaa3",
+            "aa3",
             ""
           ],
           "en": "What's on the agenda?"
@@ -1975,11 +2003,12 @@
             "hans": "Ivan"
           },
           "formal": "主要討論下一季度的預算。",
-          "colloquial": "主要傾下個季度嘅預算。",
+          "colloquial": "主要傾吓下個季度嘅預算。",
           "jyutping": [
             "zyu2",
             "jiu3",
             "king1",
+            "haa2",
             "haa6",
             "go3",
             "gwai3",
@@ -2118,11 +2147,15 @@
             "hans": "合伙人"
           },
           "formal": "利潤率呢？",
-          "colloquial": "利潤率呢？",
+          "colloquial": "啲margin呢？",
           "jyutping": [
-            "lei6",
-            "jeon6",
-            "seot1",
+            "di1",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "ne1",
             ""
           ],
@@ -2137,11 +2170,20 @@
             "hans": "分析员"
           },
           "formal": "毛利率維持在百分之四十左右。",
-          "colloquial": "毛利率維持喺百分之四十度。",
+          "colloquial": "Gross margin維持喺百分之四十度。",
           "jyutping": [
-            "mou4",
-            "lei6",
-            "leot2",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "wai4",
             "ci4",
             "hai2",
@@ -2191,7 +2233,7 @@
             "hans": "分析员"
           },
           "formal": "他們比較樂觀，計劃擴充東南亞市場。",
-          "colloquial": "佢哋比較樂觀，計劃擴充東南亞市場。",
+          "colloquial": "佢哋比較樂觀，打算擴充東南亞市場。",
           "jyutping": [
             "keoi5",
             "dei6",
@@ -2200,8 +2242,8 @@
             "lok6",
             "gun1",
             "",
-            "gai3",
-            "waak6",
+            "daa2",
+            "syun3",
             "kwong3",
             "cung1",
             "dung1",
@@ -2274,24 +2316,21 @@
             "hans": "合伙人"
           },
           "formal": "好，下星期向投資委員會匯報。",
-          "colloquial": "好，下星期同投資委員會匯報。",
+          "colloquial": "好，下星期上IC匯報。",
           "jyutping": [
             "hou2",
             "",
             "haa6",
             "sing1",
             "kei4",
-            "tung4",
-            "tau4",
-            "zi1",
-            "wai2",
-            "jyun4",
-            "wui2",
+            "soeng6",
+            "",
+            "",
             "wui6",
             "bou3",
             ""
           ],
-          "en": "Good — we'll report to the investment committee next week."
+          "en": "Good — we'll take it to the investment committee (IC) next week."
         },
         {
           "id": 9,
@@ -2437,12 +2476,14 @@
             "hans": "Tom"
           },
           "formal": "七點半怎樣？我來訂位。",
-          "colloquial": "七點半點呀？我訂位。",
+          "colloquial": "七點半得唔得呀？我訂位。",
           "jyutping": [
             "cat1",
             "dim2",
             "bun3",
-            "dim2",
+            "dak1",
+            "m4",
+            "dak1",
             "aa3",
             "",
             "ngo5",
@@ -2450,7 +2491,7 @@
             "wai2",
             ""
           ],
-          "en": "How about half past seven? I'll book a table."
+          "en": "Does half past seven work? I'll book a table."
         },
         {
           "id": 5,

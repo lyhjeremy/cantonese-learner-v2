@@ -5,178 +5,1110 @@
       "id": "greetings",
       "emoji": "👋",
       "level": 1,
-      "title": { "en": "Greetings & introductions", "hant": "打招呼同自我介紹", "hans": "打招呼和自我介绍" },
+      "title": {
+        "en": "Greetings & introductions",
+        "hant": "打招呼同自我介紹",
+        "hans": "打招呼和自我介绍"
+      },
       "lines": [
-        { "speaker": { "en": "David", "hant": "David", "hans": "David" }, "formal": "早晨！你好，我叫David，初次見面，請多多指教。", "colloquial": "早晨！你好呀，我叫David，第一次見面，請多多指教。", "en": "Good morning! Hi, I'm David — nice to meet you." },
-        { "speaker": { "en": "Ms Chan", "hant": "陳小姐", "hans": "陈小姐" }, "formal": "你好，我是陳小姐，叫我阿珍就可以了。", "colloquial": "你好呀，我係陳小姐，叫我阿珍就得喇。", "en": "Hello, I'm Ms Chan — just call me Ah Jan." },
-        { "speaker": { "en": "David", "hant": "David", "hans": "David" }, "formal": "很高興認識你。", "colloquial": "好開心識到你。", "en": "Very happy to meet you." },
-        { "speaker": { "en": "Ms Chan", "hant": "陳小姐", "hans": "陈小姐" }, "formal": "你是新來的同事嗎？", "colloquial": "你係唔係新嚟嘅同事呀？", "en": "Are you the new colleague?" },
-        { "speaker": { "en": "David", "hant": "David", "hans": "David" }, "formal": "是的，我剛從倫敦調過來。", "colloquial": "係呀，我啱啱由倫敦調過嚟。", "en": "Yes, I just transferred over from London." },
-        { "speaker": { "en": "Ms Chan", "hant": "陳小姐", "hans": "陈小姐" }, "formal": "歡迎你！習慣香港的生活嗎？", "colloquial": "歡迎你呀！香港嘅生活習唔習慣呀？", "en": "Welcome! Are you getting used to life in Hong Kong?" },
-        { "speaker": { "en": "David", "hant": "David", "hans": "David" }, "formal": "還可以，就是天氣有點熱。", "colloquial": "都OK，不過天氣有啲熱。", "en": "It's okay — the weather is a bit hot though." },
-        { "speaker": { "en": "Ms Chan", "hant": "陳小姐", "hans": "陈小姐" }, "formal": "慢慢就會習慣了。有需要隨時找我。", "colloquial": "慢慢就會習慣㗎喇。有咩需要隨時搵我。", "en": "You'll get used to it. Come find me any time you need something." },
-        { "speaker": { "en": "David", "hant": "David", "hans": "David" }, "formal": "謝謝你！", "colloquial": "唔該晒你！", "en": "Thank you so much!" },
-        { "speaker": { "en": "Ms Chan", "hant": "陳小姐", "hans": "陈小姐" }, "formal": "不用客氣。", "colloquial": "唔使客氣。", "en": "You're welcome." }
+        {
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "早上好！你好，我叫David，初次見面，請多多指教。",
+          "colloquial": "早晨！你好呀，我叫David，以後請多多指教。",
+          "en": "Good morning! Hi, I'm David — nice to meet you."
+        },
+        {
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "你好，我是陳小姐，叫我阿珍就可以了。",
+          "colloquial": "你好呀，我係陳小姐，叫我阿珍就得喇。",
+          "en": "Hello, I'm Ms Chan — just call me Ah Jan."
+        },
+        {
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "很高興認識你。",
+          "colloquial": "好開心識到你。",
+          "en": "Very happy to meet you."
+        },
+        {
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "你是新來的同事嗎？",
+          "colloquial": "你係唔係新嚟嘅同事呀？",
+          "en": "Are you the new colleague?"
+        },
+        {
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "是的，我剛從倫敦調過來。",
+          "colloquial": "係呀，我啱啱由倫敦調過嚟。",
+          "en": "Yes, I just transferred over from London."
+        },
+        {
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "歡迎你！習慣香港的生活嗎？",
+          "colloquial": "歡迎你呀！香港嘅生活習唔習慣呀？",
+          "en": "Welcome! Are you getting used to life in Hong Kong?"
+        },
+        {
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "還可以，就是天氣有點熱。",
+          "colloquial": "都OK，不過天氣有啲熱。",
+          "en": "It's okay — the weather is a bit hot though."
+        },
+        {
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "慢慢就會習慣了。有需要隨時找我。",
+          "colloquial": "慢慢就會習慣㗎喇。有咩需要隨時搵我。",
+          "en": "You'll get used to it. Come find me any time you need something."
+        },
+        {
+          "speaker": {
+            "en": "David",
+            "hant": "David",
+            "hans": "David"
+          },
+          "formal": "謝謝你！",
+          "colloquial": "唔該晒你！",
+          "en": "Thank you so much!"
+        },
+        {
+          "speaker": {
+            "en": "Ms Chan",
+            "hant": "陳小姐",
+            "hans": "陈小姐"
+          },
+          "formal": "不用客氣。",
+          "colloquial": "唔使客氣。",
+          "en": "You're welcome."
+        }
       ]
     },
     {
       "id": "cha-chaan-teng",
       "emoji": "🍳",
       "level": 1,
-      "title": { "en": "Breakfast at a cha chaan teng", "hant": "茶餐廳食早餐", "hans": "茶餐厅吃早餐" },
+      "title": {
+        "en": "Breakfast at a cha chaan teng",
+        "hant": "茶餐廳食早餐",
+        "hans": "茶餐厅吃早餐"
+      },
       "lines": [
-        { "speaker": { "en": "Waiter", "hant": "侍應", "hans": "侍应" }, "formal": "早晨，幾位？", "colloquial": "早晨，幾多位呀？", "en": "Morning — how many?" },
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "一位，謝謝。", "colloquial": "一個人，唔該。", "en": "Just one, thanks." },
-        { "speaker": { "en": "Waiter", "hant": "侍應", "hans": "侍应" }, "formal": "這邊坐。想吃什麼？", "colloquial": "呢邊坐啦。想食咩呀？", "en": "Sit over here. What would you like?" },
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "我要一個A餐，火腿通粉配炒蛋。", "colloquial": "我要個A餐，火腿通粉配炒蛋。", "en": "I'll have set A — ham macaroni with scrambled eggs." },
-        { "speaker": { "en": "Waiter", "hant": "侍應", "hans": "侍应" }, "formal": "飲品呢？凍飲加兩元。", "colloquial": "飲嘢呢？凍飲加兩蚊。", "en": "And to drink? Cold drinks are two dollars extra." },
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "熱奶茶，少甜。", "colloquial": "熱奶茶，少甜，唔該。", "en": "Hot milk tea, less sweet please." },
-        { "speaker": { "en": "Waiter", "hant": "侍應", "hans": "侍应" }, "formal": "多士要牛油還是果醬？", "colloquial": "多士要牛油定果醬呀？", "en": "Butter or jam on the toast?" },
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "牛油就可以了。", "colloquial": "牛油就得喇。", "en": "Butter is fine." },
-        { "speaker": { "en": "Waiter", "hant": "侍應", "hans": "侍应" }, "formal": "好的，馬上來。", "colloquial": "好，即刻嚟。", "en": "Got it, coming right up." },
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "麻煩你，結帳。", "colloquial": "唔該，埋單！", "en": "Excuse me — the bill, please!" },
-        { "speaker": { "en": "Waiter", "hant": "侍應", "hans": "侍应" }, "formal": "一共三十八元。", "colloquial": "總共三十八蚊。", "en": "Thirty-eight dollars in total." }
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "早上好，幾位？",
+          "colloquial": "早晨，幾多位呀？",
+          "en": "Morning — how many?"
+        },
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "一位，謝謝。",
+          "colloquial": "一個人，唔該。",
+          "en": "Just one, thanks."
+        },
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "這邊坐。想吃什麼？",
+          "colloquial": "呢邊坐啦。想食咩呀？",
+          "en": "Sit over here. What would you like?"
+        },
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "我要一個A餐，火腿通粉配炒蛋。",
+          "colloquial": "我要個A餐，火腿通粉配炒蛋。",
+          "en": "I'll have set A — ham macaroni with scrambled eggs."
+        },
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "飲品呢？凍飲加兩元。",
+          "colloquial": "飲咩呀？凍飲加兩蚊。",
+          "en": "And to drink? Cold drinks are two dollars extra."
+        },
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "熱奶茶，謝謝。",
+          "colloquial": "熱奶茶，唔該。",
+          "en": "Hot milk tea, please."
+        },
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "多士要牛油還是果醬？",
+          "colloquial": "多士要牛油定果醬呀？",
+          "en": "Butter or jam on the toast?"
+        },
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "牛油就可以了。",
+          "colloquial": "牛油就得喇。",
+          "en": "Butter is fine."
+        },
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "好的，馬上來。",
+          "colloquial": "好，即刻嚟。",
+          "en": "Got it, coming right up."
+        },
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "麻煩你，結帳。",
+          "colloquial": "唔該，埋單！",
+          "en": "Excuse me — the bill, please!"
+        },
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "一共三十八元。",
+          "colloquial": "總共三十八蚊。",
+          "en": "Thirty-eight dollars in total."
+        }
       ]
     },
     {
       "id": "dim-sum",
       "emoji": "🥟",
       "level": 1,
-      "title": { "en": "Dim sum with friends", "hant": "同朋友飲茶", "hans": "和朋友饮茶" },
+      "title": {
+        "en": "Dim sum with friends",
+        "hant": "同朋友飲茶",
+        "hans": "和朋友饮茶"
+      },
       "lines": [
-        { "speaker": { "en": "Staff", "hant": "知客", "hans": "知客" }, "formal": "兩位，有預約嗎？", "colloquial": "兩位，有冇訂位呀？", "en": "Two of you — do you have a reservation?" },
-        { "speaker": { "en": "Guest", "hant": "客人", "hans": "客人" }, "formal": "沒有，要等多久？", "colloquial": "冇呀，要等幾耐？", "en": "No — how long is the wait?" },
-        { "speaker": { "en": "Staff", "hant": "知客", "hans": "知客" }, "formal": "大約十五分鐘。", "colloquial": "大概十五分鐘左右。", "en": "About fifteen minutes." },
-        { "speaker": { "en": "Guest", "hant": "客人", "hans": "客人" }, "formal": "好，我們等一下。", "colloquial": "好呀，我哋等陣先。", "en": "Fine, we'll wait." },
-        { "speaker": { "en": "Staff", "hant": "知客", "hans": "知客" }, "formal": "想喝什麼茶？", "colloquial": "想飲咩茶呀？", "en": "What tea would you like?" },
-        { "speaker": { "en": "Guest", "hant": "客人", "hans": "客人" }, "formal": "普洱，謝謝。", "colloquial": "普洱，唔該。", "en": "Pu-erh, please." },
-        { "speaker": { "en": "Guest", "hant": "客人", "hans": "客人" }, "formal": "要一籠蝦餃、一籠燒賣，還有叉燒包。", "colloquial": "要一籠蝦餃、一籠燒賣，仲有叉燒包。", "en": "A basket of har gow, a basket of siu mai, and char siu buns." },
-        { "speaker": { "en": "Staff", "hant": "知客", "hans": "知客" }, "formal": "還需要什麼嗎？", "colloquial": "仲要啲咩嗎？", "en": "Anything else?" },
-        { "speaker": { "en": "Guest", "hant": "客人", "hans": "客人" }, "formal": "先這樣，不夠再點。", "colloquial": "住咁多先，唔夠再叫。", "en": "That's it for now — we'll order more if it's not enough." },
-        { "speaker": { "en": "Staff", "hant": "知客", "hans": "知客" }, "formal": "好的。", "colloquial": "好嘅。", "en": "Sure." }
+        {
+          "speaker": {
+            "en": "Staff",
+            "hant": "知客",
+            "hans": "知客"
+          },
+          "formal": "兩位，有預約嗎？",
+          "colloquial": "兩位，有冇訂位呀？",
+          "en": "Two of you — do you have a reservation?"
+        },
+        {
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "沒有，要等多久？",
+          "colloquial": "冇呀，要等幾耐？",
+          "en": "No — how long is the wait?"
+        },
+        {
+          "speaker": {
+            "en": "Staff",
+            "hant": "知客",
+            "hans": "知客"
+          },
+          "formal": "大約十五分鐘，請先取票等叫號。",
+          "colloquial": "大概十五分鐘，攞張飛等叫號先啦。",
+          "en": "About fifteen minutes — take a ticket and wait for your number."
+        },
+        {
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "好，我們等一下。",
+          "colloquial": "好呀，我哋等陣先。",
+          "en": "Fine, we'll wait."
+        },
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "想喝什麼茶？",
+          "colloquial": "想飲咩茶呀？",
+          "en": "What tea would you like?"
+        },
+        {
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "普洱，謝謝。",
+          "colloquial": "普洱，唔該。",
+          "en": "Pu-erh, please."
+        },
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "這是點心紙，請勾選想吃的交給我。",
+          "colloquial": "呢張係點心紙，剔咗想食嘅畀我啦。",
+          "en": "Here's the dim sum sheet — tick what you'd like and hand it back."
+        },
+        {
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "要一籠蝦餃、一籠燒賣，還有叉燒包。",
+          "colloquial": "要一籠蝦餃、一籠燒賣，仲有叉燒包。",
+          "en": "A basket of har gow, a basket of siu mai, and char siu buns."
+        },
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "還需要什麼嗎？",
+          "colloquial": "仲要啲咩呀？",
+          "en": "Anything else?"
+        },
+        {
+          "speaker": {
+            "en": "Guest",
+            "hant": "客人",
+            "hans": "客人"
+          },
+          "formal": "先這樣，不夠再點。",
+          "colloquial": "咁多住先，唔夠再叫。",
+          "en": "That's it for now — we'll order more if it's not enough."
+        },
+        {
+          "speaker": {
+            "en": "Waiter",
+            "hant": "侍應",
+            "hans": "侍应"
+          },
+          "formal": "好的。",
+          "colloquial": "好嘅。",
+          "en": "Sure."
+        }
       ]
     },
     {
       "id": "taxi",
       "emoji": "🚕",
       "level": 1,
-      "title": { "en": "Taking a taxi", "hant": "搭的士", "hans": "搭出租车" },
+      "title": {
+        "en": "Taking a taxi",
+        "hant": "搭的士",
+        "hans": "搭出租车"
+      },
       "lines": [
-        { "speaker": { "en": "Driver", "hant": "司機", "hans": "司机" }, "formal": "去哪裡？", "colloquial": "去邊呀？", "en": "Where to?" },
-        { "speaker": { "en": "Passenger", "hant": "乘客", "hans": "乘客" }, "formal": "麻煩去中環國際金融中心。", "colloquial": "唔該去中環IFC。", "en": "To IFC in Central, please." },
-        { "speaker": { "en": "Driver", "hant": "司機", "hans": "司机" }, "formal": "走隧道可以嗎？", "colloquial": "行隧道得唔得呀？", "en": "Is the tunnel okay?" },
-        { "speaker": { "en": "Passenger", "hant": "乘客", "hans": "乘客" }, "formal": "可以，哪條快就走哪條。", "colloquial": "得，邊條快行邊條啦。", "en": "Sure — whichever is faster." },
-        { "speaker": { "en": "Driver", "hant": "司機", "hans": "司机" }, "formal": "今天塞車，可能要二十分鐘。", "colloquial": "今日塞車，可能要二十分鐘。", "en": "Traffic is bad today — could take twenty minutes." },
-        { "speaker": { "en": "Passenger", "hant": "乘客", "hans": "乘客" }, "formal": "沒關係，不趕時間。", "colloquial": "唔緊要，唔趕時間。", "en": "No problem, I'm not in a hurry." },
-        { "speaker": { "en": "Passenger", "hant": "乘客", "hans": "乘客" }, "formal": "前面路口停就可以了。", "colloquial": "前面路口停就得喇。", "en": "You can stop at the junction ahead." },
-        { "speaker": { "en": "Driver", "hant": "司機", "hans": "司机" }, "formal": "好，八十五元。", "colloquial": "好，八十五蚊。", "en": "Okay — eighty-five dollars." },
-        { "speaker": { "en": "Passenger", "hant": "乘客", "hans": "乘客" }, "formal": "給你一百，不用找了。", "colloquial": "畀一百你，唔使找喇。", "en": "Here's a hundred — keep the change." },
-        { "speaker": { "en": "Driver", "hant": "司機", "hans": "司机" }, "formal": "謝謝，慢走！", "colloquial": "多謝晒，慢慢行！", "en": "Thanks a lot — take care!" }
+        {
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "去哪裡？",
+          "colloquial": "去邊呀？",
+          "en": "Where to?"
+        },
+        {
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "麻煩去中環國際金融中心。",
+          "colloquial": "唔該去中環IFC。",
+          "en": "To IFC in Central, please."
+        },
+        {
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "走西隧還是紅隧？",
+          "colloquial": "行西隧定紅隧呀？",
+          "en": "Western Harbour Tunnel or the Cross-Harbour Tunnel?"
+        },
+        {
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "可以，哪條快就走哪條。",
+          "colloquial": "得，邊條快行邊條啦。",
+          "en": "Sure — whichever is faster."
+        },
+        {
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "今天塞車，可能要二十分鐘。",
+          "colloquial": "今日塞車，可能要二十分鐘。",
+          "en": "Traffic is bad today — could take twenty minutes."
+        },
+        {
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "沒關係，不趕時間。",
+          "colloquial": "唔緊要，唔趕時間。",
+          "en": "No problem, I'm not in a hurry."
+        },
+        {
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "前面路口停就可以了。",
+          "colloquial": "前面路口停就得喇。",
+          "en": "You can stop at the junction ahead."
+        },
+        {
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "好，九十八元。",
+          "colloquial": "好，九十八蚊。",
+          "en": "Okay — ninety-eight dollars."
+        },
+        {
+          "speaker": {
+            "en": "Passenger",
+            "hant": "乘客",
+            "hans": "乘客"
+          },
+          "formal": "給你一百，不用找了。",
+          "colloquial": "畀一百你，唔使找喇。",
+          "en": "Here's a hundred — keep the change."
+        },
+        {
+          "speaker": {
+            "en": "Driver",
+            "hant": "司機",
+            "hans": "司机"
+          },
+          "formal": "謝謝！",
+          "colloquial": "多謝晒！",
+          "en": "Thanks a lot!"
+        }
       ]
     },
     {
       "id": "mtr",
       "emoji": "🚇",
       "level": 1,
-      "title": { "en": "MTR & asking directions", "hant": "搭港鐵問路", "hans": "搭港铁问路" },
+      "title": {
+        "en": "MTR & asking directions",
+        "hant": "搭港鐵問路",
+        "hans": "搭港铁问路"
+      },
       "lines": [
-        { "speaker": { "en": "Tourist", "hant": "遊客", "hans": "游客" }, "formal": "請問，往中環方向的月台在哪邊？", "colloquial": "唔該，去中環嗰邊嘅月台喺邊呀？", "en": "Excuse me, which platform is for trains towards Central?" },
-        { "speaker": { "en": "Local", "hant": "街坊", "hans": "街坊" }, "formal": "在對面，走樓梯下去就是。", "colloquial": "喺對面，行樓梯落去就係。", "en": "It's on the other side — take the stairs down." },
-        { "speaker": { "en": "Tourist", "hant": "遊客", "hans": "游客" }, "formal": "需要轉車嗎？", "colloquial": "使唔使轉車呀？", "en": "Do I need to change trains?" },
-        { "speaker": { "en": "Local", "hant": "街坊", "hans": "街坊" }, "formal": "在金鐘轉港島綫。", "colloquial": "喺金鐘轉港島綫。", "en": "Change to the Island Line at Admiralty." },
-        { "speaker": { "en": "Tourist", "hant": "遊客", "hans": "游客" }, "formal": "大約要多久？", "colloquial": "大概要幾耐呀？", "en": "Roughly how long does it take?" },
-        { "speaker": { "en": "Local", "hant": "街坊", "hans": "街坊" }, "formal": "十分鐘左右。", "colloquial": "十分鐘度啦。", "en": "About ten minutes." },
-        { "speaker": { "en": "Tourist", "hant": "遊客", "hans": "游客" }, "formal": "我的八達通沒有錢了，在哪裡增值？", "colloquial": "我張八達通冇錢喇，喺邊度增值呀？", "en": "My Octopus card is out of money — where can I top it up?" },
-        { "speaker": { "en": "Local", "hant": "街坊", "hans": "街坊" }, "formal": "那邊有增值機，客務中心也可以。", "colloquial": "嗰邊有增值機，客務中心又得。", "en": "There's a top-up machine over there, or the customer service centre." },
-        { "speaker": { "en": "Tourist", "hant": "遊客", "hans": "游客" }, "formal": "明白了，非常感謝！", "colloquial": "明喇，唔該晒！", "en": "Got it — thanks so much!" },
-        { "speaker": { "en": "Local", "hant": "街坊", "hans": "街坊" }, "formal": "不客氣。", "colloquial": "唔使唔該。", "en": "No need to thank me." }
+        {
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "請問，去中環應該在哪個月台上車？",
+          "colloquial": "唔該，去中環應該喺邊個月台上車呀？",
+          "en": "Excuse me, which platform should I take for Central?"
+        },
+        {
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "在對面，走樓梯下去就是。",
+          "colloquial": "喺對面，行樓梯落去就係。",
+          "en": "It's on the other side — take the stairs down."
+        },
+        {
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "需要轉車嗎？",
+          "colloquial": "使唔使轉車呀？",
+          "en": "Do I need to change trains?"
+        },
+        {
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "在金鐘轉港島綫。",
+          "colloquial": "喺金鐘轉港島綫。",
+          "en": "Change to the Island Line at Admiralty."
+        },
+        {
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "大約要多久？",
+          "colloquial": "大概要幾耐呀？",
+          "en": "Roughly how long does it take?"
+        },
+        {
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "十分鐘左右。",
+          "colloquial": "十分鐘度啦。",
+          "en": "About ten minutes."
+        },
+        {
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "我的八達通沒有錢了，在哪裡增值？",
+          "colloquial": "我張八達通冇錢喇，喺邊度增值呀？",
+          "en": "My Octopus card is out of money — where can I top it up?"
+        },
+        {
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "那邊有增值機，客務中心也可以。",
+          "colloquial": "嗰邊有增值機，去客務中心都得。",
+          "en": "There's a top-up machine over there, or the customer service centre."
+        },
+        {
+          "speaker": {
+            "en": "Tourist",
+            "hant": "遊客",
+            "hans": "游客"
+          },
+          "formal": "明白了，非常感謝！",
+          "colloquial": "明喇，唔該晒！",
+          "en": "Got it — thanks so much!"
+        },
+        {
+          "speaker": {
+            "en": "Local",
+            "hant": "街坊",
+            "hans": "街坊"
+          },
+          "formal": "不客氣。",
+          "colloquial": "唔使唔該。",
+          "en": "No need to thank me."
+        }
       ]
     },
     {
       "id": "market",
       "emoji": "🛍️",
       "level": 2,
-      "title": { "en": "Shopping at the market", "hant": "街市買嘢", "hans": "街市买东西" },
+      "title": {
+        "en": "Shopping at the market",
+        "hant": "街市買嘢",
+        "hans": "街市买东西"
+      },
       "lines": [
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "老闆，這個怎麼賣？", "colloquial": "老闆，呢個點賣呀？", "en": "Boss, how much is this?" },
-        { "speaker": { "en": "Vendor", "hant": "老闆", "hans": "老板" }, "formal": "三十元一斤。", "colloquial": "三十蚊一斤。", "en": "Thirty dollars a catty." },
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "有點貴，能便宜一點嗎？", "colloquial": "有啲貴喎，平啲得唔得呀？", "en": "That's a bit expensive — can you go lower?" },
-        { "speaker": { "en": "Vendor", "hant": "老闆", "hans": "老板" }, "formal": "買兩斤算你五十。", "colloquial": "買兩斤算你五十啦。", "en": "Buy two catties and I'll make it fifty." },
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "好，那要兩斤。", "colloquial": "好啦，咁要兩斤。", "en": "Deal — two catties then." },
-        { "speaker": { "en": "Vendor", "hant": "老闆", "hans": "老板" }, "formal": "還要別的嗎？", "colloquial": "仲要唔要第二啲呀？", "en": "Anything else?" },
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "這些芒果甜不甜？", "colloquial": "呢啲芒果甜唔甜㗎？", "en": "Are these mangoes sweet?" },
-        { "speaker": { "en": "Vendor", "hant": "老闆", "hans": "老板" }, "formal": "很甜，不甜不要錢！", "colloquial": "好甜㗎，唔甜唔使錢！", "en": "Very sweet — free if they're not!" },
-        { "speaker": { "en": "Customer", "hant": "顧客", "hans": "顾客" }, "formal": "那拿三個。可以用八達通嗎？", "colloquial": "咁攞三個啦。可唔可以嘟八達通呀？", "en": "I'll take three then. Can I pay by Octopus?" },
-        { "speaker": { "en": "Vendor", "hant": "老闆", "hans": "老板" }, "formal": "可以，一共七十二元。", "colloquial": "得，總共七十二蚊。", "en": "Sure — seventy-two dollars altogether." }
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "老闆，這個怎麼賣？",
+          "colloquial": "老闆，呢個點賣呀？",
+          "en": "Boss, how much is this?"
+        },
+        {
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "三十元一斤。",
+          "colloquial": "三十蚊一斤。",
+          "en": "Thirty dollars a catty."
+        },
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "有點貴，能便宜一點嗎？",
+          "colloquial": "有啲貴喎，平啲得唔得呀？",
+          "en": "That's a bit expensive — can you go lower?"
+        },
+        {
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "買兩斤算你五十。",
+          "colloquial": "買兩斤算你五十啦。",
+          "en": "Buy two catties and I'll make it fifty."
+        },
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "好，那要兩斤。",
+          "colloquial": "好啦，咁要兩斤。",
+          "en": "Deal — two catties then."
+        },
+        {
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "還要別的嗎？",
+          "colloquial": "仲要唔要第二啲呀？",
+          "en": "Anything else?"
+        },
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "這些芒果甜不甜？",
+          "colloquial": "呢啲芒果甜唔甜㗎？",
+          "en": "Are these mangoes sweet?"
+        },
+        {
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "很甜，不甜不要錢！",
+          "colloquial": "好甜㗎，唔甜唔使錢！",
+          "en": "Very sweet — free if they're not!"
+        },
+        {
+          "speaker": {
+            "en": "Customer",
+            "hant": "顧客",
+            "hans": "顾客"
+          },
+          "formal": "那拿三個。可以用八達通嗎？",
+          "colloquial": "咁攞三個啦。可唔可以嘟八達通呀？",
+          "en": "I'll take three then. Can I pay by Octopus?"
+        },
+        {
+          "speaker": {
+            "en": "Vendor",
+            "hant": "老闆",
+            "hans": "老板"
+          },
+          "formal": "可以，一共七十二元。",
+          "colloquial": "得，總共七十二蚊。",
+          "en": "Sure — seventy-two dollars altogether."
+        }
       ]
     },
     {
       "id": "office-small-talk",
       "emoji": "💼",
       "level": 2,
-      "title": { "en": "Office small talk", "hant": "辦公室傾偈", "hans": "办公室聊天" },
+      "title": {
+        "en": "Office small talk",
+        "hant": "辦公室傾偈",
+        "hans": "办公室聊天"
+      },
       "lines": [
-        { "speaker": { "en": "Anna", "hant": "Anna", "hans": "Anna" }, "formal": "早晨！週末過得怎樣？", "colloquial": "早晨！週末點呀？", "en": "Morning! How was your weekend?" },
-        { "speaker": { "en": "Ken", "hant": "Ken", "hans": "Ken" }, "formal": "不錯，去了行山，走了麥理浩徑。", "colloquial": "幾好呀，去咗行山，行咗麥理浩徑。", "en": "Pretty good — went hiking on the MacLehose Trail." },
-        { "speaker": { "en": "Anna", "hant": "Anna", "hans": "Anna" }, "formal": "那麼厲害！我整個週末都在加班。", "colloquial": "咁犀利！我成個週末都喺度加班。", "en": "Impressive! I spent the whole weekend working overtime." },
-        { "speaker": { "en": "Ken", "hant": "Ken", "hans": "Ken" }, "formal": "辛苦了。項目趕得及嗎？", "colloquial": "辛苦晒。個project趕唔趕得切呀？", "en": "Poor you. Will the project make the deadline?" },
-        { "speaker": { "en": "Anna", "hant": "Anna", "hans": "Anna" }, "formal": "應該可以，星期五之前要交給客戶。", "colloquial": "應該得，星期五之前要交畀客戶。", "en": "Should be fine — it's due to the client by Friday." },
-        { "speaker": { "en": "Ken", "hant": "Ken", "hans": "Ken" }, "formal": "有需要幫忙就說一聲。", "colloquial": "有咩要幫手就出聲。", "en": "Shout if you need a hand." },
-        { "speaker": { "en": "Anna", "hant": "Anna", "hans": "Anna" }, "formal": "謝謝！中午一起吃飯嗎？", "colloquial": "唔該晒！晏晝一齊食飯吖？", "en": "Thanks! Lunch together at noon?" },
-        { "speaker": { "en": "Ken", "hant": "Ken", "hans": "Ken" }, "formal": "好啊，樓下那間新開的日本菜怎樣？", "colloquial": "好呀，樓下嗰間新開嘅日本嘢點呀？", "en": "Sure — how about that new Japanese place downstairs?" },
-        { "speaker": { "en": "Anna", "hant": "Anna", "hans": "Anna" }, "formal": "沒問題，十二點半見。", "colloquial": "冇問題，十二點半見。", "en": "No problem — see you at half past twelve." }
+        {
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "早上好！週末過得怎樣？",
+          "colloquial": "早晨！週末點呀？",
+          "en": "Morning! How was your weekend?"
+        },
+        {
+          "speaker": {
+            "en": "Ken",
+            "hant": "Ken",
+            "hans": "Ken"
+          },
+          "formal": "不錯，去了遠足，走了麥理浩徑。",
+          "colloquial": "幾好呀，去咗行山，行咗麥理浩徑。",
+          "en": "Pretty good — went hiking on the MacLehose Trail."
+        },
+        {
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "那麼厲害！我整個週末都在加班。",
+          "colloquial": "咁犀利！我成個週末都喺度加班。",
+          "en": "Impressive! I spent the whole weekend working overtime."
+        },
+        {
+          "speaker": {
+            "en": "Ken",
+            "hant": "Ken",
+            "hans": "Ken"
+          },
+          "formal": "辛苦了。項目趕得及嗎？",
+          "colloquial": "辛苦晒。個project趕唔趕得切呀？",
+          "en": "Poor you. Will the project make the deadline?"
+        },
+        {
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "應該可以，星期五之前要交給客戶。",
+          "colloquial": "應該得，星期五之前要交畀客戶。",
+          "en": "Should be fine — it's due to the client by Friday."
+        },
+        {
+          "speaker": {
+            "en": "Ken",
+            "hant": "Ken",
+            "hans": "Ken"
+          },
+          "formal": "有需要幫忙就說一聲。",
+          "colloquial": "有咩要幫手就出聲。",
+          "en": "Shout if you need a hand."
+        },
+        {
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "謝謝！中午一起吃飯嗎？",
+          "colloquial": "唔該晒！晏晝一齊食飯吖？",
+          "en": "Thanks! Lunch together at noon?"
+        },
+        {
+          "speaker": {
+            "en": "Ken",
+            "hant": "Ken",
+            "hans": "Ken"
+          },
+          "formal": "好啊，樓下那間新開的日本菜怎樣？",
+          "colloquial": "好呀，樓下嗰間新開嘅日本嘢點呀？",
+          "en": "Sure — how about that new Japanese place downstairs?"
+        },
+        {
+          "speaker": {
+            "en": "Anna",
+            "hant": "Anna",
+            "hans": "Anna"
+          },
+          "formal": "沒問題，十二點半見。",
+          "colloquial": "冇問題，十二點半見。",
+          "en": "No problem — see you at half past twelve."
+        }
       ]
     },
     {
       "id": "meetings",
       "emoji": "📅",
       "level": 2,
-      "title": { "en": "Meetings & scheduling", "hant": "開會同夾時間", "hans": "开会和约时间" },
+      "title": {
+        "en": "Meetings & scheduling",
+        "hant": "開會同夾時間",
+        "hans": "开会和约时间"
+      },
       "lines": [
-        { "speaker": { "en": "Ivan", "hant": "Ivan", "hans": "Ivan" }, "formal": "明天下午三點開會，你有空嗎？", "colloquial": "聽日下晝三點開會，你得唔得閒呀？", "en": "Meeting at 3pm tomorrow — are you free?" },
-        { "speaker": { "en": "Mandy", "hant": "Mandy", "hans": "Mandy" }, "formal": "讓我看看日程……三點有另一個會，四點可以嗎？", "colloquial": "等我睇睇個schedule……三點有另一個會，四點得唔得？", "en": "Let me check my schedule… I have another meeting at three — does four work?" },
-        { "speaker": { "en": "Ivan", "hant": "Ivan", "hans": "Ivan" }, "formal": "可以，那改到四點。", "colloquial": "得，咁改到四點啦。", "en": "Sure, let's move it to four." },
-        { "speaker": { "en": "Mandy", "hant": "Mandy", "hans": "Mandy" }, "formal": "在哪個會議室？", "colloquial": "喺邊個會議室呀？", "en": "Which meeting room?" },
-        { "speaker": { "en": "Ivan", "hant": "Ivan", "hans": "Ivan" }, "formal": "十樓的大會議室，我發邀請給你。", "colloquial": "十樓個大會議室，我send個invite畀你。", "en": "The big one on the tenth floor — I'll send you an invite." },
-        { "speaker": { "en": "Mandy", "hant": "Mandy", "hans": "Mandy" }, "formal": "議程是什麼？", "colloquial": "個agenda係咩嚟㗎？", "en": "What's on the agenda?" },
-        { "speaker": { "en": "Ivan", "hant": "Ivan", "hans": "Ivan" }, "formal": "主要討論下一季度的預算。", "colloquial": "主要傾下個季度嘅預算。", "en": "Mainly next quarter's budget." },
-        { "speaker": { "en": "Mandy", "hant": "Mandy", "hans": "Mandy" }, "formal": "好，我先準備一下資料。", "colloquial": "好，我準備定啲資料先。", "en": "Okay, I'll get some materials ready." },
-        { "speaker": { "en": "Ivan", "hant": "Ivan", "hans": "Ivan" }, "formal": "麻煩你了，到時見。", "colloquial": "唔該晒，到時見。", "en": "Thanks — see you then." }
+        {
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "明天下午三點開會，你有空嗎？",
+          "colloquial": "聽日下晝三點開會，你得唔得閒呀？",
+          "en": "Meeting at 3pm tomorrow — are you free?"
+        },
+        {
+          "speaker": {
+            "en": "Mandy",
+            "hant": "Mandy",
+            "hans": "Mandy"
+          },
+          "formal": "讓我看看日程……三點有另一個會，四點可以嗎？",
+          "colloquial": "等我睇吓個schedule……三點有另一個會，四點得唔得？",
+          "en": "Let me check my schedule… I have another meeting at three — does four work?"
+        },
+        {
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "可以，那改到四點。",
+          "colloquial": "得，咁改到四點啦。",
+          "en": "Sure, let's move it to four."
+        },
+        {
+          "speaker": {
+            "en": "Mandy",
+            "hant": "Mandy",
+            "hans": "Mandy"
+          },
+          "formal": "在哪個會議室？",
+          "colloquial": "喺邊個會議室呀？",
+          "en": "Which meeting room?"
+        },
+        {
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "十樓的大會議室，我發邀請給你。",
+          "colloquial": "十樓個大會議室，我send個invite畀你。",
+          "en": "The big one on the tenth floor — I'll send you an invite."
+        },
+        {
+          "speaker": {
+            "en": "Mandy",
+            "hant": "Mandy",
+            "hans": "Mandy"
+          },
+          "formal": "議程是什麼？",
+          "colloquial": "個agenda係咩呀？",
+          "en": "What's on the agenda?"
+        },
+        {
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "主要討論下一季度的預算。",
+          "colloquial": "主要傾吓下個季度嘅預算。",
+          "en": "Mainly next quarter's budget."
+        },
+        {
+          "speaker": {
+            "en": "Mandy",
+            "hant": "Mandy",
+            "hans": "Mandy"
+          },
+          "formal": "好，我先準備一下資料。",
+          "colloquial": "好，我準備定啲資料先。",
+          "en": "Okay, I'll get some materials ready."
+        },
+        {
+          "speaker": {
+            "en": "Ivan",
+            "hant": "Ivan",
+            "hans": "Ivan"
+          },
+          "formal": "麻煩你了，到時見。",
+          "colloquial": "唔該晒，到時見。",
+          "en": "Thanks — see you then."
+        }
       ]
     },
     {
       "id": "portfolio-review",
       "emoji": "📈",
       "level": 3,
-      "title": { "en": "Portfolio & finance talk", "hant": "傾業績同投資", "hans": "谈业绩和投资" },
+      "title": {
+        "en": "Portfolio & finance talk",
+        "hant": "傾業績同投資",
+        "hans": "谈业绩和投资"
+      },
       "lines": [
-        { "speaker": { "en": "Partner", "hant": "合夥人", "hans": "合伙人" }, "formal": "這家公司上一季度的業績怎樣？", "colloquial": "呢間公司上個季度嘅業績點呀？", "en": "How did this company do last quarter?" },
-        { "speaker": { "en": "Analyst", "hant": "分析員", "hans": "分析员" }, "formal": "收入按年增長百分之十五，超出預期。", "colloquial": "收入按年升咗百分之十五，好過預期。", "en": "Revenue grew fifteen percent year-on-year — better than expected." },
-        { "speaker": { "en": "Partner", "hant": "合夥人", "hans": "合伙人" }, "formal": "利潤率呢？", "colloquial": "利潤率呢？", "en": "And margins?" },
-        { "speaker": { "en": "Analyst", "hant": "分析員", "hans": "分析员" }, "formal": "毛利率維持在百分之四十左右。", "colloquial": "毛利率維持喺百分之四十度。", "en": "Gross margin held at around forty percent." },
-        { "speaker": { "en": "Partner", "hant": "合夥人", "hans": "合伙人" }, "formal": "管理層對下半年有什麼看法？", "colloquial": "管理層對下半年有咩睇法呀？", "en": "What does management think about the second half?" },
-        { "speaker": { "en": "Analyst", "hant": "分析員", "hans": "分析员" }, "formal": "他們比較樂觀，計劃擴充東南亞市場。", "colloquial": "佢哋比較樂觀，計劃擴充東南亞市場。", "en": "They're fairly optimistic — planning to expand in Southeast Asia." },
-        { "speaker": { "en": "Partner", "hant": "合夥人", "hans": "合伙人" }, "formal": "風險方面要注意什麼？", "colloquial": "風險方面要留意啲咩？", "en": "What should we watch on the risk side?" },
-        { "speaker": { "en": "Analyst", "hant": "分析員", "hans": "分析员" }, "formal": "主要是成本上升和匯率波動。", "colloquial": "主要係成本上升同埋匯率波動。", "en": "Mainly rising costs and currency swings." },
-        { "speaker": { "en": "Partner", "hant": "合夥人", "hans": "合伙人" }, "formal": "好，下星期向投資委員會匯報。", "colloquial": "好，下星期同投資委員會匯報。", "en": "Good — we'll report to the investment committee next week." },
-        { "speaker": { "en": "Analyst", "hant": "分析員", "hans": "分析员" }, "formal": "我今晚把報告發給你。", "colloquial": "我今晚send份報告畀你。", "en": "I'll send you the report tonight." }
+        {
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "這家公司上一季度的業績怎樣？",
+          "colloquial": "呢間公司上個季度嘅業績點呀？",
+          "en": "How did this company do last quarter?"
+        },
+        {
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "收入按年增長百分之十五，超出預期。",
+          "colloquial": "收入按年升咗百分之十五，好過預期。",
+          "en": "Revenue grew fifteen percent year-on-year — better than expected."
+        },
+        {
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "利潤率呢？",
+          "colloquial": "啲margin呢？",
+          "en": "And margins?"
+        },
+        {
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "毛利率維持在百分之四十左右。",
+          "colloquial": "Gross margin維持喺百分之四十度。",
+          "en": "Gross margin held at around forty percent."
+        },
+        {
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "管理層對下半年有什麼看法？",
+          "colloquial": "管理層對下半年有咩睇法呀？",
+          "en": "What does management think about the second half?"
+        },
+        {
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "他們比較樂觀，計劃擴充東南亞市場。",
+          "colloquial": "佢哋比較樂觀，打算擴充東南亞市場。",
+          "en": "They're fairly optimistic — planning to expand in Southeast Asia."
+        },
+        {
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "風險方面要注意什麼？",
+          "colloquial": "風險方面要留意啲咩？",
+          "en": "What should we watch on the risk side?"
+        },
+        {
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "主要是成本上升和匯率波動。",
+          "colloquial": "主要係成本上升同埋匯率波動。",
+          "en": "Mainly rising costs and currency swings."
+        },
+        {
+          "speaker": {
+            "en": "Partner",
+            "hant": "合夥人",
+            "hans": "合伙人"
+          },
+          "formal": "好，下星期向投資委員會匯報。",
+          "colloquial": "好，下星期上IC匯報。",
+          "en": "Good — we'll take it to the investment committee (IC) next week."
+        },
+        {
+          "speaker": {
+            "en": "Analyst",
+            "hant": "分析員",
+            "hans": "分析员"
+          },
+          "formal": "我今晚把報告發給你。",
+          "colloquial": "我今晚send份報告畀你。",
+          "en": "I'll send you the report tonight."
+        }
       ]
     },
     {
       "id": "after-work-drinks",
       "emoji": "🍻",
       "level": 2,
-      "title": { "en": "After-work drinks", "hant": "收工飲返杯", "hans": "下班喝一杯" },
+      "title": {
+        "en": "After-work drinks",
+        "hant": "收工飲返杯",
+        "hans": "下班喝一杯"
+      },
       "lines": [
-        { "speaker": { "en": "Tom", "hant": "Tom", "hans": "Tom" }, "formal": "今晚下班去喝一杯嗎？", "colloquial": "今晚收工去唔去飲返杯呀？", "en": "Drinks after work tonight?" },
-        { "speaker": { "en": "Wing", "hant": "Wing", "hans": "Wing" }, "formal": "好啊，去哪裡？", "colloquial": "好呀，去邊度好？", "en": "Sure — where should we go?" },
-        { "speaker": { "en": "Tom", "hant": "Tom", "hans": "Tom" }, "formal": "蘭桂坊新開了一間酒吧，聽說不錯。", "colloquial": "蘭桂坊新開咗間酒吧，聽講幾好。", "en": "A new bar opened in Lan Kwai Fong — supposedly quite good." },
-        { "speaker": { "en": "Wing", "hant": "Wing", "hans": "Wing" }, "formal": "幾點去？", "colloquial": "幾點去呀？", "en": "What time?" },
-        { "speaker": { "en": "Tom", "hant": "Tom", "hans": "Tom" }, "formal": "七點半怎樣？我來訂位。", "colloquial": "七點半點呀？我訂位。", "en": "How about half past seven? I'll book a table." },
-        { "speaker": { "en": "Wing", "hant": "Wing", "hans": "Wing" }, "formal": "沒問題。要叫其他同事嗎？", "colloquial": "冇問題。使唔使叫埋其他同事呀？", "en": "No problem. Should we invite the other colleagues too?" },
-        { "speaker": { "en": "Tom", "hant": "Tom", "hans": "Tom" }, "formal": "好主意，我在群組說一聲。", "colloquial": "好主意，我喺group度講聲。", "en": "Good idea — I'll mention it in the group chat." },
-        { "speaker": { "en": "Wing", "hant": "Wing", "hans": "Wing" }, "formal": "今天我請客，慶祝項目完成！", "colloquial": "今日我請，慶祝個project搞掂！", "en": "My treat today — to celebrate finishing the project!" },
-        { "speaker": { "en": "Tom", "hant": "Tom", "hans": "Tom" }, "formal": "那就不客氣了！", "colloquial": "咁就唔客氣喇！", "en": "Well, don't mind if I do!" }
+        {
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "今晚下班去喝一杯嗎？",
+          "colloquial": "今晚收工去唔去飲返杯呀？",
+          "en": "Drinks after work tonight?"
+        },
+        {
+          "speaker": {
+            "en": "Wing",
+            "hant": "Wing",
+            "hans": "Wing"
+          },
+          "formal": "好啊，去哪裡？",
+          "colloquial": "好呀，去邊度好？",
+          "en": "Sure — where should we go?"
+        },
+        {
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "蘭桂坊新開了一間酒吧，聽說不錯。",
+          "colloquial": "蘭桂坊新開咗間酒吧，聽講幾好。",
+          "en": "A new bar opened in Lan Kwai Fong — supposedly quite good."
+        },
+        {
+          "speaker": {
+            "en": "Wing",
+            "hant": "Wing",
+            "hans": "Wing"
+          },
+          "formal": "幾點去？",
+          "colloquial": "幾點去呀？",
+          "en": "What time?"
+        },
+        {
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "七點半怎樣？我來訂位。",
+          "colloquial": "七點半得唔得呀？我訂位。",
+          "en": "Does half past seven work? I'll book a table."
+        },
+        {
+          "speaker": {
+            "en": "Wing",
+            "hant": "Wing",
+            "hans": "Wing"
+          },
+          "formal": "沒問題。要叫其他同事嗎？",
+          "colloquial": "冇問題。使唔使叫埋其他同事呀？",
+          "en": "No problem. Should we invite the other colleagues too?"
+        },
+        {
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "好主意，我在群組說一聲。",
+          "colloquial": "好主意，我喺group度講聲。",
+          "en": "Good idea — I'll mention it in the group chat."
+        },
+        {
+          "speaker": {
+            "en": "Wing",
+            "hant": "Wing",
+            "hans": "Wing"
+          },
+          "formal": "今天我請客，慶祝項目完成！",
+          "colloquial": "今日我請，慶祝個project搞掂！",
+          "en": "My treat today — to celebrate finishing the project!"
+        },
+        {
+          "speaker": {
+            "en": "Tom",
+            "hant": "Tom",
+            "hans": "Tom"
+          },
+          "formal": "那就不客氣了！",
+          "colloquial": "咁就唔客氣喇！",
+          "en": "Well, don't mind if I do!"
+        }
       ]
     }
   ]
