@@ -24,15 +24,16 @@ feature — other browsers can listen and read.
 
 ## What's new in V2
 
-1. **Much better Cantonese.** When the daily build runs with an Anthropic API
-   key, every sentence is rewritten by **Claude (Opus 4.8)** into genuinely
-   natural anchor-Cantonese, then **cross-checked by a second, independent
-   Claude reviewer pass** that hunts for exactly the class of error the old
-   rule converter made (不足 mechanically becoming 唔足, 其他 becoming 其佢…)
-   and repairs anything it flags. Lessons built this way carry a green
-   "cross-checked" banner. The keyless rule-based fallback was also hardened
-   with a ~10× larger protect-list so those compounds can't be mangled there
-   either.
+1. **Much better Cantonese — by default, for free.** Every sentence is
+   rewritten into genuinely natural anchor-Cantonese by an LLM and then
+   cross-checked by a second, independent review pass that hunts for exactly
+   the class of error rule converters make (不足 mechanically becoming 唔足,
+   其他 becoming 其佢…). This runs at **zero cost** on GitHub's free model
+   inference; adding an `ANTHROPIC_API_KEY` upgrades both passes to Claude
+   (Opus 4.8) with semantically aligned phrase pairs and a green
+   "cross-checked" banner. The last-resort rule converter was itself rebuilt
+   from a two-reviewer audit (phrase whitelists instead of risky
+   single-character swaps, quoted names never touched).
 2. **Numbers you can pronounce.** Arabic numerals used to have no jyutping and
    no reliable reading. V2 spells every number out on the spoken side, the way
    an anchor reads it **in context**: `2020年` → 二零二零年 (year, digit by
@@ -40,7 +41,12 @@ feature — other browsers can listen and read.
    百分之十五; `54.1` → 五十四點一; `2846 3222` → digit by digit. Every
    character gets jyutping, the voice reads it correctly, and saying the
    number correctly scores green.
-3. **Everyday Hong Kong conversations — a full curriculum.** 38 scenario
+3. **A real voice, not a robot.** Every sentence ships with pre-synthesised
+   **neural Cantonese audio** (Microsoft's free zh-HK voices): news read by an
+   anchor voice, conversations voiced with a distinct voice per speaker, and a
+   pitch-preserving speed control. The browser's built-in voice is only an
+   offline fallback.
+4. **Everyday Hong Kong conversations — a full curriculum.** 38 scenario
    dialogues (378 lines) organised into 8 categories, each with its own
    sub-page: 🍽️ eating & drinking (cha chaan teng, dim sum, dinner booking,
    bubble tea, takeaway), 🚇 getting around (taxi, MTR, minibus, directions,
@@ -55,17 +61,19 @@ feature — other browsers can listen and read.
    voice per speaker, and the same listen → speak → grade loop as the news.
    All content was written and then cross-checked by independent AI reviewers
    for native naturalness, three-layer consistency, and real-HK accuracy.
-4. **Tap to compare written ↔ spoken.** The rewrite now emits *aligned phrase
+5. **Tap to compare written ↔ spoken.** The rewrite now emits *aligned phrase
    pairs*: tap any underlined phrase in either pane and its counterpart lights
    up in the other, so you can see precisely that 認為 became 覺得. On phones,
    the two stacked panes are replaced by an **interleaved view** — each written
    line sits directly above its spoken version, so nothing to scroll between.
-5. **Auto-play.** Press `A` (or the Auto button) and the whole article plays
+6. **Auto-play.** Press `A` (or the Auto button) and the whole article plays
    through hands-free, sentence by sentence — a podcast mode for shadowing or
    passive listening. Any manual action stops it.
-6. **A second news source (optional).** The build can mix in articles from a
-   WeChat 公眾號 via an RSS bridge — designed for Bain Portfolio News, so the
-   lessons cover the companies you actually work with (see below).
+7. **Bain-relevant news, automatically.** Alongside RTHK, the build reserves
+   slots for a second source: a WeChat 公眾號 RSS bridge when configured, or —
+   with zero setup — a web-scrape of fresh Chinese-language **Bain Capital
+   coverage** (Google News → real publisher pages), so the lessons cover the
+   world your colleagues actually work in (see below).
 
 ## How you use it
 
@@ -247,16 +255,22 @@ frontend/            the static site (GitHub Pages)
   numbers.js         context-aware numeral → Cantonese-reading engine (shared)
   tts.js             zh-HK text-to-speech with voice re-resolution
   i18n.js            English / Traditional / Simplified labels
-  data/              sample-lessons.json, jyutping.json, conversations.json,
-                     today.json (generated daily, not committed)
+  data/              sample-lessons.json, jyutping.json, conversations.json
+                     (8 categories × 4-6 scenarios), today.json (generated daily)
+  audio/             per-sentence neural MP3s (generated per deploy, not committed)
 backend/             shared logic used by the daily build
   chunk.js           CJK sentence chunking + packing
   rss.js             RTHK RSS + full-body extraction + custom-feed (WeChat) seam
+  gnews.js           web-scrape fallback: Google News query → publisher URL
+                     decode → generic article-body extraction
   convert.js         Claude rewrite + verifier (Anthropic SDK, structured outputs)
-  convert-rules.js   hardened keyless written→spoken converter + segment pairs
+  ghmodels.js        FREE rewrite tier: GitHub Models + review pass + quota breaker
+  align.js           character-LCS written↔spoken pair aligner
+  convert-rules.js   audited keyless written→spoken converter + segment pairs
 content/
   conversations-src.json   hand-authored conversations curriculum (source)
-scripts/             build-lessons, build-conversations, build-jyutping-dict,
+scripts/             build-lessons, build-conversations, build_audio.py
+                     (edge-tts neural synthesis), build-jyutping-dict,
                      dev server, data validator
 tests/               node:test unit tests + Playwright e2e
 .github/workflows/   pages.yml (daily build + deploy), keepalive.yml

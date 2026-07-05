@@ -21,10 +21,15 @@ kept for the original rationale.
   https://lyhjeremy.github.io/cantonese-learner-v2/
 
 **What V2 added over V1**
-1. Two-pass Claude rewrite (Opus 4.8 rewrite + independent verifier that
-   repairs mangled compounds like 唔足) with aligned written↔spoken phrase
-   pairs — activates when an `ANTHROPIC_API_KEY` secret is added; currently
-   running keyless on the hardened rule converter (~10× larger protect table).
+1. A three-tier rewrite ladder with a review pass at every tier: Claude
+   (Opus 4.8, if a key is added) ▸ **GitHub Models free tier** (the current
+   default — zero cost, runs on the workflow's own token, with a daily-quota
+   circuit breaker) ▸ an audited rule converter (phrase whitelists, quote
+   guard, sentence-final 了→喇). Aligned written↔spoken phrase pairs come from
+   the model or a character-LCS aligner.
+1b. Pre-synthesised neural Cantonese audio for every sentence (edge-tts zh-HK;
+   anchor voice for news, per-speaker voices for dialogues) — browser TTS is
+   only the offline fallback.
 2. Context-aware numeral readings (2020年→二零二零年, 2020個→二千零二十個,
    15%→百分之十五) with jyutping, TTS, and digit-tolerant grading.
 3. An everyday-conversations curriculum: 8 categories × 4-6 scenarios each
@@ -37,8 +42,9 @@ kept for the original rationale.
    configured, else a keyless web-scrape fallback (Google News zh-HK →
    publisher-URL decode → generic body extraction) for 貝恩資本 coverage.
 
-**Verification:** 79 unit + Playwright e2e tests green; data validator covers
-sample lessons, conversations, pair alignment, and the daily build output.
+**Verification:** 101 unit + Playwright e2e tests green; data validator covers
+sample lessons, the 8-category conversations curriculum (≥4 scenarios per
+category, layer purity, no digits), pair alignment, and the daily build output.
 
 > A hand-off / spec document for building a **daily financial-news → interactive
 > Cantonese learning web app**. It is a sibling of the *Mandarin Learning Reader*
