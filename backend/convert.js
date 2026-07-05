@@ -17,6 +17,7 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { chunkTextForLearning } from "./chunk.js";
+import { normalizeDigits } from "../frontend/numbers.js";
 
 // Opus 4.8 — the most capable Opus-tier model, for the highest-quality rewrite.
 // (Cost is cents/day at ~12 articles × 2 passes; the owner sets a monthly cap.)
@@ -179,14 +180,17 @@ ${list}`;
     const arr = parsed && parsed.sentences;
     if (!Array.isArray(arr) || arr.length !== batch.length) return null;
     arr.forEach((s, i) => {
-      const colloquial = String(s.colloquial || "").trim();
+      const colloquial = normalizeDigits(String(s.colloquial || "").trim());
       if (!colloquial) {
         out.push({ colloquial: batch[i], pairs: null });
         return;
       }
+      const pairs = Array.isArray(s.pairs)
+        ? s.pairs.map((p) => ({ f: p?.f, c: normalizeDigits(String(p?.c ?? "")) }))
+        : s.pairs;
       out.push({
         colloquial,
-        pairs: validatePairs(batch[i], colloquial, s.pairs),
+        pairs: validatePairs(batch[i], colloquial, pairs),
       });
     });
   }
@@ -222,12 +226,15 @@ ${list}`;
     if (!Array.isArray(arr) || arr.length !== idxs.length) return null;
     idxs.forEach((i, k) => {
       const v = arr[k];
-      const fixed = v && !v.ok ? String(v.fixed || "").trim() : "";
+      const fixed = v && !v.ok ? normalizeDigits(String(v.fixed || "").trim()) : "";
       if (fixed) {
         repaired++;
+        const fixedPairs = Array.isArray(v.fixed_pairs)
+          ? v.fixed_pairs.map((p) => ({ f: p?.f, c: normalizeDigits(String(p?.c ?? "")) }))
+          : v.fixed_pairs;
         out[i] = {
           colloquial: fixed,
-          pairs: validatePairs(formals[i], fixed, v.fixed_pairs),
+          pairs: validatePairs(formals[i], fixed, fixedPairs),
           ok: false,
         };
       } else {

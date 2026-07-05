@@ -164,6 +164,12 @@ export function spellOutNumbers(text, lookahead = "") {
     out += s.slice(last, start);
     const following = full.slice(start + raw.length);
     let reading = readNumber(raw, following);
+    // Codes and tickers — a number straight after a colon (TYO:9433) reads
+    // digit-by-digit, never as a quantity.
+    const before = s.slice(0, start);
+    if (/[:：]$/.test(before) && !raw.includes(".") && !raw.endsWith("%")) {
+      reading = digitsReading(raw.replace(/,/g, ""));
+    }
     // Special case: a short number that is the SECOND half of a year range —
     // "2020至21年" -> 二零二零至二一年 (the 21 reads digit-by-digit too).
     if (
@@ -198,4 +204,17 @@ export function splitByNumbers(text) {
   }
   if (last < s.length) out.push({ text: s.slice(last), num: false });
   return out;
+}
+
+// Normalise LLM-produced digit typography on the SPOKEN side so the number
+// reader sees clean runs: full-width digits/percent, and full-width commas or
+// dots INSIDE a number (3，384 → 3,384 — otherwise the run splits and reads
+// as two separate numbers).
+export function normalizeDigits(text) {
+  let s = String(text || "");
+  s = s.replace(/[０-９]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 0xff10 + 0x30));
+  s = s.replace(/(\d)，(?=\d)/g, "$1,");
+  s = s.replace(/(\d)．(?=\d)/g, "$1.");
+  s = s.replace(/(\d)％/g, "$1%");
+  return s;
 }

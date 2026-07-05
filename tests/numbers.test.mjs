@@ -74,3 +74,24 @@ test("text without digits is untouched", () => {
   const s = "恒生指數今日高開。";
   assert.equal(spellOutNumbers(s), s);
 });
+
+import { normalizeDigits } from "../frontend/numbers.js";
+
+test("normalizeDigits: full-width digits/commas/dots/percent become ASCII", () => {
+  assert.equal(normalizeDigits("每股3，384日圓"), "每股3,384日圓");
+  assert.equal(normalizeDigits("升１５％"), "升15%");
+  assert.equal(normalizeDigits("報３．５"), "報3.5");
+  // Full-width comma NOT inside a number is untouched.
+  assert.equal(normalizeDigits("條款，貝恩"), "條款，貝恩");
+});
+
+test("numbers after a colon read digit-by-digit (tickers/codes)", () => {
+  assert.equal(spellOutNumbers("（TYO:9433）"), "（TYO:九四三三）");
+  assert.equal(spellOutNumbers("編號：2046"), "編號：二零四六");
+  // But a normal quantity is unaffected.
+  assert.equal(spellOutNumbers("賣出9433個"), "賣出九千四百三十三個");
+});
+
+test("comma-grouped price reads as ONE cardinal after normalisation", () => {
+  assert.equal(spellOutNumbers(normalizeDigits("每股3，384日圓")), "每股三千三百八十四日圓");
+});

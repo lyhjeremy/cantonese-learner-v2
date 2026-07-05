@@ -14,6 +14,8 @@
 // Plain fetch, OpenAI-compatible chat/completions schema, defensive JSON
 // parsing, and fail-soft null returns throughout (caller falls back to rules).
 
+import { normalizeDigits } from "../frontend/numbers.js";
+
 export const GH_MODELS_ENDPOINT = "https://models.github.ai/inference/chat/completions";
 export const GH_MODEL = "openai/gpt-4o-mini"; // 150 free requests/day tier
 
@@ -131,7 +133,7 @@ export async function ghConvertSentences(
     );
     const arr = parsed && parsed.sentences;
     if (!Array.isArray(arr) || arr.length !== batch.length) return null;
-    let rewritten = arr.map((s, i) => String(s || "").trim() || batch[i]);
+    let rewritten = arr.map((s, i) => normalizeDigits(String(s || "").trim()) || batch[i]);
 
     if (review) {
       const pairsList = batch
@@ -145,7 +147,7 @@ export async function ghConvertSentences(
       );
       const rArr = reviewed && reviewed.sentences;
       if (Array.isArray(rArr) && rArr.length === batch.length) {
-        rewritten = rArr.map((s, i) => String(s || "").trim() || rewritten[i]);
+        rewritten = rArr.map((s, i) => normalizeDigits(String(s || "").trim()) || rewritten[i]);
       }
       // Review failure is non-fatal — ship the unreviewed rewrites.
     }

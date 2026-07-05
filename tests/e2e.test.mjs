@@ -302,3 +302,55 @@ maybe("pre-synthesised audio keeps Play/Auto enabled even without browser TTS", 
   assert.equal(await page.isHidden("#note-tts"), true, "no TTS warning when audio present");
   await page.close();
 });
+
+maybe("both panes auto-scroll in lockstep on long articles", async () => {
+  const page = await browser.newPage();
+  // A long article: enough sentences that both panes must scroll to reach the end.
+  const LONG = {
+    date: "2026-07-05",
+    source: "RTHK 香港電台",
+    method: "rules",
+    articles: [{
+      id: "a0",
+      title: "長文章滾動測試",
+      source: "RTHK 本地",
+      url: "https://news.rthk.hk/x",
+      converted: true,
+      method: "rules",
+      sentences: Array.from({ length: 30 }, (_, i) => ({
+        id: i,
+        paragraph_id: i,
+        formal: `第${i + 1}句的書面語內容，講述當日發生的事件與背景。`,
+        colloquial: `第${i + 1}句嘅口語內容，講吓當日發生嘅事同背景。`,
+        jyutping: [],
+      })),
+    }],
+  };
+  await page.route("**/data/today.json", (r) =>
+    r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(LONG) }),
+  );
+  await ready(page);
+  await page.click("#cards .card:first-child");
+  // Jump straight to the last sentence via a DOM click (no Playwright scroll help).
+  await page.$$eval("#colloquial-pane .sentence", (els) => els[els.length - 1].click());
+  await page.waitForTimeout(800); // let smooth scrolling settle
+  const [f, c] = await page.evaluate(() => [
+    document.querySelector("#formal-pane").scrollTop,
+    document.querySelector("#colloquial-pane").scrollTop,
+  ]);
+  assert.ok(c > 0, `colloquial pane scrolled (got ${c})`);
+  assert.ok(f > 0, `formal pane scrolled too (got ${f}) — the drift bug`);
+  // The current sentence is actually within view in BOTH panes.
+  const visible = await page.evaluate(() => {
+    const inView = (paneSel) => {
+      const pane = document.querySelector(paneSel);
+      const cur = pane.querySelector(".current");
+      const pr = pane.getBoundingClientRect();
+      const cr = cur.getBoundingClientRect();
+      return cr.bottom > pr.top && cr.top < pr.bottom;
+    };
+    return [inView("#formal-pane"), inView("#colloquial-pane")];
+  });
+  assert.deepEqual(visible, [true, true], "current sentence visible in both panes");
+  await page.close();
+});

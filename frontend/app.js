@@ -401,12 +401,27 @@ function renderReader(marks) {
   hint.hidden = !(cur.pairs && cur.pairs.some((p) => p.f !== p.c));
   hint.textContent = t("tapHint", state.lang);
 
-  // Scroll current sentence into view (whichever pane is visible).
-  const target = ilPane.offsetParent ? ilPane : ccPane;
-  const curEl = target.querySelector(".current");
-  if (curEl) curEl.scrollIntoView({ block: "center", behavior: "smooth" });
+  // Keep the current sentence centred in EVERY visible pane — written and
+  // spoken must stay in lockstep. Scrolls only the pane's own scrollbar
+  // (never the page), so the two sides can't drift apart.
+  for (const pane of [formalPane, ccPane, ilPane]) {
+    if (pane.offsetParent) centerCurrent(pane);
+  }
 
   updateControls();
+}
+
+// Scroll a pane so its .current sentence sits in the vertical centre. Uses
+// rect deltas against the pane's own scroll position — scrollIntoView() would
+// also scroll ancestors/the page, which is what let the panes drift.
+function centerCurrent(pane) {
+  const cur = pane.querySelector(".current");
+  if (!cur) return;
+  const pr = pane.getBoundingClientRect();
+  const cr = cur.getBoundingClientRect();
+  const delta = cr.top + cr.height / 2 - (pr.top + pr.height / 2);
+  if (Math.abs(delta) < 2) return;
+  pane.scrollTo({ top: pane.scrollTop + delta, behavior: "smooth" });
 }
 
 function jumpTo(i, keepAutoplay = false) {
