@@ -47,6 +47,13 @@ function parseStrictJson(text) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// Circuit breaker: when the free tier's DAILY quota is exhausted, every call
+// 429s until midnight UTC — retrying each one through the whole backoff
+// ladder would stall the build for an hour. Once one call exhausts its
+// retries (or the server asks for a minutes-long wait), stop calling for the
+// rest of the process and let the build fall back to rules immediately.
+let quotaExhausted = false;
+
 // The free tier enforces small per-minute request caps, so ALL calls in the
 // process are strictly serialised through this queue, and 429/5xx responses
 // back off (honouring retry-after) before retrying.
@@ -59,6 +66,7 @@ function enqueue(fn) {
 
 async function chat(system, user, { token, model, retries = 3, retryDelayMs = 15000 }, fetchImpl) {
   return enqueue(async () => {
+    if (quotaExhausted) return null;
     try {
       for (let attempt = 0; attempt <= retries; attempt++) {
         const res = await fetchImpl(GH_MODELS_ENDPOINT, {
@@ -79,11 +87,22 @@ async function chat(system, user, { token, model, retries = 3, retryDelayMs = 15
           }),
         });
         if (res.status === 429 || res.status >= 500) {
-          if (attempt === retries) {
-            console.log(`  github-models: HTTP ${res.status} (retries exhausted)`);
+          const retryAfter = Number(res.headers?.get?.("retry-after"));
+          // A minutes-long retry-after on 429 means the DAILY quota is gone,
+          // not a per-minute blip — give up for the whole build.
+          if (res.status === 429 && Number.isFinite(retryAfter) && retryAfter > 300) {
+            quotaExhausted = true;
+            console.log(`  github-models: daily quota exhausted (retry-after ${retryAfter}s) — falling back to rules`);
             return null;
           }
-          const retryAfter = Number(res.headers?.get?.("retry-after"));
+          if (attempt === retries) {
+            console.log(`  github-models: HTTP ${res.status} (retries exhausted)`);
+            if (res.status === 429) {
+              quotaExhausted = true;
+              console.log("  github-models: treating as exhausted quota — no further calls this build");
+            }
+            return null;
+          }
           const wait = Number.isFinite(retryAfter) && retryAfter > 0
             ? retryAfter * 1000
             : retryDelayMs * (attempt + 1);

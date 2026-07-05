@@ -73,3 +73,20 @@ test("ghConvertSentences: tolerates markdown fences in the model output", async 
   const out = await ghConvertSentences(["市場造好。"], { token: "tok", review: false }, q.fetch);
   assert.deepEqual(out, ["個市造好。"]);
 });
+
+test("daily-quota circuit breaker: after retries exhaust on 429, later calls skip instantly", async () => {
+  // Fresh import state is per-process; this test runs after earlier ones, so
+  // simulate: first call exhausts 429 retries -> breaker trips -> second call
+  // makes NO fetch at all.
+  const calls = [];
+  const always429 = async (url, opts) => {
+    calls.push(url);
+    return { ok: false, status: 429, headers: { get: () => "86400" }, json: async () => ({}) };
+  };
+  const out1 = await ghConvertSentences(["一。"], { token: "tok", review: false, retries: 1, retryDelayMs: 1 }, always429);
+  assert.equal(out1, null);
+  const before = calls.length;
+  const out2 = await ghConvertSentences(["二。"], { token: "tok", review: false, retries: 1, retryDelayMs: 1 }, always429);
+  assert.equal(out2, null);
+  assert.equal(calls.length, before, "no further HTTP calls after the breaker trips");
+});
