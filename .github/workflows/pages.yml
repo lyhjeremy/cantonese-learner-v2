@@ -11,6 +11,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  models: read # free GitHub Models inference for the Cantonese rewrite
 
 concurrency:
   group: pages
@@ -45,9 +46,19 @@ jobs:
         run: node scripts/build-lessons.mjs
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }} # free GitHub Models rewrite tier
           WECHAT_FEED_URL: ${{ secrets.WECHAT_FEED_URL }}
           WECHAT_SOURCE_NAME: ${{ vars.WECHAT_SOURCE_NAME }}
           BAIN_NEWS_QUERY: ${{ vars.BAIN_NEWS_QUERY }}
+      # Pre-synthesise neural Cantonese audio (free Microsoft edge-tts voices)
+      # for every sentence, so playback doesn't rely on the robotic browser
+      # voice. Fail-soft: on any failure the site falls back to browser TTS.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install edge-tts
+      - name: Synthesise neural Cantonese audio
+        run: python3 scripts/build_audio.py
       - uses: actions/configure-pages@v5
       - name: Upload frontend/ (including generated today.json) as Pages artifact
         uses: actions/upload-pages-artifact@v3

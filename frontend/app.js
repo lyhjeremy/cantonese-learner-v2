@@ -414,6 +414,7 @@ function jumpTo(i, keepAutoplay = false) {
   state.idx = i;
   if (!keepAutoplay) {
     stopAutoplay();
+    stopAudio();
     stopSpeaking();
   }
   clearFeedback();
@@ -428,9 +429,81 @@ function prev() {
 }
 
 // ── Transport actions ────────────────────────────────────────────────────────
+
+// Pre-synthesised neural audio (edge-tts MP3s baked by the daily build). Much
+// more natural than the browser's speechSynthesis voice, which stays as the
+// offline / missing-clip fallback.
+let audioEl = null;
+let audioDone = null;
+function articleHasAudio() {
+  return !!(state.article && state.article.sentences.some((s) => s.audio));
+}
+function stopAudio() {
+  if (!audioEl) return;
+  const el = audioEl;
+  const done = audioDone;
+  audioEl = null;
+  audioDone = null;
+  try {
+    el.pause();
+  } catch {
+    /* ignore */
+  }
+  if (done) done(); // release anyone awaiting playback (e.g. auto-play)
+}
+function playAudioFile(url, rate) {
+  return new Promise((resolve, reject) => {
+    const el = new Audio(url);
+    let settled = false;
+    const done = () => {
+      if (settled) return;
+      settled = true;
+      if (audioEl === el) {
+        audioEl = null;
+        audioDone = null;
+      }
+      resolve();
+    };
+    audioEl = el;
+    audioDone = done;
+    el.playbackRate = rate;
+    try {
+      el.preservesPitch = true;
+    } catch {
+      /* older browsers */
+    }
+    el.onended = done;
+    el.onerror = () => {
+      if (settled) return;
+      settled = true;
+      if (audioEl === el) {
+        audioEl = null;
+        audioDone = null;
+      }
+      reject(new Error("audio failed"));
+    };
+    el.play().catch((e) => {
+      if (!settled) {
+        settled = true;
+        reject(e);
+      }
+    });
+  });
+}
+
 async function play() {
-  if (!state.tts.available) return;
   const s = state.article.sentences[state.idx];
+  stopAudio();
+  stopSpeaking();
+  if (s.audio) {
+    try {
+      await playAudioFile("./audio/" + s.audio, state.speed);
+      return;
+    } catch {
+      /* fall through to the browser voice */
+    }
+  }
+  if (!state.tts.available) return;
   // Voice is re-resolved fresh inside speak() to avoid Chrome's stale-voice ->
   // English fallback bug.
   await speak(forScript(s.colloquial || s.formal), state.speed);
@@ -443,7 +516,7 @@ async function toggleAutoplay() {
     stopAutoplay();
     return;
   }
-  if (!state.tts.available || !state.article) return;
+  if (!state.article || (!state.tts.available && !articleHasAudio())) return;
   const token = Symbol("autoplay");
   state.autoplay = token;
   $("#btn-auto").classList.add("active");
@@ -462,6 +535,7 @@ async function toggleAutoplay() {
 function stopAutoplay() {
   if (!state.autoplay) return;
   state.autoplay = null;
+  stopAudio();
   stopSpeaking();
   const btn = $("#btn-auto");
   if (btn) btn.classList.remove("active");
@@ -476,6 +550,7 @@ function clearFeedback() {
 async function record() {
   if (!state.asrOk || state.recording) return;
   stopAutoplay();
+  stopAudio();
   const btn = $("#btn-record");
   btn.classList.add("active");
   const fb = $("#feedback");
@@ -534,13 +609,17 @@ function updateControls() {
   $("#speed-sel").value = String(state.speed);
   $("#script-sel").value = state.script;
   $("#script-sel").disabled = !openccOk;
-  $("#btn-play").disabled = !state.tts.available;
-  $("#btn-auto").disabled = !state.tts.available;
+  const canPlay = state.tts.available || articleHasAudio();
+  $("#btn-play").disabled = !canPlay;
+  $("#btn-auto").disabled = !canPlay;
   $("#btn-record").hidden = !state.asrOk;
 
-  // Degradation notes: no voice at all, OR only a non-Cantonese fallback voice.
+  // Degradation notes: only relevant when the pre-synthesised neural audio is
+  // absent and playback would fall back to the browser voice.
   const noteTts = $("#note-tts");
-  if (!state.tts.available) {
+  if (articleHasAudio()) {
+    noteTts.hidden = true;
+  } else if (!state.tts.available) {
     noteTts.hidden = false;
     noteTts.textContent = t("noTts", state.lang);
   } else if (!state.tts.isCantonese) {
@@ -626,6 +705,7 @@ function wire() {
       prev();
     } else if (e.key === "Escape") {
       stopAutoplay();
+      stopAudio();
       stopSpeaking();
     }
   });

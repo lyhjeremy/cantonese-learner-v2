@@ -17,6 +17,8 @@ import {
   newsScore,
 } from "../backend/rss.js";
 import { paragraphsToUnits, convertArticle, makeClient } from "../backend/convert.js";
+import { ghConvertSentences } from "../backend/ghmodels.js";
+import { alignPairs } from "../backend/align.js";
 import { fetchGoogleNewsArticles, DEFAULT_QUERY } from "../backend/gnews.js";
 import { cjkCount } from "../backend/chunk.js";
 import { toColloquialSegments } from "../backend/convert-rules.js";
@@ -54,11 +56,16 @@ function pickBalanced(pool, max) {
   return picked;
 }
 
-// Higher-quality rewrite + verification when an ANTHROPIC_API_KEY is present
-// (e.g. a GitHub Actions secret); otherwise stay keyless with the rule-based
-// converter.
+// Rewrite quality tiers, best available wins:
+//   1. ANTHROPIC_API_KEY        — Claude rewrite + verifier, semantic pairs.
+//   2. GITHUB_TOKEN (free)      — GitHub Models rewrite + review pass; pairs
+//                                 computed locally with the LCS aligner. Zero
+//                                 cost on public-repo Actions.
+//   3. neither                  — hardened rule-based converter.
 const LLM_KEY = process.env.ANTHROPIC_API_KEY || "";
 const LLM_MODEL = process.env.CONVERT_MODEL || undefined;
+const GH_TOKEN = process.env.GH_MODELS_TOKEN || process.env.GITHUB_TOKEN || "";
+const GH_MODEL_OVERRIDE = process.env.GH_MODELS_MODEL || undefined;
 
 // Secondary source. Preferred: a WeChat 公眾號 → RSS bridge (WECHAT_FEED_URL).
 // Fallback when no bridge is configured: scrape the public web via Google News
@@ -100,20 +107,29 @@ function spellOutPairs(pairs) {
 
 async function buildArticle(a, idx, client) {
   const units = paragraphsToUnits(a.body);
-  // Prefer the Claude rewrite + verifier when a key is configured; fall back
-  // to the rule-based converter on any failure.
+  const formals = units.map((u) => u.formal);
+  // Quality tiers: Claude rewrite+verifier -> free GitHub Models rewrite+review
+  // -> rule-based converter. Each tier fails soft to the next.
   let llm = null;
   if (client) {
-    llm = await convertArticle(units.map((u) => u.formal), client, { model: LLM_MODEL });
+    llm = await convertArticle(formals, client, { model: LLM_MODEL });
   }
-  const method = llm ? (llm.verified ? "llm+verify" : "llm") : "rules";
+  let gh = null;
+  if (!llm && GH_TOKEN) {
+    gh = await ghConvertSentences(formals, { token: GH_TOKEN, model: GH_MODEL_OVERRIDE });
+  }
+  const method = llm ? (llm.verified ? "llm+verify" : "llm") : gh ? "llm" : "rules";
   let anyChanged = false;
   const sentences = units.map((u, i) => {
     let pairs;
     let colloquial;
     if (llm) {
       colloquial = llm.sentences[i].colloquial;
-      pairs = llm.sentences[i].pairs; // may be null (alignment failed)
+      // Semantic pairs from Claude; LCS alignment when they failed validation.
+      pairs = llm.sentences[i].pairs || alignPairs(u.formal, colloquial);
+    } else if (gh) {
+      colloquial = gh[i];
+      pairs = alignPairs(u.formal, colloquial);
     } else {
       pairs = toColloquialSegments(u.formal);
       colloquial = pairs.map((p) => p.c).join("");
@@ -199,17 +215,22 @@ async function main() {
     note: verified
       ? "Rewritten to spoken Cantonese by Claude and cross-checked by an independent Claude reviewer."
       : usedLlm
-        ? "Converted to spoken Cantonese by Claude (Opus 4.8) from live RSS news."
+        ? "Rewritten to spoken Cantonese by an AI model with a second review pass, from live news."
         : "Auto-converted to Cantonese (rule-based, rough) from live RSS news.",
     generatedAt: process.env.BUILD_TIME || "",
     articles: built,
   };
   await writeFile(OUT, JSON.stringify(lessons, null, 2), "utf-8");
   const repaired = built.reduce((n, a) => n + (a.repaired || 0), 0);
+  const tier = LLM_KEY
+    ? `anthropic, verifier repaired ${repaired}`
+    : GH_TOKEN
+      ? "github-models (free) + review pass"
+      : "no ANTHROPIC_API_KEY / GITHUB_TOKEN, using rules";
   console.log(
     `Wrote today.json: ${lessons.articles.length} articles, ` +
       `${lessons.articles.reduce((n, a) => n + a.sentences.length, 0)} sentences ` +
-      `(rewrite: ${lessons.method}${LLM_KEY ? `, verifier repaired ${repaired}` : " — no ANTHROPIC_API_KEY, using rules"}).`,
+      `(rewrite: ${lessons.method} — ${tier}).`,
   );
 }
 

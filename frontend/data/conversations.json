@@ -46,7 +46,8 @@
             "gaau3",
             ""
           ],
-          "en": "Good morning! Hi, I'm David — nice to meet you."
+          "en": "Good morning! Hi, I'm David — nice to meet you.",
+          "audio": "067d24afe2dae35b.mp3"
         },
         {
           "id": 1,
@@ -78,7 +79,8 @@
             "laa3",
             ""
           ],
-          "en": "Hello, I'm Ms Chan — just call me Ah Jan."
+          "en": "Hello, I'm Ms Chan — just call me Ah Jan.",
+          "audio": "265bddc162a3ddc0.mp3"
         },
         {
           "id": 2,
@@ -99,7 +101,8 @@
             "nei5",
             ""
           ],
-          "en": "Very happy to meet you."
+          "en": "Very happy to meet you.",
+          "audio": "0625ae0f513f30e5.mp3"
         },
         {
           "id": 3,
@@ -124,7 +127,8 @@
             "aa3",
             ""
           ],
-          "en": "Are you the new colleague?"
+          "en": "Are you the new colleague?",
+          "audio": "220a650e0562a083.mp3"
         },
         {
           "id": 4,
@@ -151,7 +155,8 @@
             "lai4",
             ""
           ],
-          "en": "Yes, I just transferred over from London."
+          "en": "Yes, I just transferred over from London.",
+          "audio": "2ee6708c323c325c.mp3"
         },
         {
           "id": 5,
@@ -181,7 +186,8 @@
             "aa3",
             ""
           ],
-          "en": "Welcome! Are you getting used to life in Hong Kong?"
+          "en": "Welcome! Are you getting used to life in Hong Kong?",
+          "audio": "b681516b4d404130.mp3"
         },
         {
           "id": 6,
@@ -207,7 +213,8 @@
             "jit6",
             ""
           ],
-          "en": "It's okay — the weather is a bit hot though."
+          "en": "It's okay — the weather is a bit hot though.",
+          "audio": "4d2d240e683f5fcb.mp3"
         },
         {
           "id": 7,
@@ -239,7 +246,8 @@
             "ngo5",
             ""
           ],
-          "en": "You'll get used to it. Come find me any time you need something."
+          "en": "You'll get used to it. Come find me any time you need something.",
+          "audio": "d426dd9c7d151972.mp3"
         },
         {
           "id": 8,
@@ -258,7 +266,8 @@
             "nei5",
             ""
           ],
-          "en": "Thank you so much!"
+          "en": "Thank you so much!",
+          "audio": "ed3a1fcfa04b8e8d.mp3"
         },
         {
           "id": 9,
@@ -277,7 +286,8 @@
             "hei3",
             ""
           ],
-          "en": "You're welcome."
+          "en": "You're welcome.",
+          "audio": "54129d0d8e3af809.mp3"
         }
       ]
     },
@@ -311,7 +321,8 @@
             "aa3",
             ""
           ],
-          "en": "Morning — how many?"
+          "en": "Morning — how many?",
+          "audio": "f7a145e31be4c513.mp3"
         },
         {
           "id": 1,
@@ -332,7 +343,8 @@
             "goi1",
             ""
           ],
-          "en": "Just one, thanks."
+          "en": "Just one, thanks.",
+          "audio": "4f18f6ae38fd650f.mp3"
         },
         {
           "id": 2,
@@ -356,7 +368,8 @@
             "aa3",
             ""
           ],
-          "en": "Sit over here. What would you like?"
+          "en": "Sit over here. What would you like?",
+          "audio": "76e77166ab008244.mp3"
         },
         {
           "id": 3,
@@ -384,7 +397,8 @@
             "daan2",
             ""
           ],
-          "en": "I'll have set A — ham macaroni with scrambled eggs."
+          "en": "I'll have set A — ham macaroni with scrambled eggs.",
+          "audio": "3e7c5b41b1371b76.mp3"
         },
         {
           "id": 4,
@@ -408,7 +422,8 @@
             "man1",
             ""
           ],
-          "en": "And to drink? Cold drinks are two dollars extra."
+          "en": "And to drink? Cold drinks are two dollars extra.",
+          "audio": "5e6c86426fafb998.mp3"
         },
         {
           "id": 5,
@@ -429,7 +444,8 @@
             "goi1",
             ""
           ],
-          "en": "Hot milk tea, please."
+          "en": "Hot milk tea, please.",
+          "audio": "a6c4bed0dc360aa2.mp3"
         },
         {
           "id": 6,
@@ -453,7 +469,8 @@
             "aa3",
             ""
           ],
-          "en": "Butter or jam on the toast?"
+          "en": "Butter or jam on the toast?",
+          "audio": "b313439013554f1a.mp3"
         },
         {
           "id": 7,
@@ -473,7 +490,8 @@
             "laa3",
             ""
           ],
-          "en": "Butter is fine."
+          "en": "Butter is fine.",
+          "audio": "c719ceb011b1bbba.mp3"
         },
         {
           "id": 8,
@@ -493,7 +511,8 @@
             "lai4",
             ""
           ],
-          "en": "Got it, coming right up."
+          "en": "Got it, coming right up.",
+          "audio": "db585b44fd66a090.mp3"
         },
         {
           "id": 9,
@@ -513,7 +532,8 @@
             "daan1",
             ""
           ],
-          "en": "Excuse me — the bill, please!"
+          "en": "Excuse me — the bill, please!",
+          "audio": "a4f3a2deefd91a66.mp3"
         },
         {
           "id": 10,
@@ -534,7 +554,8 @@
             "man1",
             ""
           ],
-          "en": "Thirty-eight dollars in total."
+          "en": "Thirty-eight dollars in total.",
+          "audio": "79f25bd18938dfc9.mp3"
         }
       ]
     },
@@ -569,7 +590,8 @@
             "aa3",
             ""
           ],
-          "en": "Two of you — do you have a reservation?"
+          "en": "Two of you — do you have a reservation?",
+          "audio": "89b217e45c000a3b.mp3"
         },
         {
           "id": 1,
@@ -591,7 +613,8 @@
             "noi6",
             ""
           ],
-          "en": "No — how long is the wait?"
+          "en": "No — how long is the wait?",
+          "audio": "9a254db1ffc9d4e2.mp3"
         },
         {
           "id": 2,
@@ -621,7 +644,8 @@
             "laa1",
             ""
           ],
-          "en": "About fifteen minutes — take a ticket and wait for your number."
+          "en": "About fifteen minutes — take a ticket and wait for your number.",
+          "audio": "57e509a8a14cf5d9.mp3"
         },
         {
           "id": 3,
@@ -644,7 +668,8 @@
             "sin1",
             ""
           ],
-          "en": "Fine, we'll wait."
+          "en": "Fine, we'll wait.",
+          "audio": "c091c355854f5075.mp3"
         },
         {
           "id": 4,
@@ -664,7 +689,8 @@
             "aa3",
             ""
           ],
-          "en": "What tea would you like?"
+          "en": "What tea would you like?",
+          "audio": "0780abc8deba2576.mp3"
         },
         {
           "id": 5,
@@ -684,7 +710,8 @@
             "goi1",
             ""
           ],
-          "en": "Pu-erh, please."
+          "en": "Pu-erh, please.",
+          "audio": "dcaa62b1b5b82425.mp3"
         },
         {
           "id": 6,
@@ -714,7 +741,8 @@
             "laa1",
             ""
           ],
-          "en": "Here's the dim sum sheet — tick what you'd like and hand it back."
+          "en": "Here's the dim sum sheet — tick what you'd like and hand it back.",
+          "audio": "25e32149f5fffaf7.mp3"
         },
         {
           "id": 7,
@@ -745,7 +773,8 @@
             "baau1",
             ""
           ],
-          "en": "A basket of har gow, a basket of siu mai, and char siu buns."
+          "en": "A basket of har gow, a basket of siu mai, and char siu buns.",
+          "audio": "a43ac3a8ec8e0f99.mp3"
         },
         {
           "id": 8,
@@ -765,7 +794,8 @@
             "aa3",
             ""
           ],
-          "en": "Anything else?"
+          "en": "Anything else?",
+          "audio": "dbd53399d4e73ebc.mp3"
         },
         {
           "id": 9,
@@ -789,7 +819,8 @@
             "giu3",
             ""
           ],
-          "en": "That's it for now — we'll order more if it's not enough."
+          "en": "That's it for now — we'll order more if it's not enough.",
+          "audio": "812b619c0ea05b6b.mp3"
         },
         {
           "id": 10,
@@ -806,7 +837,8 @@
             "ge3",
             ""
           ],
-          "en": "Sure."
+          "en": "Sure.",
+          "audio": "fce259307fa9cbfa.mp3"
         }
       ]
     },
@@ -836,7 +868,8 @@
             "aa3",
             ""
           ],
-          "en": "Where to?"
+          "en": "Where to?",
+          "audio": "9f9a76307bf6d23d.mp3"
         },
         {
           "id": 1,
@@ -859,7 +892,8 @@
             "",
             ""
           ],
-          "en": "To IFC in Central, please."
+          "en": "To IFC in Central, please.",
+          "audio": "5a188cc26604fb55.mp3"
         },
         {
           "id": 2,
@@ -881,7 +915,8 @@
             "aa3",
             ""
           ],
-          "en": "Western Harbour Tunnel or the Cross-Harbour Tunnel?"
+          "en": "Western Harbour Tunnel or the Cross-Harbour Tunnel?",
+          "audio": "2357ec34e1967c5d.mp3"
         },
         {
           "id": 3,
@@ -905,7 +940,8 @@
             "laa1",
             ""
           ],
-          "en": "Sure — whichever is faster."
+          "en": "Sure — whichever is faster.",
+          "audio": "1d7db5aac8e13338.mp3"
         },
         {
           "id": 4,
@@ -932,7 +968,8 @@
             "zung1",
             ""
           ],
-          "en": "Traffic is bad today — could take twenty minutes."
+          "en": "Traffic is bad today — could take twenty minutes.",
+          "audio": "b902c8ac86e10752.mp3"
         },
         {
           "id": 5,
@@ -955,7 +992,8 @@
             "gaan3",
             ""
           ],
-          "en": "No problem, I'm not in a hurry."
+          "en": "No problem, I'm not in a hurry.",
+          "audio": "f947460f69128e83.mp3"
         },
         {
           "id": 6,
@@ -978,7 +1016,8 @@
             "laa3",
             ""
           ],
-          "en": "You can stop at the junction ahead."
+          "en": "You can stop at the junction ahead.",
+          "audio": "4dad6f4f8a71a74e.mp3"
         },
         {
           "id": 7,
@@ -999,7 +1038,8 @@
             "man1",
             ""
           ],
-          "en": "Okay — ninety-eight dollars."
+          "en": "Okay — ninety-eight dollars.",
+          "audio": "af317bd9f0b74065.mp3"
         },
         {
           "id": 8,
@@ -1023,7 +1063,8 @@
             "laa3",
             ""
           ],
-          "en": "Here's a hundred — keep the change."
+          "en": "Here's a hundred — keep the change.",
+          "audio": "d6d7edea0b6a569c.mp3"
         },
         {
           "id": 9,
@@ -1041,7 +1082,8 @@
             "saai3",
             ""
           ],
-          "en": "Thanks a lot!"
+          "en": "Thanks a lot!",
+          "audio": "9f0e381cbb2c5397.mp3"
         }
       ]
     },
@@ -1084,7 +1126,8 @@
             "aa3",
             ""
           ],
-          "en": "Excuse me, which platform should I take for Central?"
+          "en": "Excuse me, which platform should I take for Central?",
+          "audio": "0f604fc335d59c70.mp3"
         },
         {
           "id": 1,
@@ -1110,7 +1153,8 @@
             "hai6",
             ""
           ],
-          "en": "It's on the other side — take the stairs down."
+          "en": "It's on the other side — take the stairs down.",
+          "audio": "152d3a3476c5ab1f.mp3"
         },
         {
           "id": 2,
@@ -1131,7 +1175,8 @@
             "aa3",
             ""
           ],
-          "en": "Do I need to change trains?"
+          "en": "Do I need to change trains?",
+          "audio": "151ea0d605ae3666.mp3"
         },
         {
           "id": 3,
@@ -1153,7 +1198,8 @@
             "sin3",
             ""
           ],
-          "en": "Change to the Island Line at Admiralty."
+          "en": "Change to the Island Line at Admiralty.",
+          "audio": "27584dd2aa8bee4a.mp3"
         },
         {
           "id": 4,
@@ -1174,7 +1220,8 @@
             "aa3",
             ""
           ],
-          "en": "Roughly how long does it take?"
+          "en": "Roughly how long does it take?",
+          "audio": "c3d1d6bc4c364656.mp3"
         },
         {
           "id": 5,
@@ -1194,7 +1241,8 @@
             "laa1",
             ""
           ],
-          "en": "About ten minutes."
+          "en": "About ten minutes.",
+          "audio": "e9c9c5512f24d9c6.mp3"
         },
         {
           "id": 6,
@@ -1224,7 +1272,8 @@
             "aa3",
             ""
           ],
-          "en": "My Octopus card is out of money — where can I top it up?"
+          "en": "My Octopus card is out of money — where can I top it up?",
+          "audio": "e332543971f90f45.mp3"
         },
         {
           "id": 7,
@@ -1253,7 +1302,8 @@
             "dak1",
             ""
           ],
-          "en": "There's a top-up machine over there, or the customer service centre."
+          "en": "There's a top-up machine over there, or the customer service centre.",
+          "audio": "577ecb00c386c9d3.mp3"
         },
         {
           "id": 8,
@@ -1274,7 +1324,8 @@
             "saai3",
             ""
           ],
-          "en": "Got it — thanks so much!"
+          "en": "Got it — thanks so much!",
+          "audio": "27ee45f3dc1669b9.mp3"
         },
         {
           "id": 9,
@@ -1293,7 +1344,8 @@
             "goi1",
             ""
           ],
-          "en": "No need to thank me."
+          "en": "No need to thank me.",
+          "audio": "527c52e9aa6e83e5.mp3"
         }
       ]
     },
@@ -1328,7 +1380,8 @@
             "aa3",
             ""
           ],
-          "en": "Boss, how much is this?"
+          "en": "Boss, how much is this?",
+          "audio": "c8effbf7a6c2b5eb.mp3"
         },
         {
           "id": 1,
@@ -1348,7 +1401,8 @@
             "gan1",
             ""
           ],
-          "en": "Thirty dollars a catty."
+          "en": "Thirty dollars a catty.",
+          "audio": "288940886876117d.mp3"
         },
         {
           "id": 2,
@@ -1374,7 +1428,8 @@
             "aa3",
             ""
           ],
-          "en": "That's a bit expensive — can you go lower?"
+          "en": "That's a bit expensive — can you go lower?",
+          "audio": "55a446486b6dc62f.mp3"
         },
         {
           "id": 3,
@@ -1397,7 +1452,8 @@
             "laa1",
             ""
           ],
-          "en": "Buy two catties and I'll make it fifty."
+          "en": "Buy two catties and I'll make it fifty.",
+          "audio": "eb1033e81a0a5dde.mp3"
         },
         {
           "id": 4,
@@ -1419,7 +1475,8 @@
             "gan1",
             ""
           ],
-          "en": "Deal — two catties then."
+          "en": "Deal — two catties then.",
+          "audio": "fa16a6e0b54fa55a.mp3"
         },
         {
           "id": 5,
@@ -1442,7 +1499,8 @@
             "aa3",
             ""
           ],
-          "en": "Anything else?"
+          "en": "Anything else?",
+          "audio": "9fa4de8ce14a3e5c.mp3"
         },
         {
           "id": 6,
@@ -1465,7 +1523,8 @@
             "gaa3",
             ""
           ],
-          "en": "Are these mangoes sweet?"
+          "en": "Are these mangoes sweet?",
+          "audio": "7101a95b7c356df1.mp3"
         },
         {
           "id": 7,
@@ -1489,7 +1548,8 @@
             "cin2",
             ""
           ],
-          "en": "Very sweet — free if they're not!"
+          "en": "Very sweet — free if they're not!",
+          "audio": "2980cde41055b44c.mp3"
         },
         {
           "id": 8,
@@ -1519,7 +1579,8 @@
             "aa3",
             ""
           ],
-          "en": "I'll take three then. Can I pay by Octopus?"
+          "en": "I'll take three then. Can I pay by Octopus?",
+          "audio": "3378180261ecc16d.mp3"
         },
         {
           "id": 9,
@@ -1542,7 +1603,8 @@
             "man1",
             ""
           ],
-          "en": "Sure — seventy-two dollars altogether."
+          "en": "Sure — seventy-two dollars altogether.",
+          "audio": "84411fc9f510e069.mp3"
         }
       ]
     },
@@ -1576,7 +1638,8 @@
             "aa3",
             ""
           ],
-          "en": "Morning! How was your weekend?"
+          "en": "Morning! How was your weekend?",
+          "audio": "6ac08b56538f4d8e.mp3"
         },
         {
           "id": 1,
@@ -1606,7 +1669,8 @@
             "ging3",
             ""
           ],
-          "en": "Pretty good — went hiking on the MacLehose Trail."
+          "en": "Pretty good — went hiking on the MacLehose Trail.",
+          "audio": "f940426cf6aee3e8.mp3"
         },
         {
           "id": 2,
@@ -1635,7 +1699,8 @@
             "baan1",
             ""
           ],
-          "en": "Impressive! I spent the whole weekend working overtime."
+          "en": "Impressive! I spent the whole weekend working overtime.",
+          "audio": "85786ce2a9ac8115.mp3"
         },
         {
           "id": 3,
@@ -1668,7 +1733,8 @@
             "aa3",
             ""
           ],
-          "en": "Poor you. Will the project make the deadline?"
+          "en": "Poor you. Will the project make the deadline?",
+          "audio": "f930c9aeb9417557.mp3"
         },
         {
           "id": 4,
@@ -1697,7 +1763,8 @@
             "wu6",
             ""
           ],
-          "en": "Should be fine — it's due to the client by Friday."
+          "en": "Should be fine — it's due to the client by Friday.",
+          "audio": "51ea2b98d21ba914.mp3"
         },
         {
           "id": 5,
@@ -1720,7 +1787,8 @@
             "seng1",
             ""
           ],
-          "en": "Shout if you need a hand."
+          "en": "Shout if you need a hand.",
+          "audio": "5f55f4e34b74e4a7.mp3"
         },
         {
           "id": 6,
@@ -1746,7 +1814,8 @@
             "aa1",
             ""
           ],
-          "en": "Thanks! Lunch together at noon?"
+          "en": "Thanks! Lunch together at noon?",
+          "audio": "40d0eebd63933705.mp3"
         },
         {
           "id": 7,
@@ -1776,7 +1845,8 @@
             "aa3",
             ""
           ],
-          "en": "Sure — how about that new Japanese place downstairs?"
+          "en": "Sure — how about that new Japanese place downstairs?",
+          "audio": "a618f21bc60f794e.mp3"
         },
         {
           "id": 8,
@@ -1800,7 +1870,8 @@
             "gin3",
             ""
           ],
-          "en": "No problem — see you at half past twelve."
+          "en": "No problem — see you at half past twelve.",
+          "audio": "498a6f34195c63ea.mp3"
         }
       ]
     },
@@ -1842,7 +1913,8 @@
             "aa3",
             ""
           ],
-          "en": "Meeting at 3pm tomorrow — are you free?"
+          "en": "Meeting at 3pm tomorrow — are you free?",
+          "audio": "e8c361722fdf233d.mp3"
         },
         {
           "id": 1,
@@ -1885,7 +1957,8 @@
             "dak1",
             ""
           ],
-          "en": "Let me check my schedule… I have another meeting at three — does four work?"
+          "en": "Let me check my schedule… I have another meeting at three — does four work?",
+          "audio": "198245736105a683.mp3"
         },
         {
           "id": 2,
@@ -1908,7 +1981,8 @@
             "laa1",
             ""
           ],
-          "en": "Sure, let's move it to four."
+          "en": "Sure, let's move it to four.",
+          "audio": "893aa5ea292ec5b4.mp3"
         },
         {
           "id": 3,
@@ -1930,7 +2004,8 @@
             "aa3",
             ""
           ],
-          "en": "Which meeting room?"
+          "en": "Which meeting room?",
+          "audio": "1e074c75fa0ba5c8.mp3"
         },
         {
           "id": 4,
@@ -1967,7 +2042,8 @@
             "nei5",
             ""
           ],
-          "en": "The big one on the tenth floor — I'll send you an invite."
+          "en": "The big one on the tenth floor — I'll send you an invite.",
+          "audio": "dcf029162ac55a90.mp3"
         },
         {
           "id": 5,
@@ -1992,7 +2068,8 @@
             "aa3",
             ""
           ],
-          "en": "What's on the agenda?"
+          "en": "What's on the agenda?",
+          "audio": "087297c7b8620d67.mp3"
         },
         {
           "id": 6,
@@ -2018,7 +2095,8 @@
             "syun3",
             ""
           ],
-          "en": "Mainly next quarter's budget."
+          "en": "Mainly next quarter's budget.",
+          "audio": "fc3e4fb65cf2c16b.mp3"
         },
         {
           "id": 7,
@@ -2043,7 +2121,8 @@
             "sin1",
             ""
           ],
-          "en": "Okay, I'll get some materials ready."
+          "en": "Okay, I'll get some materials ready.",
+          "audio": "219ec9df27724f78.mp3"
         },
         {
           "id": 8,
@@ -2065,7 +2144,8 @@
             "gin3",
             ""
           ],
-          "en": "Thanks — see you then."
+          "en": "Thanks — see you then.",
+          "audio": "76a64c71358784e3.mp3"
         }
       ]
     },
@@ -2105,7 +2185,8 @@
             "aa3",
             ""
           ],
-          "en": "How did this company do last quarter?"
+          "en": "How did this company do last quarter?",
+          "audio": "126e30ef63bb1e61.mp3"
         },
         {
           "id": 1,
@@ -2136,7 +2217,8 @@
             "kei4",
             ""
           ],
-          "en": "Revenue grew fifteen percent year-on-year — better than expected."
+          "en": "Revenue grew fifteen percent year-on-year — better than expected.",
+          "audio": "c29ae8519af974d4.mp3"
         },
         {
           "id": 2,
@@ -2159,7 +2241,8 @@
             "ne1",
             ""
           ],
-          "en": "And margins?"
+          "en": "And margins?",
+          "audio": "4eb6c80c8f9a8de2.mp3"
         },
         {
           "id": 3,
@@ -2195,7 +2278,8 @@
             "dou6",
             ""
           ],
-          "en": "Gross margin held at around forty percent."
+          "en": "Gross margin held at around forty percent.",
+          "audio": "154705dc4afeabef.mp3"
         },
         {
           "id": 4,
@@ -2222,7 +2306,8 @@
             "aa3",
             ""
           ],
-          "en": "What does management think about the second half?"
+          "en": "What does management think about the second half?",
+          "audio": "04d7a2fb7c583f22.mp3"
         },
         {
           "id": 5,
@@ -2253,7 +2338,8 @@
             "coeng4",
             ""
           ],
-          "en": "They're fairly optimistic — planning to expand in Southeast Asia."
+          "en": "They're fairly optimistic — planning to expand in Southeast Asia.",
+          "audio": "4abb2e758fe64b88.mp3"
         },
         {
           "id": 6,
@@ -2277,7 +2363,8 @@
             "me1",
             ""
           ],
-          "en": "What should we watch on the risk side?"
+          "en": "What should we watch on the risk side?",
+          "audio": "cf516af00d5ec134.mp3"
         },
         {
           "id": 7,
@@ -2305,7 +2392,8 @@
             "dung6",
             ""
           ],
-          "en": "Mainly rising costs and currency swings."
+          "en": "Mainly rising costs and currency swings.",
+          "audio": "ee41bdd31ec3497a.mp3"
         },
         {
           "id": 8,
@@ -2330,7 +2418,8 @@
             "bou3",
             ""
           ],
-          "en": "Good — we'll take it to the investment committee (IC) next week."
+          "en": "Good — we'll take it to the investment committee (IC) next week.",
+          "audio": "f90657ab475c170d.mp3"
         },
         {
           "id": 9,
@@ -2357,7 +2446,8 @@
             "nei5",
             ""
           ],
-          "en": "I'll send you the report tonight."
+          "en": "I'll send you the report tonight.",
+          "audio": "4958b918c0c311e9.mp3"
         }
       ]
     },
@@ -2395,7 +2485,8 @@
             "aa3",
             ""
           ],
-          "en": "Drinks after work tonight?"
+          "en": "Drinks after work tonight?",
+          "audio": "774e099e420cef2c.mp3"
         },
         {
           "id": 1,
@@ -2417,7 +2508,8 @@
             "hou2",
             ""
           ],
-          "en": "Sure — where should we go?"
+          "en": "Sure — where should we go?",
+          "audio": "86ab57dc086bd980.mp3"
         },
         {
           "id": 2,
@@ -2446,7 +2538,8 @@
             "hou2",
             ""
           ],
-          "en": "A new bar opened in Lan Kwai Fong — supposedly quite good."
+          "en": "A new bar opened in Lan Kwai Fong — supposedly quite good.",
+          "audio": "b55967afef047354.mp3"
         },
         {
           "id": 3,
@@ -2465,7 +2558,8 @@
             "aa3",
             ""
           ],
-          "en": "What time?"
+          "en": "What time?",
+          "audio": "08a5fbfd649fdbd3.mp3"
         },
         {
           "id": 4,
@@ -2491,7 +2585,8 @@
             "wai2",
             ""
           ],
-          "en": "Does half past seven work? I'll book a table."
+          "en": "Does half past seven work? I'll book a table.",
+          "audio": "b77292f622d70dfd.mp3"
         },
         {
           "id": 5,
@@ -2520,7 +2615,8 @@
             "aa3",
             ""
           ],
-          "en": "No problem. Should we invite the other colleagues too?"
+          "en": "No problem. Should we invite the other colleagues too?",
+          "audio": "66bee23807b4465f.mp3"
         },
         {
           "id": 6,
@@ -2549,7 +2645,8 @@
             "seng1",
             ""
           ],
-          "en": "Good idea — I'll mention it in the group chat."
+          "en": "Good idea — I'll mention it in the group chat.",
+          "audio": "ac1bca7cf2efce89.mp3"
         },
         {
           "id": 7,
@@ -2581,7 +2678,8 @@
             "dim6",
             ""
           ],
-          "en": "My treat today — to celebrate finishing the project!"
+          "en": "My treat today — to celebrate finishing the project!",
+          "audio": "802c721f46f0142f.mp3"
         },
         {
           "id": 8,
@@ -2602,7 +2700,8 @@
             "laa3",
             ""
           ],
-          "en": "Well, don't mind if I do!"
+          "en": "Well, don't mind if I do!",
+          "audio": "c3153804b2ed2632.mp3"
         }
       ]
     }

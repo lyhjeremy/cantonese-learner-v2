@@ -79,15 +79,16 @@ feature — other browsers can listen and read.
 GitHub Actions (daily cron, 06:00 HKT)                Browser (GitHub Pages, static)
 ┌──────────────────────────────────────────┐          ┌──────────────────────────────┐
 │ 1. fetch RTHK RSS (5 topics)             │          │ loads today.json +           │
-│    + optional WeChat-bridge feed         │          │       conversations.json     │
+│    + Bain feed (bridge or web scrape)    │          │       conversations.json     │
 │ 2. fetch full article bodies             │  writes  │ • side-by-side / interleaved │
-│ 3. REWRITE: Claude Opus 4.8 → anchor     │  today   │   reader + jyutping ruby     │
-│    Cantonese + aligned phrase pairs      │  .json   │ • tap-to-compare segments    │
-│ 4. VERIFY: independent Claude reviewer   │ ───────► │ • speechSynthesis TTS (zh-HK)│
-│    cross-checks & repairs every sentence │          │ • auto-play                  │
-│    (keyless fallback: hardened rules)    │          │ • SpeechRecognition grading  │
-│ 5. spell out numerals in context         │          │   (digits ≡ spelled-out)     │
-│ 6. add jyutping (to-jyutping, local)     │          │ • trad⇄simp, tri-lingual UI  │
+│ 3. REWRITE → anchor Cantonese:           │  today   │   reader + jyutping ruby     │
+│    Claude (if key) ▸ GitHub Models       │  .json   │ • tap-to-compare segments    │
+│    (free, built-in token) ▸ rules        │  + MP3s  │ • NEURAL AUDIO per sentence  │
+│ 4. REVIEW pass cross-checks rewrites     │ ───────► │   (edge-tts zh-HK voices;    │
+│ 5. spell out numerals in context         │          │   browser TTS as fallback)   │
+│ 6. add jyutping (to-jyutping, local)     │          │ • auto-play, speed control   │
+│ 7. synthesise neural Cantonese audio     │          │ • SpeechRecognition grading  │
+│    for EVERY sentence (edge-tts, free)   │          │ • trad⇄simp, tri-lingual UI  │
 └──────────────────────────────────────────┘          └──────────────────────────────┘
 ```
 
@@ -99,22 +100,36 @@ GitHub Actions (daily cron, 06:00 HKT)                Browser (GitHub Pages, sta
 - **Voices and grading run in the visitor's browser.** Your friends cost you
   nothing; nobody's audio leaves their machine.
 
-### The two-pass rewrite (the heart of V2)
+### Natural audio, for free (the V2.1 fix)
 
-With an `ANTHROPIC_API_KEY` secret configured, the build makes **two Claude
-calls per article** using structured outputs (schema-guaranteed JSON):
+The browser's built-in Cantonese voice is robotic and mangles intonation, so
+the daily build now **pre-synthesises every sentence** with Microsoft's free
+neural zh-HK voices via `edge-tts` (the engine the sibling Mandarin Reader
+uses) and ships the MP3s as static files. News is read by a female anchor
+voice; conversation scenarios give each speaker their own voice, so dialogues
+sound like two people. The speed control uses pitch-preserving `playbackRate`.
+Synthesis is retry + atomic + fail-soft: any clip that can't be made simply
+falls back to the browser voice for that sentence.
 
-1. **Rewrite** — formal sentences → natural spoken anchor-Cantonese, plus the
-   aligned `pairs` that power tap-to-compare. Pair alignment is re-validated in
-   code (both sides must reproduce their sentences character-for-character);
-   invalid pairs are dropped rather than trusted.
-2. **Verify** — a second call with an independent "native reviewer" persona
-   judges every rewrite for naturalness, meaning preservation, and mangled
-   compounds, and returns corrected sentences where needed. The build applies
-   the repairs and labels the day's data `llm+verify`.
+### The rewrite ladder (three tiers, best available wins)
 
-Cost is a few tens of cents per day at ~12 articles; set a monthly cap in the
-Anthropic console. Remove the secret and it's fully keyless again.
+1. **Claude rewrite + verifier** (`ANTHROPIC_API_KEY` secret; a few tens of
+   cents/day) — two structured-output calls per article: a rewrite that emits
+   semantically aligned phrase pairs, then an independent reviewer that repairs
+   anything unnatural. Labels the day `llm+verify`.
+2. **GitHub Models rewrite + review pass** — **completely free and automatic**:
+   public-repo Actions can call GitHub's model inference with the workflow's
+   own `GITHUB_TOKEN` (`permissions: models: read`), no key and no billing.
+   Same idea (rewrite call, then a native-reviewer correction call), serialised
+   with back-off to respect the free tier's rate limits; tap-to-compare pairs
+   are computed locally with a character-LCS aligner. Override the model with
+   a `GH_MODELS_MODEL` variable (default `openai/gpt-4o-mini`).
+3. **Hardened rule converter** — the last-resort fallback, rebuilt after a
+   two-reviewer audit against real output: risky single-character rules
+   (不→唔, 這→呢, 那→嗰) are replaced by explicit phrase whitelists, quoted
+   spans (「」《》) are never touched, sentence-final 了 becomes 喇, and the
+   protect table covers transliterations (巴塞羅那, 馬耳他), official-body
+   names, and 表示+attitude-noun collocations.
 
 ### Numbers, precisely
 
@@ -193,7 +208,9 @@ Actions):
 
 | Name | Type | Required? | Purpose |
 |---|---|---|---|
-| `ANTHROPIC_API_KEY` | secret | recommended | Claude rewrite + independent verifier (else: rule-based) |
+| *(nothing)* | — | — | Free tier already active: GitHub Models rewrite + neural audio need NO setup |
+| `ANTHROPIC_API_KEY` | secret | optional | Upgrade the rewrite to Claude + independent verifier |
+| `GH_MODELS_MODEL` | variable | optional | Change the free rewrite model (default `openai/gpt-4o-mini`) |
 | `WECHAT_FEED_URL` | secret | optional | RSS-bridge URL for the WeChat 公眾號 feed (overrides the web-scrape fallback) |
 | `WECHAT_SOURCE_NAME` | variable | optional | Source label for the secondary-feed lessons |
 | `BAIN_NEWS_QUERY` | variable | optional | Web-scrape fallback topic (default 貝恩資本; `off` disables) |

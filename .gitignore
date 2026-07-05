@@ -6,3 +6,6 @@ package-lock.json
 .dev.vars
 # Generated daily by the Pages workflow (RSS + rule-based rewrite); not committed.
 frontend/data/today.json
+
+# Generated per-deploy by scripts/build_audio.py (edge-tts MP3s); not committed.
+frontend/audio/

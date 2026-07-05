@@ -282,3 +282,23 @@ maybe("narrow viewport: two panes hide, interleaved view shows written above spo
   assert.ok(await block.$(".il-colloquial .cc"), "spoken ruby line in block");
   await page.close();
 });
+
+maybe("pre-synthesised audio keeps Play/Auto enabled even without browser TTS", async () => {
+  const page = await browser.newPage();
+  // Strip the browser voice entirely — audio clips must carry playback alone.
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "speechSynthesis", { value: undefined, configurable: true });
+    Object.defineProperty(window, "SpeechSynthesisUtterance", { value: undefined, configurable: true });
+  });
+  const FIX = JSON.parse(JSON.stringify(PAIRS_FIXTURE));
+  FIX.articles[0].sentences[0].audio = "abc123def456.mp3";
+  await page.route("**/data/today.json", (r) =>
+    r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(FIX) }),
+  );
+  await ready(page);
+  await page.click("#cards .card:first-child");
+  assert.equal(await page.$eval("#btn-play", (e) => e.disabled), false, "Play enabled via audio");
+  assert.equal(await page.$eval("#btn-auto", (e) => e.disabled), false, "Auto enabled via audio");
+  assert.equal(await page.isHidden("#note-tts"), true, "no TTS warning when audio present");
+  await page.close();
+});
