@@ -90,13 +90,14 @@ async def process(json_path: Path, kind: str) -> tuple[int, int]:
                 text = s.get("colloquial") or s.get("formal") or ""
                 if text:
                     jobs.append((s, text, NEWS_VOICE))
-    else:  # conversations
-        for sc in data.get("scenarios", []):
-            order = {}
-            for s in sc.get("sentences", []):
-                text = s.get("colloquial") or ""
-                if text:
-                    jobs.append((s, text, conv_voice_for(s.get("speaker"), order)))
+    else:  # conversations (categories -> scenarios -> lines)
+        for cat in data.get("categories", []):
+            for sc in cat.get("scenarios", []):
+                order = {}
+                for s in sc.get("sentences", []):
+                    text = s.get("colloquial") or ""
+                    if text:
+                        jobs.append((s, text, conv_voice_for(s.get("speaker"), order)))
 
     async def run_one(sentence, text, voice):
         name = audio_name(text, voice)

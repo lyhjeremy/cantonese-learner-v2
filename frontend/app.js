@@ -47,6 +47,7 @@ const state = {
   lessons: null,
   conversations: null,
   article: null,
+  category: null, // open conversation category (sub-page)
   idx: 0,
   tts: { available: false, voices: {} },
   asrOk: asrAvailable(),
@@ -126,7 +127,7 @@ async function loadConversations() {
     const res = await fetch("./data/conversations.json");
     if (res.ok) {
       const data = await res.json();
-      if (data && Array.isArray(data.scenarios) && data.scenarios.length) return data;
+      if (data && Array.isArray(data.categories) && data.categories.length) return data;
     }
   } catch {
     /* conversations are optional */
@@ -135,13 +136,14 @@ async function loadConversations() {
 }
 
 // Adapt a conversation scenario to the article shape the reader renders.
-function scenarioAsArticle(sc) {
+function scenarioAsArticle(sc, cat) {
+  const catTitle = cat && cat.title ? (cat.title[state.lang] ?? cat.title.en) : "";
   return {
     id: sc.id,
     conversation: true,
     emoji: sc.emoji || "💬",
     title: (sc.title && (sc.title[state.lang] ?? sc.title.en)) || sc.id,
-    source: t("convSection", state.lang),
+    source: catTitle ? `${t("convSection", state.lang)} · ${catTitle}` : t("convSection", state.lang),
     url: "",
     converted: true,
     sentences: sc.sentences,
@@ -151,8 +153,10 @@ function scenarioAsArticle(sc) {
 // ── Rendering: article list ──────────────────────────────────────────────────
 function renderList() {
   state.article = null;
+  state.category = null;
   stopAutoplay();
   $("#reader").hidden = true;
+  $("#catpage").hidden = true;
   $("#list").hidden = false;
 
   const banner = $("#banner");
@@ -184,31 +188,58 @@ function renderList() {
     list.appendChild(card);
   });
 
-  // Everyday conversations section.
+  // Everyday conversations: one card per CATEGORY; each opens its sub-page.
   const block = $("#conv-block");
-  if (state.conversations) {
+  const cats = state.conversations && state.conversations.categories;
+  if (cats && cats.length) {
     block.hidden = false;
     $("#conv-title").textContent = t("convSection", state.lang);
     $("#conv-blurb").textContent = t("convBlurb", state.lang);
     const conv = $("#conv-cards");
     conv.innerHTML = "";
-    state.conversations.scenarios.forEach((sc) => {
-      const a = scenarioAsArticle(sc);
+    cats.forEach((cat) => {
       const card = el("button", "card conv-card");
       const head = el("div", "conv-head");
-      head.appendChild(el("span", "conv-emoji", a.emoji));
-      head.appendChild(el("h3", "card-title", a.title));
+      head.appendChild(el("span", "conv-emoji", cat.emoji || "💬"));
+      head.appendChild(el("h3", "card-title", cat.title[state.lang] ?? cat.title.en));
       card.appendChild(head);
       const meta = el("div", "card-meta");
-      meta.appendChild(el("span", "src", t("levelNames", state.lang, sc.level || 1)));
-      meta.appendChild(el("span", "cnt", `${a.sentences.length} ${t("lines", state.lang)}`));
+      meta.appendChild(el("span", "cnt", `${cat.scenarios.length} ${t("scenarios", state.lang)}`));
       card.appendChild(meta);
-      card.addEventListener("click", () => openArticle(scenarioAsArticle(sc)));
+      card.addEventListener("click", () => openCategory(cat));
       conv.appendChild(card);
     });
   } else {
     block.hidden = true;
   }
+}
+
+// ── Conversation category sub-page ───────────────────────────────────────────
+function openCategory(cat) {
+  state.category = cat;
+  state.article = null;
+  stopAutoplay();
+  $("#list").hidden = true;
+  $("#reader").hidden = true;
+  $("#catpage").hidden = false;
+  $("#cat-back").textContent = t("back", state.lang);
+  $("#cat-emoji").textContent = cat.emoji || "💬";
+  $("#cat-title").textContent = cat.title[state.lang] ?? cat.title.en;
+  const cards = $("#cat-cards");
+  cards.innerHTML = "";
+  cat.scenarios.forEach((sc) => {
+    const card = el("button", "card conv-card");
+    const head = el("div", "conv-head");
+    head.appendChild(el("span", "conv-emoji", sc.emoji || "💬"));
+    head.appendChild(el("h3", "card-title", (sc.title && (sc.title[state.lang] ?? sc.title.en)) || sc.id));
+    card.appendChild(head);
+    const meta = el("div", "card-meta");
+    meta.appendChild(el("span", "src", t("levelNames", state.lang, sc.level || 1)));
+    meta.appendChild(el("span", "cnt", `${sc.sentences.length} ${t("lines", state.lang)}`));
+    card.appendChild(meta);
+    card.addEventListener("click", () => openArticle(scenarioAsArticle(sc, cat)));
+    cards.appendChild(card);
+  });
 }
 
 // ── Rendering: reader ────────────────────────────────────────────────────────
@@ -217,8 +248,19 @@ function openArticle(a) {
   state.idx = 0;
   stopAutoplay();
   $("#list").hidden = true;
+  $("#catpage").hidden = true;
   $("#reader").hidden = false;
   renderReader();
+}
+
+// Back from the reader: conversation lessons return to their category page.
+function goBack() {
+  if (state.article && state.article.conversation && state.category) {
+    $("#reader").hidden = true;
+    openCategory(state.category);
+  } else {
+    renderList();
+  }
 }
 
 function paragraphsOf(a) {
@@ -613,7 +655,10 @@ function updateControls() {
   $("#btn-prev").querySelector(".lbl").textContent = t("prev", state.lang);
   $("#btn-next").querySelector(".lbl").textContent = t("next", state.lang);
   $("#btn-replay").querySelector(".lbl").textContent = t("replay", state.lang);
-  $("#back-btn").textContent = t("back", state.lang);
+  $("#back-btn").textContent =
+    state.article && state.article.conversation && state.category
+      ? t("backToCats", state.lang)
+      : t("back", state.lang);
   $("#kbd-hint").textContent = t("micHint", state.lang);
 
   $("#lbl-speed").textContent = t("speed", state.lang);
@@ -662,6 +707,7 @@ function renderLangButtons() {
       saveSettings();
       renderLangButtons();
       if (state.article) renderReader();
+      else if (state.category) openCategory(state.category);
       else renderList();
     });
     box.appendChild(b);
@@ -672,7 +718,8 @@ function renderLangButtons() {
 
 // ── Wiring ───────────────────────────────────────────────────────────────────
 function wire() {
-  $("#back-btn").addEventListener("click", renderList);
+  $("#back-btn").addEventListener("click", goBack);
+  $("#cat-back").addEventListener("click", renderList);
   $("#btn-play").addEventListener("click", () => {
     stopAutoplay();
     play();

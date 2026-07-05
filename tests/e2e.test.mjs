@@ -250,21 +250,32 @@ maybe("auto-play button is present and labelled", async () => {
   await page.close();
 });
 
-maybe("conversations section renders and opens with speaker labels + gloss", async () => {
+maybe("conversations: 8 category cards, sub-page with ≥4 scenarios, reader, back-routing", async () => {
   const page = await browser.newPage();
   await forceSample(page);
   await ready(page);
   assert.equal(await page.isVisible("#conv-block"), true, "conversations section visible");
   const cards = await page.$$("#conv-cards .card");
-  assert.ok(cards.length >= 8, `expected ≥8 scenario cards, got ${cards.length}`);
+  assert.equal(cards.length, 8, `expected 8 category cards, got ${cards.length}`);
+  // Category sub-page.
   await page.click("#conv-cards .card:first-child");
+  assert.equal(await page.isVisible("#catpage"), true, "category sub-page visible");
+  assert.equal(await page.isHidden("#list"), true);
+  const scen = await page.$$("#cat-cards .card");
+  assert.ok(scen.length >= 4, `expected ≥4 scenarios in category, got ${scen.length}`);
+  // Open a scenario: speaker labels, jyutping, English gloss.
+  await page.click("#cat-cards .card:first-child");
   assert.equal(await page.isVisible("#reader"), true);
-  // Speaker labels shown, jyutping ruby present, English gloss for EN UI.
   const spk = await page.$$eval("#colloquial-pane .spk", (els) => els.length);
   assert.ok(spk >= 2, "speaker labels rendered");
   const rt = await page.$$eval("#colloquial-pane .current .jp", (els) => els.filter((e) => e.textContent.trim()).length);
   assert.ok(rt > 3, "jyutping on conversation lines");
   assert.equal(await page.isVisible("#gloss"), true, "English gloss shown");
+  // Back goes reader -> category page -> home.
+  await page.click("#back-btn");
+  assert.equal(await page.isVisible("#catpage"), true, "reader back returns to the category page");
+  await page.click("#cat-back");
+  assert.equal(await page.isVisible("#list"), true, "category back returns home");
   await page.close();
 });
 

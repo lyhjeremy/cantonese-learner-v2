@@ -1,6 +1,8 @@
 // build-conversations.mjs — regenerate frontend/data/conversations.json from
 // the hand-authored curriculum in content/conversations-src.json: computes
 // per-character jyutping for every spoken line and validates the structure.
+// The curriculum is organised as ~8 CATEGORIES, each holding 4-6 scenario
+// dialogues (each category gets its own sub-page in the app).
 // Run whenever the source file changes:  npm run build:conversations
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -21,12 +23,20 @@ const fail = (m) => {
   console.error("✖", m);
 };
 
-const scenarios = (src.scenarios || []).map((sc) => {
+const CANTO_ONLY = /[嘅咗唔哋喺畀嚟搵嘢冇啲㗎蚊]/;
+
+function buildScenario(sc, catId) {
   if (!sc.id || !sc.title || !Array.isArray(sc.lines) || !sc.lines.length) {
-    fail(`scenario missing id/title/lines: ${sc.id || "?"}`);
+    fail(`scenario missing id/title/lines: ${catId}/${sc.id || "?"}`);
   }
-  const sentences = sc.lines.map((line, i) => {
-    if (!line.formal || !line.colloquial) fail(`${sc.id}#${i} missing formal/colloquial`);
+  const sentences = (sc.lines || []).map((line, i) => {
+    if (!line.formal || !line.colloquial) fail(`${catId}/${sc.id}#${i} missing formal/colloquial`);
+    if (CANTO_ONLY.test(line.formal || "")) {
+      fail(`${catId}/${sc.id}#${i} Cantonese-only character leaked into the WRITTEN layer: ${line.formal}`);
+    }
+    if (/\d/.test((line.formal || "") + (line.colloquial || ""))) {
+      fail(`${catId}/${sc.id}#${i} digits found — conversations must spell numbers as characters`);
+    }
     return {
       id: i,
       // Each dialogue line is its own paragraph so the reader renders the
@@ -46,6 +56,21 @@ const scenarios = (src.scenarios || []).map((sc) => {
     title: sc.title,
     sentences,
   };
+}
+
+const categories = (src.categories || []).map((cat) => {
+  if (!cat.id || !cat.title || !cat.title.en || !cat.title.hant || !cat.title.hans) {
+    fail(`category missing id or tri-lingual title: ${cat.id || "?"}`);
+  }
+  if (!Array.isArray(cat.scenarios) || cat.scenarios.length < 4) {
+    fail(`category ${cat.id}: needs at least 4 scenarios, has ${cat.scenarios?.length ?? 0}`);
+  }
+  return {
+    id: cat.id,
+    emoji: cat.emoji || "💬",
+    title: cat.title,
+    scenarios: (cat.scenarios || []).map((sc) => buildScenario(sc, cat.id)),
+  };
 });
 
 if (errors) {
@@ -53,12 +78,12 @@ if (errors) {
   process.exit(1);
 }
 
-await writeFile(
-  OUT,
-  JSON.stringify({ version: 1, scenarios }, null, 2),
-  "utf-8",
+await writeFile(OUT, JSON.stringify({ version: 2, categories }, null, 2), "utf-8");
+const nScen = categories.reduce((n, c) => n + c.scenarios.length, 0);
+const nLines = categories.reduce(
+  (n, c) => n + c.scenarios.reduce((m, s) => m + s.sentences.length, 0),
+  0,
 );
 console.log(
-  `Wrote conversations.json: ${scenarios.length} scenarios, ` +
-    `${scenarios.reduce((n, s) => n + s.sentences.length, 0)} lines.`,
+  `Wrote conversations.json: ${categories.length} categories, ${nScen} scenarios, ${nLines} lines.`,
 );

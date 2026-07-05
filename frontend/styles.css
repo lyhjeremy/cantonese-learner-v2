@@ -227,3 +227,9 @@ body {
   .panes { display: none; }
   .interleaved { display: block; }
 }
+
+/* Conversation category sub-page */
+.cat-head { display: flex; align-items: center; gap: 14px; margin: 10px 0 18px; }
+.conv-emoji.big { font-size: 38px; }
+#cat-back { display: block; margin: 12px 0 0; }
+.cat-card-meta { color: var(--muted); font-size: 13px; }

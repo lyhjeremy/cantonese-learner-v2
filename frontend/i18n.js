@@ -72,6 +72,8 @@ export const STR = {
     hans: "点击带下划线的词组，对照书面语和口语。",
   },
   lines: { en: "lines", hant: "句", hans: "句" },
+  scenarios: { en: "scenarios", hant: "個情景", hans: "个情景" },
+  backToCats: { en: "← All categories", hant: "← 所有類別", hans: "← 所有类别" },
   levelNames: {
     en: (l) => ({ 1: "Beginner", 2: "Intermediate", 3: "Advanced" })[l] || "",
     hant: (l) => ({ 1: "入門", 2: "進階", 3: "高級" })[l] || "",

@@ -72,26 +72,38 @@ async function checkConversations() {
     fail("conversations.json missing or unparseable");
     return;
   }
-  if (!Array.isArray(data.scenarios) || !data.scenarios.length) {
-    fail("conversations.json: no scenarios");
+  if (!Array.isArray(data.categories) || !data.categories.length) {
+    fail("conversations.json: no categories");
     return;
   }
-  for (const sc of data.scenarios) {
-    if (!sc.id || !sc.title || !sc.title.en || !sc.title.hant || !sc.title.hans) {
-      fail(`conversations ${sc.id || "?"}: missing id or tri-lingual title`);
+  let nScen = 0;
+  let nLines = 0;
+  for (const cat of data.categories) {
+    if (!cat.id || !cat.title || !cat.title.en || !cat.title.hant || !cat.title.hans) {
+      fail(`conversations category ${cat.id || "?"}: missing id or tri-lingual title`);
     }
-    if (!Array.isArray(sc.sentences) || !sc.sentences.length) {
-      fail(`conversations ${sc.id}: no sentences`);
+    if (!Array.isArray(cat.scenarios) || cat.scenarios.length < 4) {
+      fail(`conversations category ${cat.id}: needs ≥4 scenarios, has ${cat.scenarios?.length ?? 0}`);
       continue;
     }
-    for (const s of sc.sentences) {
-      checkSentence(`conversations ${sc.id}#${s.id}`, s);
-      if (!s.speaker) fail(`conversations ${sc.id}#${s.id} missing speaker`);
+    for (const sc of cat.scenarios) {
+      nScen++;
+      if (!sc.id || !sc.title || !sc.title.en || !sc.title.hant || !sc.title.hans) {
+        fail(`conversations ${cat.id}/${sc.id || "?"}: missing id or tri-lingual title`);
+      }
+      if (!Array.isArray(sc.sentences) || !sc.sentences.length) {
+        fail(`conversations ${cat.id}/${sc.id}: no sentences`);
+        continue;
+      }
+      for (const s of sc.sentences) {
+        nLines++;
+        checkSentence(`conversations ${cat.id}/${sc.id}#${s.id}`, s);
+        if (!s.speaker) fail(`conversations ${cat.id}/${sc.id}#${s.id} missing speaker`);
+      }
     }
   }
   console.log(
-    `✓ conversations.json: ${data.scenarios.length} scenarios, ` +
-      `${data.scenarios.reduce((n, s) => n + s.sentences.length, 0)} lines OK.`,
+    `✓ conversations.json: ${data.categories.length} categories, ${nScen} scenarios, ${nLines} lines OK.`,
   );
 }
 

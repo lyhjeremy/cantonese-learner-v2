@@ -8,7 +8,7 @@
 
 ---
 
-## ✅ V2 build status & handoff (updated 2026-07-04)
+## ✅ V2 build status & handoff (updated 2026-07-05)
 
 **Status: V2 built, tested, and published.** This repo is **V2** — a fork of
 [cantonese-learner](https://github.com/lyhjeremy/cantonese-learner) (V1, which
@@ -27,8 +27,10 @@ kept for the original rationale.
    running keyless on the hardened rule converter (~10× larger protect table).
 2. Context-aware numeral readings (2020年→二零二零年, 2020個→二千零二十個,
    15%→百分之十五) with jyutping, TTS, and digit-tolerant grading.
-3. A 10-scenario everyday-conversations curriculum (99 lines, cross-checked by
-   three independent AI reviewers; 23 fixes applied).
+3. An everyday-conversations curriculum: 8 categories × 4-6 scenarios each
+   (38 dialogues, 378 lines) with per-category sub-pages, speaker-voiced
+   neural audio, and English glosses — authored and cross-checked by
+   independent AI reviewers (naturalness / consistency / HK realism).
 4. Tap-to-compare phrase segments + an interleaved mobile view.
 5. Auto-play (hands-free listen-through).
 6. A Bain-relevant secondary news source: a WeChat 公眾號 RSS bridge when

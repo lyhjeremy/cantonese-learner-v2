@@ -40,11 +40,21 @@ feature — other browsers can listen and read.
    百分之十五; `54.1` → 五十四點一; `2846 3222` → digit by digit. Every
    character gets jyutping, the voice reads it correctly, and saying the
    number correctly scores green.
-3. **Everyday Hong Kong conversations.** A hand-curated, natively-reviewed set
-   of 10 scenario dialogues — greetings, cha chaan teng breakfast, dim sum,
-   taxis, the MTR, the wet market, office small talk, scheduling meetings,
-   portfolio/finance discussion, after-work drinks — with speaker labels,
-   English glosses, and the same listen → speak → grade loop as the news.
+3. **Everyday Hong Kong conversations — a full curriculum.** 38 scenario
+   dialogues (378 lines) organised into 8 categories, each with its own
+   sub-page: 🍽️ eating & drinking (cha chaan teng, dim sum, dinner booking,
+   bubble tea, takeaway), 🚇 getting around (taxi, MTR, minibus, directions,
+   Airport Express), 🛍️ shopping (wet market, supermarket, clothes, phone
+   shop, personal-care store), 👥 friends & small talk (greetings, weather,
+   weekend plans, drinks, hiking), 💼 office life (small talk, meetings,
+   asking for help, sick leave, team lunch), 📈 finance & deals (portfolio
+   review, market chat, management meetings, banking, deal negotiation),
+   🏠 home & services (flat viewing, management office, repairs, haircut), and
+   🏥 health & weather (doctor, pharmacy, unwell at work, typhoon days). Every
+   line has speaker labels, an English gloss, neural audio with a distinct
+   voice per speaker, and the same listen → speak → grade loop as the news.
+   All content was written and then cross-checked by independent AI reviewers
+   for native naturalness, three-layer consistency, and real-HK accuracy.
 4. **Tap to compare written ↔ spoken.** The rewrite now emits *aligned phrase
    pairs*: tap any underlined phrase in either pane and its counterpart lights
    up in the other, so you can see precisely that 認為 became 覺得. On phones,
@@ -59,8 +69,8 @@ feature — other browsers can listen and read.
 
 ## How you use it
 
-1. Open the link. You'll see today's ~12 news articles plus the conversation
-   scenarios below them.
+1. Open the link. You'll see today's ~12 news articles plus the 8
+   conversation categories below them — tap a category for its scenarios.
 2. Tap one. The reader shows the news the way it's **written** on the left and
    the way an anchor **says** it on the right, jyutping over every character.
    On a phone you get the interleaved view instead.
