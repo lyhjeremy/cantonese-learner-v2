@@ -17,14 +17,32 @@
 import { normalizeDigits } from "../frontend/numbers.js";
 
 export const GH_MODELS_ENDPOINT = "https://models.github.ai/inference/chat/completions";
-export const GH_MODEL = "openai/gpt-4o-mini"; // 150 free requests/day tier
+// Primary rewriter: GPT-4.1 (free "high" tier, ~50 requests/day) — the only
+// free-tier model that genuinely RESTRUCTURES into spoken Cantonese rather
+// than swapping characters. When its daily quota runs dry mid-build, each
+// remaining batch falls back to GPT-4.1-mini (free "low" tier, ~150/day),
+// which is nearly as deep; the review pass always runs on the mini so the
+// primary's quota is spent on rewriting only.
+export const GH_MODEL = "openai/gpt-4.1";
+export const GH_FALLBACK_MODEL = "openai/gpt-4.1-mini";
+export const GH_REVIEW_MODEL = "openai/gpt-4.1-mini";
 
 const BATCH = 20;
 const MAX_TOKENS = 3500;
 
 const REWRITE_SYSTEM = `You rewrite formal written Chinese news into spoken Hong Kong TV-news-anchor Cantonese.
 
-Register: exactly how a Hong Kong TV news anchor SPEAKS a bulletin aloud — natural spoken Cantonese in Traditional characters, with spoken vocabulary and particles where an anchor would use them (係, 嘅, 咗, 呢個, 而家, 話, 佢哋, 喺…), but polished and professional. NOT word-swapped written Chinese, NOT Mandarin phrasing, NOT street slang. Formal compounds an anchor keeps (不足, 不斷, 是否, 參與…) stay as they are — never mechanically change characters inside a compound (不足 must NEVER become 唔足).
+Register: exactly how a Hong Kong TV news anchor SPEAKS a bulletin aloud — natural spoken Cantonese in Traditional characters. That means genuinely spoken grammar and vocabulary throughout: 嘅 for 的, 喺 for 在, 同/同埋 for 與/及/和, 係 for 是, 咗 for perfective 了, 冇 for 沒有, 唔 for 不, 而家 for 現在, 話 for 表示/指出, 佢/佢哋 for 他/他們, 呢個/嗰個 for 這個/那個, 畀 for 給, restructured word order where an anchor would rephrase. Polished and professional — NOT street slang, but absolutely NOT word-swapped written Chinese either. If your output reads like the input with one or two characters changed, you have failed the task.
+
+Formal compounds an anchor keeps (不足, 不斷, 是否, 不過, 參與…) stay as they are — never mechanically change characters inside a compound (不足 must NEVER become 唔足).
+
+Examples of the required depth:
+WRITTEN: 政府發言人表示，當局將於下月推出新措施，協助受影響的市民。
+SPOKEN: 政府發言人話，當局下個月就會推出新措施，幫受影響嘅市民。
+WRITTEN: 他指出，公司在過去一年錄得虧損，情況並不理想。
+SPOKEN: 佢指出，公司喺過去一年錄得虧損，情況唔係咁理想。
+WRITTEN: 行政長官今日與代表團會面，就雙方共同關注的議題交換意見。
+SPOKEN: 行政長官今日同代表團會面，就雙方都關注嘅議題交換意見。
 
 Rules:
 - Keep numbers (as digits), personal/company/place names, and technical terms EXACTLY as in the original.
@@ -32,6 +50,8 @@ Rules:
 - Respond with STRICT JSON only: {"sentences": ["…", "…"]} — no prose, no markdown fences.`;
 
 const REVIEW_SYSTEM = `You are a native Hong Kong Cantonese reviewer. You are given written-Chinese news sentences and machine rewrites into spoken TV-anchor Cantonese. Return the FULL corrected list: for each item, if the rewrite is natural anchor Cantonese and preserves the meaning/numbers/names exactly, return it unchanged; otherwise return your corrected version (Traditional characters, anchor register). Fix especially: mangled compounds (唔足 for 不足, 其佢 for 其他), Mandarin-flavoured phrasing, wrong particles, and meaning drift.
+
+NEVER make a rewrite LESS colloquial: do not revert spoken forms back to written ones (同 must not become 與, 嘅 must not become 的, 咗 must not become 了, 話 must not become 表示). If a rewrite is correct spoken Cantonese, return it untouched.
 
 Respond with STRICT JSON only: {"sentences": ["…", "…"]} — same count and order as the input pairs, no prose, no fences.`;
 
@@ -47,12 +67,13 @@ function parseStrictJson(text) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// Circuit breaker: when the free tier's DAILY quota is exhausted, every call
+// Circuit breaker: when a model's DAILY quota is exhausted, every call to it
 // 429s until midnight UTC — retrying each one through the whole backoff
 // ladder would stall the build for an hour. Once one call exhausts its
-// retries (or the server asks for a minutes-long wait), stop calling for the
-// rest of the process and let the build fall back to rules immediately.
-let quotaExhausted = false;
+// retries (or the server asks for a minutes-long wait), stop calling THAT
+// MODEL for the rest of the process. Quotas are per rate-limit tier, so the
+// fallback model (a different tier) keeps working after the primary trips.
+const quotaExhausted = new Set();
 
 // The free tier enforces small per-minute request caps, so ALL calls in the
 // process are strictly serialised through this queue, and 429/5xx responses
@@ -64,9 +85,9 @@ function enqueue(fn) {
   return run;
 }
 
-async function chat(system, user, { token, model, retries = 3, retryDelayMs = 15000 }, fetchImpl) {
+async function chat(system, user, { token, model = GH_MODEL, retries = 3, retryDelayMs = 15000 }, fetchImpl) {
   return enqueue(async () => {
-    if (quotaExhausted) return null;
+    if (quotaExhausted.has(model)) return null;
     try {
       for (let attempt = 0; attempt <= retries; attempt++) {
         const res = await fetchImpl(GH_MODELS_ENDPOINT, {
@@ -77,7 +98,7 @@ async function chat(system, user, { token, model, retries = 3, retryDelayMs = 15
             accept: "application/json",
           },
           body: JSON.stringify({
-            model: model || GH_MODEL,
+            model,
             temperature: 0.3,
             max_tokens: MAX_TOKENS,
             messages: [
@@ -89,17 +110,17 @@ async function chat(system, user, { token, model, retries = 3, retryDelayMs = 15
         if (res.status === 429 || res.status >= 500) {
           const retryAfter = Number(res.headers?.get?.("retry-after"));
           // A minutes-long retry-after on 429 means the DAILY quota is gone,
-          // not a per-minute blip — give up for the whole build.
+          // not a per-minute blip — give up on this model for the whole build.
           if (res.status === 429 && Number.isFinite(retryAfter) && retryAfter > 300) {
-            quotaExhausted = true;
-            console.log(`  github-models: daily quota exhausted (retry-after ${retryAfter}s) — falling back to rules`);
+            quotaExhausted.add(model);
+            console.log(`  github-models: ${model} daily quota exhausted (retry-after ${retryAfter}s)`);
             return null;
           }
           if (attempt === retries) {
-            console.log(`  github-models: HTTP ${res.status} (retries exhausted)`);
+            console.log(`  github-models: ${model} HTTP ${res.status} (retries exhausted)`);
             if (res.status === 429) {
-              quotaExhausted = true;
-              console.log("  github-models: treating as exhausted quota — no further calls this build");
+              quotaExhausted.add(model);
+              console.log(`  github-models: treating ${model} quota as exhausted — no further calls to it this build`);
             }
             return null;
           }
@@ -110,7 +131,7 @@ async function chat(system, user, { token, model, retries = 3, retryDelayMs = 15
           continue;
         }
         if (!res.ok) {
-          console.log(`  github-models: HTTP ${res.status}`);
+          console.log(`  github-models: ${model} HTTP ${res.status}`);
           return null;
         }
         const data = await res.json();
@@ -132,26 +153,38 @@ function batches(items, size) {
 
 /**
  * Rewrite formal sentences into anchor Cantonese via GitHub Models, then run a
- * second review pass over the result. Returns an array of colloquial strings
- * aligned to `formals`, or null on any failure (caller falls back to rules).
+ * second review pass over the result. Each batch tries the primary model
+ * first, then the fallback model (a separate free-tier daily quota), so a
+ * mid-build quota exhaustion degrades quality one notch instead of dropping
+ * whole articles to the rule-based converter. Returns an array of colloquial
+ * strings aligned to `formals`, or null on any failure (caller falls back to
+ * rules).
  */
 export async function ghConvertSentences(
   formals,
-  { token, model, review = true, retries, retryDelayMs } = {},
+  { token, model, fallbackModel, reviewModel, review = true, retries, retryDelayMs } = {},
   fetchImpl = fetch,
 ) {
   if (!token || !formals || !formals.length) return null;
+  const rewriteModels = [...new Set([model || GH_MODEL, fallbackModel || GH_FALLBACK_MODEL])];
   const out = [];
   for (const batch of batches(formals, BATCH)) {
     const list = batch.map((f, i) => `${i + 1}. ${f}`).join("\n");
-    const parsed = await chat(
-      REWRITE_SYSTEM,
-      `Rewrite each of the following ${batch.length} sentences. The "sentences" array MUST have exactly ${batch.length} items, in order.\n\n${list}`,
-      { token, model, retries, retryDelayMs },
-      fetchImpl,
-    );
-    const arr = parsed && parsed.sentences;
-    if (!Array.isArray(arr) || arr.length !== batch.length) return null;
+    let arr = null;
+    for (const m of rewriteModels) {
+      const parsed = await chat(
+        REWRITE_SYSTEM,
+        `Rewrite each of the following ${batch.length} sentences. The "sentences" array MUST have exactly ${batch.length} items, in order.\n\n${list}`,
+        { token, model: m, retries, retryDelayMs },
+        fetchImpl,
+      );
+      const got = parsed && parsed.sentences;
+      if (Array.isArray(got) && got.length === batch.length) {
+        arr = got;
+        break;
+      }
+    }
+    if (!arr) return null;
     let rewritten = arr.map((s, i) => normalizeDigits(String(s || "").trim()) || batch[i]);
 
     if (review) {
@@ -161,7 +194,7 @@ export async function ghConvertSentences(
       const reviewed = await chat(
         REVIEW_SYSTEM,
         `Review these ${batch.length} rewrites and return the full corrected list.\n\n${pairsList}`,
-        { token, model, retries, retryDelayMs },
+        { token, model: reviewModel || GH_REVIEW_MODEL, retries, retryDelayMs },
         fetchImpl,
       );
       const rArr = reviewed && reviewed.sentences;

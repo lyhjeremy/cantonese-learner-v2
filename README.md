@@ -46,21 +46,25 @@ feature — other browsers can listen and read.
    anchor voice, conversations voiced with a distinct voice per speaker, and a
    pitch-preserving speed control. The browser's built-in voice is only an
    offline fallback.
-4. **Everyday Hong Kong conversations — a full curriculum.** 38 scenario
-   dialogues (378 lines) organised into 8 categories, each with its own
-   sub-page: 🍽️ eating & drinking (cha chaan teng, dim sum, dinner booking,
-   bubble tea, takeaway), 🚇 getting around (taxi, MTR, minibus, directions,
-   Airport Express), 🛍️ shopping (wet market, supermarket, clothes, phone
-   shop, personal-care store), 👥 friends & small talk (greetings, weather,
-   weekend plans, drinks, hiking), 💼 office life (small talk, meetings,
-   asking for help, sick leave, team lunch), 📈 finance & deals (portfolio
-   review, market chat, management meetings, banking, deal negotiation),
-   🏠 home & services (flat viewing, management office, repairs, haircut), and
-   🏥 health & weather (doctor, pharmacy, unwell at work, typhoon days). Every
-   line has speaker labels, an English gloss, neural audio with a distinct
-   voice per speaker, and the same listen → speak → grade loop as the news.
-   All content was written and then cross-checked by independent AI reviewers
-   for native naturalness, three-layer consistency, and real-HK accuracy.
+4. **Everyday Hong Kong conversations — a full curriculum.** 96 scenario
+   dialogues (982 lines) organised into 8 categories of 12 scenarios each,
+   every category with its own sub-page: 🍽️ eating & drinking (cha chaan
+   teng, dim sum, hotpot, siu mei, dessert shops, street food, splitting the
+   bill…), 🚇 getting around (taxi, MTR, minibus, Star Ferry, the tram,
+   ride-hailing, the cross-border coach…), 🛍️ shopping (wet market, clothes,
+   Ladies' Market bargaining, returns, Carousell meetups, the optician…),
+   👥 friends & small talk (greetings, weekend plans, karaoke, weddings,
+   football banter, Mid-Autumn visits…), 💼 office life (meetings, sick
+   leave, video-call trouble, deck feedback, farewell gatherings…),
+   📈 finance & deals (portfolio reviews, deal negotiation, due diligence,
+   earnings calls, mortgages, audits…), 🏠 home & services (flat viewing,
+   moving day, broadband installation, the locksmith, pest control…), and
+   🏥 health & weather (doctor, dentist, physio, Chinese medicine, A&E,
+   typhoon days…). Every line has speaker labels, an English gloss, neural
+   audio with a distinct voice per speaker, and the same listen → speak →
+   grade loop as the news. All content was written and then cross-checked by
+   independent AI reviewers for native naturalness, three-layer consistency,
+   and real-HK accuracy.
 5. **Tap to compare written ↔ spoken.** The rewrite now emits *aligned phrase
    pairs*: tap any underlined phrase in either pane and its counterpart lights
    up in the other, so you can see precisely that 認為 became 覺得. On phones,
@@ -138,10 +142,17 @@ falls back to the browser voice for that sentence.
 2. **GitHub Models rewrite + review pass** — **completely free and automatic**:
    public-repo Actions can call GitHub's model inference with the workflow's
    own `GITHUB_TOKEN` (`permissions: models: read`), no key and no billing.
-   Same idea (rewrite call, then a native-reviewer correction call), serialised
-   with back-off to respect the free tier's rate limits; tap-to-compare pairs
-   are computed locally with a character-LCS aligner. Override the model with
-   a `GH_MODELS_MODEL` variable (default `openai/gpt-4o-mini`).
+   The rewriter is **GPT-4.1** (free "high" tier) driven by a few-shot prompt
+   that demands genuinely restructured spoken Cantonese — not character swaps;
+   if its daily quota runs dry mid-build, each remaining batch falls back to
+   GPT-4.1-mini (a separate free quota) before dropping to rules. A
+   GPT-4.1-mini native-reviewer pass then repairs mangled compounds and
+   meaning drift — and is explicitly forbidden from making a rewrite *less*
+   colloquial. Any sentence the model leaves untouched gets the rule converter
+   as a floor. Calls are serialised with back-off and a per-model daily-quota
+   circuit breaker; tap-to-compare pairs are computed locally with a
+   character-LCS aligner. Override the rewriter with a `GH_MODELS_MODEL`
+   variable (default `openai/gpt-4.1`).
 3. **Hardened rule converter** — the last-resort fallback, rebuilt after a
    two-reviewer audit against real output: risky single-character rules
    (不→唔, 這→呢, 那→嗰) are replaced by explicit phrase whitelists, quoted
@@ -162,12 +173,14 @@ runs the *recogniser's* output through the same engine, so whether Chrome hears
 ### The conversations curriculum
 
 `content/conversations-src.json` is the hand-authored source (written Chinese +
-spoken Cantonese + English, speaker by speaker). It was **cross-checked by
-three independent AI reviewers** — one judging native naturalness of the
-Cantonese, one verifying the three languages say the same thing, one checking
+spoken Cantonese + English, speaker by speaker): 8 categories × 12 scenarios,
+96 dialogues / 982 lines. Every batch of content was **cross-checked by
+independent AI reviewers** — one judging native naturalness of the Cantonese,
+one verifying the three languages say the same thing and checking
 real-Hong-Kong accuracy (prices, Octopus, MTR, code-switching habits) — before
 being baked to `frontend/data/conversations.json` with jyutping via
-`npm run build:conversations`.
+`npm run build:conversations` (which also enforces the 12-per-category floor,
+no digits, and no Cantonese-only characters in the written layer).
 
 ### The Bain news lessons (works out of the box)
 
@@ -188,6 +201,13 @@ source, resolved in this order:
    publisher URL, extracts the article body, and converts it exactly like RTHK
    news — labelled "Bain Capital 新聞" on the cards. Change the topic with a
    `BAIN_NEWS_QUERY` secret/variable, or set it to `off` to disable.
+
+Scraped pages don't always contain the story: some publishers serve a
+stale-page interstitial ("網頁已經閒置了一段時間… 請重新載入頁面") or only
+boilerplate to non-JS clients. `backend/junk.js` pattern-filters those
+paragraphs — reload banners, editorial disclaimers, cookie/paywall prompts,
+copyright footers — at extraction time *and* as a final guard over every
+source; an article with no real prose left is dropped rather than published.
 
 Both paths fail soft: if a feed breaks or finds nothing that day, the build
 carries on RTHK-only and nothing else is affected.
@@ -228,7 +248,7 @@ Actions):
 |---|---|---|---|
 | *(nothing)* | — | — | Free tier already active: GitHub Models rewrite + neural audio need NO setup |
 | `ANTHROPIC_API_KEY` | secret | optional | Upgrade the rewrite to Claude + independent verifier |
-| `GH_MODELS_MODEL` | variable | optional | Change the free rewrite model (default `openai/gpt-4o-mini`) |
+| `GH_MODELS_MODEL` | variable | optional | Change the free rewrite model (default `openai/gpt-4.1`; falls back to `openai/gpt-4.1-mini`) |
 | `WECHAT_FEED_URL` | secret | optional | RSS-bridge URL for the WeChat 公眾號 feed (overrides the web-scrape fallback) |
 | `WECHAT_SOURCE_NAME` | variable | optional | Source label for the secondary-feed lessons |
 | `BAIN_NEWS_QUERY` | variable | optional | Web-scrape fallback topic (default 貝恩資本; `off` disables) |
@@ -256,13 +276,15 @@ frontend/            the static site (GitHub Pages)
   tts.js             zh-HK text-to-speech with voice re-resolution
   i18n.js            English / Traditional / Simplified labels
   data/              sample-lessons.json, jyutping.json, conversations.json
-                     (8 categories × 4-6 scenarios), today.json (generated daily)
+                     (8 categories × 12 scenarios), today.json (generated daily)
   audio/             per-sentence neural MP3s (generated per deploy, not committed)
 backend/             shared logic used by the daily build
   chunk.js           CJK sentence chunking + packing
   rss.js             RTHK RSS + full-body extraction + custom-feed (WeChat) seam
   gnews.js           web-scrape fallback: Google News query → publisher URL
                      decode → generic article-body extraction
+  junk.js            boilerplate filter: stale-page banners, disclaimers,
+                     paywall prompts never become lessons
   convert.js         Claude rewrite + verifier (Anthropic SDK, structured outputs)
   ghmodels.js        FREE rewrite tier: GitHub Models + review pass + quota breaker
   align.js           character-LCS written↔spoken pair aligner

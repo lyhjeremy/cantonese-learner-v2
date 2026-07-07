@@ -15,7 +15,14 @@ import { spellOutNumbers } from "./numbers.js";
 
 function isCjkIdeograph(ch) {
   const o = ch.codePointAt(0);
-  return (o >= 0x4e00 && o <= 0x9fff) || (o >= 0x3400 && o <= 0x4dbf) || (o >= 0xf900 && o <= 0xfaff);
+  return (
+    (o >= 0x4e00 && o <= 0x9fff) ||
+    (o >= 0x3400 && o <= 0x4dbf) ||
+    (o >= 0xf900 && o <= 0xfaff) ||
+    (o >= 0x20000 && o <= 0x2ebef) || // Extensions B-F (Cantonese 𨋢 etc.)
+    (o >= 0x2f800 && o <= 0x2fa1f) ||
+    (o >= 0x30000 && o <= 0x3134a)
+  );
 }
 
 function cjkOnly(text) {

@@ -5,7 +5,14 @@ import { readFile } from "node:fs/promises";
 
 function isCjk(ch) {
   const o = ch.codePointAt(0);
-  return (o >= 0x4e00 && o <= 0x9fff) || (o >= 0x3400 && o <= 0x4dbf) || (o >= 0xf900 && o <= 0xfaff);
+  return (
+    (o >= 0x4e00 && o <= 0x9fff) ||
+    (o >= 0x3400 && o <= 0x4dbf) ||
+    (o >= 0xf900 && o <= 0xfaff) ||
+    (o >= 0x20000 && o <= 0x2ebef) || // Extensions B-F (𨋢 lip1 lives here)
+    (o >= 0x2f800 && o <= 0x2fa1f) || // Compatibility Supplement
+    (o >= 0x30000 && o <= 0x3134a) // Extension G
+  );
 }
 
 let errors = 0;
@@ -82,8 +89,8 @@ async function checkConversations() {
     if (!cat.id || !cat.title || !cat.title.en || !cat.title.hant || !cat.title.hans) {
       fail(`conversations category ${cat.id || "?"}: missing id or tri-lingual title`);
     }
-    if (!Array.isArray(cat.scenarios) || cat.scenarios.length < 4) {
-      fail(`conversations category ${cat.id}: needs ≥4 scenarios, has ${cat.scenarios?.length ?? 0}`);
+    if (!Array.isArray(cat.scenarios) || cat.scenarios.length < 12) {
+      fail(`conversations category ${cat.id}: needs ≥12 scenarios, has ${cat.scenarios?.length ?? 0}`);
       continue;
     }
     for (const sc of cat.scenarios) {

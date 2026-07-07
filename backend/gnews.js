@@ -10,6 +10,7 @@
 
 import { cjkCount, isCjkIdeograph } from "./chunk.js";
 import { parseRss } from "./rss.js";
+import { isJunkParagraph } from "./junk.js";
 
 export const DEFAULT_QUERY = "貝恩資本"; // Bain Capital, Traditional Chinese
 
@@ -17,8 +18,15 @@ const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 
 // Google News titles carry a " - Publisher" suffix; strip the last segment.
+// Publisher titles themselves often carry trailing site-nav segments
+// ("…簽署諒解備忘錄 | 主頁 - 新聞") — peel those off too, but only when the
+// segment is a generic nav word, so real headlines with ｜ topic prefixes
+// (e.g. RTHK's 世界盃｜…) are left alone.
+const NAV_SEGMENT = /\s*[|｜]\s*(主頁|首頁|新聞|即時新聞|財經新聞|要聞|Home)\s*$/;
 export function cleanGoogleTitle(title) {
-  return String(title || "").replace(/\s+-\s+[^-]+$/, "").trim();
+  let t = String(title || "").replace(/\s+-\s+[^-]+$/, "").trim();
+  while (NAV_SEGMENT.test(t)) t = t.replace(NAV_SEGMENT, "").trim();
+  return t;
 }
 
 // Generic article-body extraction for arbitrary Chinese news pages: harvest
@@ -47,6 +55,9 @@ export function extractArticleBody(html, { minCjkPerPara = 12, maxChars = 1600 }
       if (chars[i] === " " && isCjkIdeograph(chars[i - 1]) && isCjkIdeograph(chars[i + 1])) cjkGaps++;
     }
     if (cjkGaps >= 3) continue;
+    // Stale-page banners, disclaimers, paywall prompts and other boilerplate
+    // read as fluent prose to the checks above — filter them by pattern.
+    if (isJunkParagraph(p)) continue;
     paras.push(p);
     if (paras.join("").length > maxChars) break;
   }

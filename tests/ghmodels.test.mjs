@@ -74,6 +74,28 @@ test("ghConvertSentences: tolerates markdown fences in the model output", async 
   assert.deepEqual(out, ["個市造好。"]);
 });
 
+test("model fallback: when the primary model's quota is gone, the batch reruns on the fallback model", async () => {
+  const models = [];
+  const fetchImpl = async (url, opts) => {
+    models.push(JSON.parse(opts.body).model);
+    if (models.length === 1) {
+      // Primary model: daily quota exhausted (long retry-after trips the breaker).
+      return { ok: false, status: 429, headers: { get: () => "86400" }, json: async () => ({}) };
+    }
+    return {
+      ok: true,
+      json: async () => ({ choices: [{ message: { content: '{"sentences": ["個市造好。"]}' } }] }),
+    };
+  };
+  const out = await ghConvertSentences(
+    ["市場造好。"],
+    { token: "tok", review: false, model: "m-primary", fallbackModel: "m-fallback" },
+    fetchImpl,
+  );
+  assert.deepEqual(out, ["個市造好。"]);
+  assert.deepEqual(models, ["m-primary", "m-fallback"]);
+});
+
 test("daily-quota circuit breaker: after retries exhaust on 429, later calls skip instantly", async () => {
   // Fresh import state is per-process; this test runs after earlier ones, so
   // simulate: first call exhausts 429 retries -> breaker trips -> second call

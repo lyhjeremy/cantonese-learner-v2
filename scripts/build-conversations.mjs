@@ -1,7 +1,7 @@
 // build-conversations.mjs — regenerate frontend/data/conversations.json from
 // the hand-authored curriculum in content/conversations-src.json: computes
 // per-character jyutping for every spoken line and validates the structure.
-// The curriculum is organised as ~8 CATEGORIES, each holding 4-6 scenario
+// The curriculum is organised as ~8 CATEGORIES, each holding 12+ scenario
 // dialogues (each category gets its own sub-page in the app).
 // Run whenever the source file changes:  npm run build:conversations
 import { readFile, writeFile } from "node:fs/promises";
@@ -62,8 +62,8 @@ const categories = (src.categories || []).map((cat) => {
   if (!cat.id || !cat.title || !cat.title.en || !cat.title.hant || !cat.title.hans) {
     fail(`category missing id or tri-lingual title: ${cat.id || "?"}`);
   }
-  if (!Array.isArray(cat.scenarios) || cat.scenarios.length < 4) {
-    fail(`category ${cat.id}: needs at least 4 scenarios, has ${cat.scenarios?.length ?? 0}`);
+  if (!Array.isArray(cat.scenarios) || cat.scenarios.length < 12) {
+    fail(`category ${cat.id}: needs at least 12 scenarios, has ${cat.scenarios?.length ?? 0}`);
   }
   return {
     id: cat.id,

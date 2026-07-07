@@ -8,7 +8,7 @@
 
 ---
 
-## ✅ V2 build status & handoff (updated 2026-07-05)
+## ✅ V2 build status & handoff (updated 2026-07-06)
 
 **Status: V2 built, tested, and published.** This repo is **V2** — a fork of
 [cantonese-learner](https://github.com/lyhjeremy/cantonese-learner) (V1, which
@@ -23,17 +23,19 @@ kept for the original rationale.
 **What V2 added over V1**
 1. A three-tier rewrite ladder with a review pass at every tier: Claude
    (Opus 4.8, if a key is added) ▸ **GitHub Models free tier** (the current
-   default — zero cost, runs on the workflow's own token, with a daily-quota
-   circuit breaker) ▸ an audited rule converter (phrase whitelists, quote
-   guard, sentence-final 了→喇). Aligned written↔spoken phrase pairs come from
-   the model or a character-LCS aligner.
+   default — zero cost, runs on the workflow's own token: GPT-4.1 rewriter
+   with a few-shot restructure-don't-swap prompt, GPT-4.1-mini fallback +
+   reviewer, per-model daily-quota circuit breakers, and a rule-converter
+   floor for any sentence the model leaves untouched) ▸ an audited rule
+   converter (phrase whitelists, quote guard, sentence-final 了→喇). Aligned
+   written↔spoken phrase pairs come from the model or a character-LCS aligner.
 1b. Pre-synthesised neural Cantonese audio for every sentence (edge-tts zh-HK;
    anchor voice for news, per-speaker voices for dialogues) — browser TTS is
    only the offline fallback.
 2. Context-aware numeral readings (2020年→二零二零年, 2020個→二千零二十個,
    15%→百分之十五) with jyutping, TTS, and digit-tolerant grading.
-3. An everyday-conversations curriculum: 8 categories × 4-6 scenarios each
-   (38 dialogues, 378 lines) with per-category sub-pages, speaker-voiced
+3. An everyday-conversations curriculum: 8 categories × 12 scenarios each
+   (96 dialogues, 982 lines) with per-category sub-pages, speaker-voiced
    neural audio, and English glosses — authored and cross-checked by
    independent AI reviewers (naturalness / consistency / HK realism).
 4. Tap-to-compare phrase segments + an interleaved mobile view.
@@ -41,9 +43,14 @@ kept for the original rationale.
 6. A Bain-relevant secondary news source: a WeChat 公眾號 RSS bridge when
    configured, else a keyless web-scrape fallback (Google News zh-HK →
    publisher-URL decode → generic body extraction) for 貝恩資本 coverage.
+7. A boilerplate/junk filter (`backend/junk.js`) over every scraped body:
+   stale-page interstitials ("網頁已經閒置…請重新載入"), editorial
+   disclaimers, cookie/paywall prompts and copyright footers are stripped at
+   extraction time and again as a final build guard; an article with no real
+   prose left is dropped instead of published.
 
-**Verification:** 101 unit + Playwright e2e tests green; data validator covers
-sample lessons, the 8-category conversations curriculum (≥4 scenarios per
+**Verification:** 107 unit + Playwright e2e tests green; data validator covers
+sample lessons, the 8-category conversations curriculum (≥12 scenarios per
 category, layer purity, no digits), pair alignment, and the daily build output.
 
 > A hand-off / spec document for building a **daily financial-news → interactive

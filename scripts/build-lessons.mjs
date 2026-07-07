@@ -21,6 +21,7 @@ import { ghConvertSentences } from "../backend/ghmodels.js";
 import { alignPairs } from "../backend/align.js";
 import { fetchGoogleNewsArticles, DEFAULT_QUERY } from "../backend/gnews.js";
 import { cjkCount } from "../backend/chunk.js";
+import { stripJunkParagraphs } from "../backend/junk.js";
 import { toColloquialSegments } from "../backend/convert-rules.js";
 import { spellOutNumbers, splitByNumbers } from "../frontend/numbers.js";
 
@@ -129,7 +130,15 @@ async function buildArticle(a, idx, client) {
       pairs = llm.sentences[i].pairs || alignPairs(u.formal, colloquial);
     } else if (gh) {
       colloquial = gh[i];
-      pairs = alignPairs(u.formal, colloquial);
+      if (colloquial === u.formal) {
+        // The model left this sentence untouched — apply the rule-based
+        // converter as a floor so the LLM tier never reads LESS spoken than
+        // the rules tier would.
+        pairs = toColloquialSegments(u.formal);
+        colloquial = pairs.map((p) => p.c).join("");
+      } else {
+        pairs = alignPairs(u.formal, colloquial);
+      }
     } else {
       pairs = toColloquialSegments(u.formal);
       colloquial = pairs.map((p) => p.c).join("");
@@ -197,9 +206,17 @@ async function main() {
       if (cjkCount(full) > cjkCount(a.body)) a.body = full; // use fuller story text
     }
   }
+  // Final junk guard for EVERY source path: strip stale-page banners,
+  // disclaimers and other boilerplate paragraphs; drop articles with no real
+  // prose left (e.g. a publisher served an idle-page interstitial instead of
+  // the story).
+  for (const a of [...wechat, ...candidates]) a.body = stripJunkParagraphs(a.body);
+  wechat = wechat.filter((a) => cjkCount(a.body) >= 40);
+
   // Prefer substantial bodies; relax if too few qualify.
-  let pool = candidates.filter((a) => cjkCount(a.body) >= MIN_BODY_CHARS);
-  if (pool.length < 6) pool = candidates;
+  const studyable = candidates.filter((a) => cjkCount(a.body) >= 20);
+  let pool = studyable.filter((a) => cjkCount(a.body) >= MIN_BODY_CHARS);
+  if (pool.length < 6) pool = studyable;
   const articles = [...wechat, ...pickBalanced(pool, MAX_ARTICLES - wechat.length)];
   console.log("Selected:", articles.map((a) => `[${a.source}] ${a.title}`).join(" | "));
 
