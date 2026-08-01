@@ -1,5 +1,7 @@
 # Cantonese Learner V2
 
+> 📖 **Product overview:** https://lyhjeremy.github.io/cantonese-learner-v2/overview/
+
 **Learn to *speak* Cantonese from today's real Hong Kong news — and from the
 conversations you'll actually have living there.**
 

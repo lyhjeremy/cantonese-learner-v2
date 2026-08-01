@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Cantonese Learner V2 — today's Hong Kong news, the way an anchor would say it</title>
+<meta name="description" content="Fresh RTHK stories rewritten into natural spoken Cantonese with jyutping over every character, plus 96 everyday scenario dialogues. Reads it to you, then grades you character by character." />
+<meta name="theme-color" content="#FBF8F1" />
+<meta property="og:title" content="Cantonese Learner V2" />
+<meta property="og:description" content="Written Chinese on one side, spoken Cantonese on the other, tap either to see what became what. No sign-up, no install." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyhjeremy.github.io/cantonese-learner-v2/overview/" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #FBF8F1;
+    --card: #FFFFFF;
+    --plate: #FFFFFF;
+    --ink: #1a1a2e;
+    --ink2: #3d3d55;
+    --muted: #6B7280;
+    --rule: #E5DCC7;
+    --accent: #B45309;
+    --accent2: #BE123C;
+    --link: #0E7490;
+    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    --sans: 'Source Sans 3', -apple-system, system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+    --shadow: 0 1px 2px rgba(26,26,46,.05), 0 10px 34px rgba(26,26,46,.07);
+    --spine:  92px;
+    --col:    min(100% - 2.6rem, 62rem);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14141f;
+      --card: #1c1c2a;
+      --plate: #f7f4ec;
+      --ink: #F2EFE6;
+      --ink2: #C9C4B6;
+      --muted: #918B7D;
+      --rule: #33313f;
+      --accent: #E3BC5E;
+      --accent2: #FB7185;
+      --link: #22D3EE;
+      --shadow: 0 1px 2px rgba(0,0,0,.32), 0 10px 34px rgba(0,0,0,.4);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--serif); font-size: clamp(17px, 0.55rem + 0.6vw, 19.5px);
+    line-height: 1.68; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--link); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  strong { font-weight: 700; color: var(--ink); }
+  code { font-family: var(--mono); font-size: .86em;
+         background: color-mix(in srgb, var(--ink) 7%, transparent);
+         padding: .12em .38em; border-radius: 4px; }
+  .wrap { width: var(--col); margin: 0 auto; }
+
+  .eyebrow { font-family: var(--mono); font-weight: 600; font-size: 11.5px;
+             letter-spacing: .17em; text-transform: uppercase; color: var(--muted);
+             margin: 0 0 14px; }
+
+  .masthead { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding: 30px 0 0; }
+  .logo { font-family: var(--sans); font-weight: 800; font-size: 21px;
+          letter-spacing: -.02em; display: flex; align-items: center; gap: 9px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: none; }
+  .tagline { font-size: 15px; color: var(--ink2); font-family: var(--sans); }
+
+  .hero { padding: 44px 0 54px; }
+  .kicker { font-family: var(--sans); font-size: clamp(18px, 2.1vw, 23px); font-weight: 600;
+            color: var(--muted); margin: 0 0 8px; letter-spacing: -.01em; }
+  .hero h1 { font-family: var(--sans); font-size: clamp(37px, 6vw, 72px); font-weight: 800;
+             letter-spacing: -.035em; line-height: 1.04; margin: 0; max-width: 17ch; }
+  .hero-sub { margin: 24px 0 0; font-size: 1.06em; color: var(--ink2); max-width: 60ch; }
+
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; align-items: center; }
+  .btn { display: inline-block; padding: 13px 26px; border-radius: 8px;
+         font-family: var(--sans); font-weight: 700; font-size: 16px;
+         text-decoration: none; border: 1px solid var(--ink); transition: transform .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  .textlink { font-family: var(--sans); font-size: 16px; font-weight: 600; color: var(--ink2);
+              text-decoration: underline; text-underline-offset: 4px;
+              text-decoration-thickness: 1px; }
+  .textlink:hover { color: var(--ink); }
+
+  .claims { display: grid; grid-template-columns: 1fr; gap: 0 52px; margin: 50px 0 0; }
+  @media (min-width: 760px) { .claims { grid-template-columns: 1fr 1fr; } }
+  .claim { padding: 18px 0 20px; border-top: 1px solid var(--rule); }
+  .claim:first-child, .claim:nth-child(2) { border-top: 2px solid var(--ink); }
+  @media (max-width: 759px) { .claim:nth-child(2) { border-top: 1px solid var(--rule); } }
+  .claim .n { font-family: var(--sans); font-weight: 800; font-size: 40px; line-height: 1.05;
+              color: var(--accent); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .claim h3 { margin: 0 0 6px; }
+  .claim p { margin: 9px 0 0; font-size: 15.5px; color: var(--ink2); line-height: 1.5;
+             font-family: var(--sans); }
+
+  .route { position: relative; padding-bottom: 30px; }
+  .route::before { content: ""; position: absolute; left: calc(var(--spine) / 2); top: 8px;
+                   bottom: 80px; width: 2px; background: var(--rule); }
+  .stop { position: relative; padding: 0 0 76px var(--spine); }
+  .stop::before { content: ""; position: absolute; left: calc(var(--spine) / 2 - 7px); top: 7px;
+                  width: 16px; height: 16px; border-radius: 50%;
+                  background: var(--paper); border: 2px solid var(--ink); box-sizing: border-box; }
+  .stop--key::before { background: var(--accent); border-color: var(--accent); }
+  .stop--warn::before { background: var(--accent2); border-color: var(--accent2); }
+  .stop--end::before { background: var(--ink); }
+
+  h2 { font-family: var(--sans); font-size: clamp(27px, 3.7vw, 38px); font-weight: 800;
+       letter-spacing: -.027em; line-height: 1.13; margin: 12px 0 16px; max-width: 19ch; }
+  h3 { font-family: var(--sans); font-size: 17px; font-weight: 700; margin: 0 0 7px;
+       letter-spacing: -.012em; }
+  .stop p { margin: 0 0 17px; max-width: 60ch; color: var(--ink2); }
+
+  .bignum { font-family: var(--sans); font-weight: 800; font-size: clamp(74px, 10vw, 128px);
+            line-height: .86; letter-spacing: -.05em; margin: 6px 0 4px; color: var(--accent);
+            font-variant-numeric: tabular-nums; }
+  .bignum-note { font-family: var(--sans); font-size: 16px; color: var(--muted); margin: 0 0 20px; }
+
+  /* A white-background chart would glow in dark mode; the plate makes it read
+     as a deliberately printed page instead. */
+  figure { margin: 28px 0 0; }
+  .plate { background: var(--plate); border: 1px solid var(--rule); border-radius: 10px;
+           padding: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .plate img { border-radius: 4px; }
+  .plate--flush { padding: 0; }
+  .shot { border-radius: 10px; border: 1px solid var(--rule); box-shadow: var(--shadow);
+          overflow: hidden; background: var(--card); }
+  /* min() so the cap never exceeds the column on a phone */
+  .shot--narrow { max-width: min(430px, 100%); }
+  figcaption { margin-top: 11px; font-family: var(--sans); font-size: 14.5px;
+               color: var(--muted); line-height: 1.5; }
+  .panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+            gap: 22px; margin-top: 28px; }
+  .panels figure { margin: 0; }
+
+  .pull { margin: 30px 0 0; padding: 20px 25px; border-left: 3px solid var(--accent);
+          background: color-mix(in srgb, var(--accent) 7%, transparent);
+          border-radius: 0 8px 8px 0; }
+  .pull p { margin: 0 0 9px; color: var(--ink); max-width: none; }
+  .pull p:last-of-type { margin: 0; }
+  .pull .who { font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+               text-transform: uppercase; color: var(--muted); display: block; margin-top: 9px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(238px, 1fr));
+          gap: 1px; margin-top: 28px; background: var(--rule);
+          border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+  .cell { background: var(--paper); padding: 22px 20px; }
+  .cell p { font-size: 15px; margin: 0; color: var(--ink2); max-width: none;
+            line-height: 1.55; font-family: var(--sans); }
+
+  /* results tables: scroll inside their own box, never the page */
+  .tablewrap { margin-top: 26px; overflow-x: auto; border: 1px solid var(--rule);
+               border-radius: 10px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; min-width: 480px;
+          font-family: var(--sans); font-size: 15.5px; }
+  th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+       text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td { color: var(--ink2); font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: 0; }
+  .win td { color: var(--ink); font-weight: 700;
+            background: color-mix(in srgb, var(--accent) 8%, transparent); }
+
+  /* real terminal output, quoted verbatim */
+  .term { margin-top: 26px; background: #14141f; color: #e6e3da; border-radius: 10px;
+          padding: 18px 20px; overflow-x: auto; box-shadow: var(--shadow);
+          border: 1px solid #2a2a3a; }
+  .term pre { margin: 0; font-family: var(--mono); font-size: 13px; line-height: 1.62;
+              white-space: pre; }
+  .term .c { color: #9aa08f; }
+  .term .g { color: #7fd18f; }
+  .term .y { color: #E3BC5E; }
+
+  .specs { margin-top: 26px; border-top: 1px solid var(--rule); }
+  .spec { display: grid; grid-template-columns: 1fr; gap: 2px;
+          padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  @media (min-width: 700px) { .spec { grid-template-columns: 178px 1fr; gap: 24px; } }
+  .spec dt { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em;
+             text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+  .spec dd { margin: 0; font-size: 16px; color: var(--ink2); font-family: var(--sans); }
+
+  .close { padding: 6px 0 80px var(--spine); position: relative; }
+  .close h2 { max-width: 20ch; }
+  footer { border-top: 1px solid var(--rule); padding: 28px 0 60px;
+           font-family: var(--sans); font-size: 14.5px; color: var(--muted); }
+  footer a { color: var(--ink2); }
+  footer p { margin: 0 0 8px; }
+
+  @media (max-width: 640px) {
+    :root { --spine: 38px; }
+    .hero { padding: 36px 0 46px; }
+    .stop { padding-bottom: 58px; }
+    .plate { padding: 9px; }
+    .term { padding: 14px 14px; }
+    .term pre { font-size: 11.5px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+  }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="logo"><span class="dot" aria-hidden="true"></span>Cantonese Learner V2</div>
+    <div class="tagline">today's news, spoken the way it's spoken</div>
+  </header>
+
+  <section class="hero">
+    <p class="kicker">Written Chinese and spoken Cantonese are not the same language.</p>
+    <h1>Textbooks teach you one and Hong Kong runs on the other.</h1>
+
+    <p class="hero-sub">
+      Every day this pulls a fresh batch of real RTHK news, rewrites each story
+      <strong>the way a Hong Kong TV anchor would say it out loud</strong>, prints
+      jyutping above every character, reads it to you in a real neural voice, and
+      grades you character by character when you read it back. V2 adds
+      <strong>96 everyday scenario dialogues</strong>, numbers you can finally
+      pronounce, and a tap-to-compare view that shows exactly which written phrase
+      became which spoken one.
+    </p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="../">Open the app</a>
+      <a class="textlink" href="https://github.com/lyhjeremy/cantonese-learner-v2">or read the code</a>
+    </div>
+
+    <figure style="margin-top:38px">
+      <img width="2560" height="1800" class="shot" src="reader-light.png" fetchpriority="high"
+        alt="The reader on a Bain Capital news story: written Chinese on the left, spoken Cantonese with jyutping above every character on the right, the figure 4% spelled out as 百分之四, and a tap-to-compare hint below." />
+      <figcaption>
+        Written on the left, spoken on the right. Note <strong>4%</strong> rendered
+        as <strong>百分之四</strong> — because that is what an anchor says.
+      </figcaption>
+    </figure>
+
+    <div class="claims">
+      <div class="claim">
+        <div class="n">96</div>
+        <p>scenario dialogues across 8 categories, 982 lines, from cha chaan teng
+           ordering to due diligence calls.</p>
+      </div>
+      <div class="claim">
+        <div class="n">2 passes</div>
+        <p>An LLM rewrite plus an independent review pass hunting the exact errors
+           rule converters make. Both free.</p>
+      </div>
+      <div class="claim">
+        <div class="n">$0</div>
+        <p>No sign-up, no install, no API key. Runs on GitHub's free model
+           inference.</p>
+      </div>
+      <div class="claim">
+        <div class="n">Every number</div>
+        <p>spelled out in context: 2020年 → 二零二零年, but 2020個 →
+           二千零二十個.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+<div class="route">
+
+  <section class="stop">
+    <p class="eyebrow">Start · the problem</p>
+    <h2>The gap nobody warns you about</h2>
+    <p>
+      You can read a Hong Kong newspaper competently and still not understand the
+      evening news, because written Chinese and spoken Cantonese diverge in
+      vocabulary, grammar and register. 認為 on the page becomes 覺得 in the mouth.
+      The textbook teaches the first and the city speaks the second.
+    </p>
+    <p>
+      So this app puts both on screen at once and makes the mapping between them
+      the thing you study, rather than something you are expected to absorb.
+    </p>
+  </section>
+
+  <section class="stop stop--key">
+    <p class="eyebrow">↓ V2's best idea</p>
+    <h2>Tap a phrase, watch its counterpart light up</h2>
+    <p>
+      The rewrite now emits <strong>aligned phrase pairs</strong>. Tap any
+      underlined phrase in either pane and its counterpart highlights in the other,
+      so you can see precisely that <strong>認為 became 覺得</strong> rather than
+      squinting at two paragraphs and inferring it.
+    </p>
+    <p>
+      On a phone the two stacked panes are replaced by an
+      <strong>interleaved view</strong>: each written line sits directly above its
+      spoken version, so there is nothing to scroll between.
+    </p>
+    <figure>
+      <img width="2560" height="1800" class="shot" src="reader-dark.png" loading="lazy"
+        alt="The same reader in dark theme, showing the written and spoken panes side by side with jyutping above every character." />
+      <figcaption>Dark theme, same layout.</figcaption>
+    </figure>
+  </section>
+
+  <section class="stop">
+    <p class="eyebrow">↓ the quality problem, and the fix</p>
+    <h2>Two independent passes, because one is not enough</h2>
+    <p>
+      The hard part of this app is that mechanical written-to-spoken conversion
+      produces confident nonsense. Single-character substitution rules turn 不足
+      into 唔足 and 其他 into 其佢 — plausible-looking, wrong, and invisible to a
+      learner who cannot yet tell.
+    </p>
+    <p>
+      So every sentence goes through an LLM rewrite and then a
+      <strong>second, independent review pass</strong> that specifically hunts for
+      that class of error. The last-resort rule converter was itself rebuilt after a
+      two-reviewer audit, replacing risky single-character swaps with phrase
+      whitelists, and quoted names are never touched.
+    </p>
+    <p>
+      All of this runs at <strong>zero cost</strong> on GitHub's free model
+      inference. Adding an <code>ANTHROPIC_API_KEY</code> upgrades both passes to
+      Claude with semantically aligned phrase pairs and a green "cross-checked"
+      banner, so you can see which tier produced what you are reading.
+    </p>
+    <div class="pull">
+      <p>A converter that is wrong 5% of the time is worse than no converter,
+         because the learner has no way to know which 5%.</p>
+      <span class="who">Why there are two passes and a whitelist</span>
+    </div>
+  </section>
+
+  <section class="stop">
+    <p class="eyebrow">↓ numbers</p>
+    <h2>The unglamorous fix that mattered most</h2>
+    <p>
+      In V1, Arabic numerals had no jyutping and no reliable reading — a real hole,
+      because news is full of them. V2 spells every number out the way an anchor
+      reads it <strong>in context</strong>:
+    </p>
+    <div class="grid">
+      <div class="cell">
+        <h3>2020年 → 二零二零年</h3>
+        <p>A year, read digit by digit.</p>
+      </div>
+      <div class="cell">
+        <h3>2020個 → 二千零二十個</h3>
+        <p>The same digits as a quantity, read as a cardinal.</p>
+      </div>
+      <div class="cell">
+        <h3>15% → 百分之十五</h3>
+        <p>Percentages spelled out in full.</p>
+      </div>
+      <div class="cell">
+        <h3>2846 3222 → digit by digit</h3>
+        <p>Phone numbers, the way anyone would actually say one.</p>
+      </div>
+    </div>
+    <p style="margin-top:24px">
+      Every one of those characters gets jyutping, the voice reads it correctly,
+      and saying the number right scores green.
+    </p>
+  </section>
+
+  <section class="stop">
+    <p class="eyebrow">↓ the curriculum</p>
+    <h2>Eight categories of conversations you'll actually have</h2>
+    <p>
+      Alongside the news sit <strong>96 scenario dialogues</strong> in 8 categories
+      of 12: eating and drinking (cha chaan teng, dim sum, hotpot, splitting the
+      bill), getting around (taxi, MTR, minibus, Star Ferry, the tram), shopping
+      (wet market, Ladies' Market bargaining, returns), friends and small talk,
+      office life, finance and deals, home and services, and health and weather.
+    </p>
+    <p>
+      Every line has speaker labels, an English gloss, neural audio with
+      <strong>a distinct voice per speaker</strong>, and the same listen → speak →
+      grade loop as the news. The content was written and then cross-checked by
+      independent reviewers for naturalness and real-Hong-Kong accuracy.
+    </p>
+    <div class="panels">
+      <figure>
+        <img width="2560" height="1800" class="shot" src="list-light.png" loading="lazy"
+          alt="The article list showing today's news stories above the eight conversation categories." />
+        <figcaption><strong>Today's list</strong> — fresh news, then the categories.</figcaption>
+      </figure>
+      <figure>
+        <img width="2560" height="1800" class="shot" src="list-dark.png" loading="lazy"
+          alt="The same article and category list in dark theme." />
+        <figcaption><strong>Dark</strong> — same list, night theme.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="stop">
+    <p class="eyebrow">↓ smaller things</p>
+    <h2>Auto-play, and news that matches your work</h2>
+    <p>
+      Press <code>A</code> and the whole article plays hands-free, sentence by
+      sentence — a podcast mode for shadowing or passive listening, which any manual
+      action stops. Pre-synthesised neural Cantonese means a real anchor voice
+      rather than the browser's robot, with a pitch-preserving speed control; the
+      browser voice is only an offline fallback.
+    </p>
+    <p>
+      The build also reserves slots for a second news source alongside RTHK: a
+      WeChat 公眾號 RSS bridge when configured, or with zero setup a scrape of
+      fresh Chinese-language coverage of a specific firm, so the vocabulary you
+      practise is the vocabulary your colleagues use.
+    </p>
+  </section>
+
+  <section class="stop stop--warn">
+    <p class="eyebrow">↓ what you should know before relying on it</p>
+    <h2>Chrome, and a machine in the loop</h2>
+    <p>
+      The speaking and scoring feature needs <strong>Chrome</strong>. Other browsers
+      can listen and read but cannot grade you, which is a browser API limitation
+      rather than a choice.
+    </p>
+    <p>
+      More importantly: the spoken Cantonese is machine-generated and
+      machine-reviewed. Two independent passes and a rebuilt rule converter cut the
+      error rate a great deal, and they do not make it zero. This is a practice
+      tool, not an authority — if something reads oddly to you, trust the instinct.
+    </p>
+    <p>
+      Because it pulls today's news, the content changes daily and nothing is
+      archived. That is the point for a news reader and worth knowing if you wanted
+      to come back to a specific story.
+    </p>
+  </section>
+
+  <section class="stop stop--end">
+    <p class="eyebrow">Finish · what it is built on</p>
+    <h2>Free to use, free to run</h2>
+    <dl class="specs">
+      <div class="spec"><dt>Source</dt><dd>RTHK news, fetched daily, plus an optional second source</dd></div>
+      <div class="spec"><dt>Rewrite</dt><dd>An LLM pass plus an independent review pass, on GitHub's free model inference</dd></div>
+      <div class="spec"><dt>Upgrade path</dt><dd><code>ANTHROPIC_API_KEY</code> moves both passes to Claude with aligned phrase pairs</dd></div>
+      <div class="spec"><dt>Audio</dt><dd>Pre-synthesised neural zh-HK voices, a distinct voice per speaker in dialogues</dd></div>
+      <div class="spec"><dt>Scoring</dt><dd>Character by character, in Chrome</dd></div>
+      <div class="spec"><dt>Curriculum</dt><dd>96 scenarios, 982 lines, 8 categories</dd></div>
+      <div class="spec"><dt>Hosting</dt><dd>GitHub Pages. No sign-up, no install, no keys</dd></div>
+      <div class="spec"><dt>Sibling</dt><dd><a href="https://lyhjeremy.github.io/mandarin-learning-reader/">Mandarin Learning Reader</a>, the same loop applied to books</dd></div>
+    </dl>
+  </section>
+
+</div>
+</div>
+
+<div class="wrap">
+  <section class="close">
+    <h2>Learn the Cantonese that gets spoken</h2>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="../">Open the app</a>
+      <a class="textlink" href="https://github.com/lyhjeremy/cantonese-learner-v2">or read the code</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      Cantonese Learner V2 ·
+      <a href="../">App</a> ·
+      <a href="https://github.com/lyhjeremy/cantonese-learner-v2">Source</a> ·
+      © 2026 Jeremy Lee
+    </p>
+    <p>News content © RTHK. Used for language-learning practice.</p>
+  </footer>
+</div>
+</body>
+</html>
