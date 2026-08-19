@@ -1,9 +1,9 @@
-// grader.js — on-device speech grading.
+// grader.js, on-device speech grading.
 // Recognition: browser SpeechRecognition (Chrome), Cantonese (yue-Hant-HK).
 // Scoring: lenient, script-normalised, character-level compare ported from the
 // Mandarin Reader's `grade()`. Aligns via edit-distance (not a naive zip) so one
 // missed character doesn't cascade, compares in a common script so 學 == 学, AND
-// accepts homophones — if the recogniser hears a different character with the
+// accepts homophones, if the recogniser hears a different character with the
 // same/similar Cantonese pronunciation, it still counts (right sound, wrong
 // character = a soft/amber match).
 //
@@ -31,10 +31,10 @@ function cjkOnly(text) {
 
 // Spoken-Cantonese -> standard-written equivalents. Browser speech recognition
 // usually returns standard forms even when a Cantonese sentence is read aloud
-// (是 for 係, 的 for 嘅, 了 for 咗 …). We collapse both the target and the heard
+// (是 for 係，的 for 嘅，了 for 咗 …). We collapse both the target and the heard
 // text through this map before comparing, so a correct read is not penalised for
 // the register the recogniser happens to output. Applying the SAME map to both
-// sides can only merge equivalent characters — it never breaks a real match.
+// sides can only merge equivalent characters. It never breaks a real match.
 const COLLOQ_TO_STD = {
   係: "是", 喺: "在", 嘅: "的", 咗: "了", 唔: "不", 冇: "沒", 佢: "他", 哋: "們",
   畀: "給", 食: "吃", 飲: "喝", 睇: "看", 嚟: "來", 諗: "想", 搵: "找", 揾: "找",
@@ -217,7 +217,7 @@ export function listen({ lang = "yue-Hant-HK", onStart, silenceMs = 3500, preSpe
         finalize();
       } else {
         // Chrome ended the session on its own but the learner hasn't paused
-        // long enough (or hasn't started yet) — keep listening.
+        // long enough (or hasn't started yet), keep listening.
         committed += sessionFinal;
         sessionFinal = "";
         interim = "";

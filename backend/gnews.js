@@ -1,8 +1,8 @@
-// gnews.js — keyless "scrape the web" secondary source. When no WeChat bridge
+// gnews.js, keyless "scrape the web" secondary source. When no WeChat bridge
 // feed is configured, the build pulls Chinese-language coverage of a topic
 // (default: 貝恩資本 / Bain Capital) from Google News' public RSS search feed,
 // resolves each item's redirect wrapper to the real publisher URL (splash-page
-// signature + batchexecute POST — the documented-in-the-wild decode), fetches
+// signature + batchexecute POST. The documented-in-the-wild decode), fetches
 // the publisher page, and extracts the article body generically.
 //
 // Everything here is best-effort and fails soft: any step that breaks just
@@ -19,7 +19,7 @@ const UA =
 
 // Google News titles carry a " - Publisher" suffix; strip the last segment.
 // Publisher titles themselves often carry trailing site-nav segments
-// ("…簽署諒解備忘錄 | 主頁 - 新聞") — peel those off too, but only when the
+// ("…簽署諒解備忘錄 | 主頁 - 新聞"). Peel those off too, but only when the
 // segment is a generic nav word, so real headlines with ｜ topic prefixes
 // (e.g. RTHK's 世界盃｜…) are left alone.
 const NAV_SEGMENT = /\s*[|｜]\s*(主頁|首頁|新聞|即時新聞|財經新聞|要聞|Home)\s*$/;
@@ -31,7 +31,7 @@ export function cleanGoogleTitle(title) {
 
 // Generic article-body extraction for arbitrary Chinese news pages: harvest
 // <p> blocks, keep CJK-dense paragraphs that read like prose (they contain
-// Chinese punctuation — nav menus and footers don't), join as paragraphs.
+// Chinese punctuation: nav menus and footers don't), join as paragraphs.
 export function extractArticleBody(html, { minCjkPerPara = 12, maxChars = 1600 } = {}) {
   let s = String(html || "");
   if (!s) return "";
@@ -46,7 +46,7 @@ export function extractArticleBody(html, { minCjkPerPara = 12, maxChars = 1600 }
     if (cjk < minCjkPerPara) continue;
     if (cjk / Math.max(p.length, 1) < 0.4) continue; // mostly-Latin block
     if (!/[。！？，；：]/.test(p)) continue; // no Chinese punctuation -> nav/footer
-    // Nav strips read "新聞 財經 體育 更多…" — spaces BETWEEN two CJK chars,
+    // Nav strips read "新聞 財經 體育 更多…": spaces BETWEEN two CJK chars,
     // which real Chinese prose essentially never has (spaces around Latin
     // words/digits are fine). Three or more such gaps -> menu, not prose.
     let cjkGaps = 0;
@@ -56,7 +56,7 @@ export function extractArticleBody(html, { minCjkPerPara = 12, maxChars = 1600 }
     }
     if (cjkGaps >= 3) continue;
     // Stale-page banners, disclaimers, paywall prompts and other boilerplate
-    // read as fluent prose to the checks above — filter them by pattern.
+    // read as fluent prose to the checks above, filter them by pattern.
     if (isJunkParagraph(p)) continue;
     paras.push(p);
     if (paras.join("").length > maxChars) break;

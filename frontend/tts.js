@@ -1,11 +1,11 @@
-// tts.js — Cantonese text-to-speech via the browser SpeechSynthesis API.
+// tts.js, Cantonese text-to-speech via the browser SpeechSynthesis API.
 // Free, on-device, no backend. Uses a single Cantonese voice (prefers "Sinji",
 // the macOS zh-HK voice) and degrades gracefully when none is available.
 //
 // IMPORTANT: Chrome invalidates SpeechSynthesisVoice objects when its voice list
 // reloads, so a cached object is silently ignored and playback falls back to the
 // default (often English) voice. We store the voice by voiceURI and RE-RESOLVE a
-// fresh object from getVoices() at speak time — never cache the object itself.
+// fresh object from getVoices() at speak time, never cache the object itself.
 
 function getVoicesNow() {
   const synth = window.speechSynthesis;
@@ -38,7 +38,7 @@ function cantoneseScore(v) {
   if (lang === "zh-hk" || lang.startsWith("yue")) return 5;
   if (/cantonese|粵|aasing|aacantonese/.test(name)) return 5;
   if (lang.includes("hk")) return 4;
-  if (lang.startsWith("zh")) return 1; // Mandarin voice — usable but not ideal
+  if (lang.startsWith("zh")) return 1; // Mandarin voice, usable but not ideal
   return -1; // not Chinese at all
 }
 

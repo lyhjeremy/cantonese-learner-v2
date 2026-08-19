@@ -1,4 +1,4 @@
-// junk.js — boilerplate/junk detection for scraped article text. Generic
+// junk.js, boilerplate/junk detection for scraped article text. Generic
 // article extraction (gnews.js) harvests CJK-dense <p> blocks, which lets
 // site chrome slip through when a publisher serves an interstitial instead of
 // the story: stale-page banners ("網頁已經閒置了一段時間…請重新載入頁面"),

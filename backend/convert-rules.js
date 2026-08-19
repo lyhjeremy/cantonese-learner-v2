@@ -1,11 +1,11 @@
-// convert-rules.js — KEYLESS, rule-based formal-written -> spoken-Cantonese
+// convert-rules.js: KEYLESS, rule-based formal-written -> spoken-Cantonese
 // conversion. The last-resort fallback when neither the Claude nor the free
 // GitHub Models rewrite is available: longest-match lexical swaps (是->係,
-// 的->嘅, 沒有->冇, 現在->而家, 我們->我哋 …). It cannot restructure grammar.
+// 的->嘅，沒有->冇，現在->而家，我們->我哋 …). It cannot restructure grammar.
 //
 // Design principle (from a two-reviewer audit against real RTHK output): for
-// HK news register a MISSED conversion is inaudible — an anchor keeps plenty
-// of written vocabulary — while a WRONG conversion (唔足, 巴塞羅嗰, 話歡迎) is
+// HK news register a MISSED conversion is inaudible, an anchor keeps plenty
+// of written vocabulary, while a WRONG conversion (唔足，巴塞羅嗰，話歡迎) is
 // glaring. So risky single-character rules are inverted into explicit phrase
 // whitelists (這位->呢位 … instead of 這->呢), the protect table is large, and
 // text inside 「」/《》/『』 quotes (party names, titles, verbatim speech) is
@@ -17,13 +17,13 @@
 // characters are never re-converted piecemeal.
 //
 // toColloquialSegments() returns the ALIGNED SEGMENT PAIRS the conversion
-// walked through — [{f, c}, ...] whose f-side concatenates to the input and
-// c-side to the output — powering the tap-to-compare UI.
+// walked through: [{f, c}, ...] whose f-side concatenates to the input and
+// c-side to the output, powering the tap-to-compare UI.
 
 // Identity entries protect written forms whose characters would otherwise be
 // mis-converted by the char/phrase rules. Grouped by the rule they guard.
 const PROTECT_WORDS = [
-  // 不 — the single-char 不->唔 rule was REMOVED (its residue was dominated by
+  // 不. The single-char 不->唔 rule was REMOVED (its residue was dominated by
   // literary compounds: 不慎/不敵/不俗/不丹…). These entries remain to guard
   // OTHER rules from firing inside 不-compounds (e.g. the 了 in 不得了) and as
   // cheap insurance for the negation PHRASES below.
@@ -33,25 +33,25 @@ const PROTECT_WORDS = [
   "不法", "不禁", "不妨", "不容", "不得", "不如", "不滿", "不錯", "不便",
   "不治", "不果", "不遂", "不濟", "不景", "不當", "不一", "不肖", "不無",
   "不在", "不和", "不與", "不了", "不了了之", "不得了",
-  // 的 — attributive 的->嘅 must not fire inside these (incl. transliterations).
+  // 的, attributive 的->嘅 must not fire inside these (incl. Transliterations).
   "目的", "的確", "的士", "標的", "目的地",
   "波羅的海", "的黎波里", "亞的斯亞貝巴", "眾矢之的", "一語中的", "無的放矢",
-  // 了 — 了 as a morpheme, not the aspect marker.
+  // 了：了 as a morpheme, not the aspect marker.
   "了解", "了結", "未了", "罷了", "私了", "算了", "了無", "了事", "了斷",
-  // 是 — copula 是->係 must not fire inside these.
+  // 是, copula 是->係 must not fire inside these.
   "是否", "於是", "是次", "或是", "還是", "凡是", "是非", "是日", "是項",
   "實事求是", "自以為是",
-  // 他 / 她 — incl. transliterations (他信, 馬耳他…).
+  // 他 / 她, incl. Transliterations (他信，馬耳他…).
   "其他", "他人", "他殺", "他日", "他國", "他鄉", "排他",
   "他信", "猶他", "馬耳他", "維他命", "維他奶", "吉他", "利他",
-  // 和 — the conjunction rule 和->同 must not fire inside these.
+  // 和, the conjunction rule 和->同 must not fire inside these.
   "和平", "和解", "和議", "共和", "飽和", "緩和", "溫和", "和諧", "和約",
   "求和", "議和", "和局", "和談", "和暖", "和好", "附和", "總和", "和尚",
   "和牛", "令和", "昭和", "和歌山", "和記", "大和證券",
-  // 與 — 與其他 MUST accompany 與其 (longest-match), per the audit.
+  // 與：與其他 MUST accompany 與其 (longest-match), per the audit.
   "參與", "與會", "與此同時", "與其他", "與其", "與否", "給與",
   "與日俱增", "事與願違", "與生俱來", "與時並進",
-  // 說 — quotative 說->話 must not fire inside these; 後來/原來 stop the
+  // 說, quotative 說->話 must not fire inside these; 後來/原來 stop the
   // 來說->嚟講 phrase matching across a word boundary.
   "說明", "說法", "說服", "小說", "演說", "學說", "據說", "遊說",
   "說話", "再說", "傳說", "解說", "訴說", "述說", "雖說", "說客",
@@ -61,22 +61,22 @@ const PROTECT_WORDS = [
   "喝彩", "喝采", "喝止", "喝令", "喝罵",
   "沒收", "沒落", "埋沒", "出沒", "沉沒", "淹沒", "吞沒", "覆沒", "湮沒",
   "神出鬼沒",
-  // 也 — rare but real.
+  // 也, rare but real.
   "也許", "也門", "亦然",
-  // 在 — the preposition rule 在->喺 must not fire inside these. 在港/在華
+  // 在, the preposition rule 在->喺 must not fire inside these. 在港/在華
   // stay written (在港上市 read as-is); 在美國 etc. still convert.
   "存在", "正在", "在於", "實在", "潛在", "在場", "在職", "在內", "在此",
   "在座", "所在", "內在", "外在", "旨在", "志在", "意在", "在意", "在乎",
   "在案", "自在", "在任", "在世", "在生", "在望", "在即", "在囚", "在學",
   "在讀", "好在", "何在", "在野", "在朝", "重在", "貴在", "在逃",
   "在所難免", "在港", "在華",
-  // 表示 + attitude noun is NOT a speech act — 話歡迎 is broken Cantonese.
+  // 表示 + attitude noun is NOT a speech act. 話歡迎 is broken Cantonese.
   "表示歡迎", "表示遺憾", "表示不滿", "表示哀悼", "表示關注", "表示支持",
   "表示反對", "表示感謝", "表示歉意", "表示慰問", "表示同情", "表示祝賀",
   "表示擔憂", "表示憂慮", "表示尊重", "表示滿意",
-  // 認為 — passive 被認為 must not become 被覺得.
+  // 認為, passive 被認為 must not become 被覺得.
   "被認為",
-  // 一起 as mainland-wire measure word (一起事故) — never 一齊.
+  // 一起 as mainland-wire measure word (一起事故), never 一齊.
   "一起事故", "一起案件", "一起事件",
   // Demonstrative-phrase guards (transliterations & fixed forms).
   "剎那", "巴塞羅那",
@@ -92,7 +92,7 @@ const PROTECT_WORDS = [
   "提早", "及早", "趁早", "遲早",                                    // ↛ 早上
   "今晚", "前晚", "當晚", "傍晚",                                    // ↛ 晚上
   "直至", "截至", "時至今日",                                        // ↛ 至今
-  // 看 — the 看->睇 rule must not fire inside these.
+  // 看, the 看->睇 rule must not fire inside these.
   "觀看", "收看", "查看", "察看", "翻看", "看守", "看待", "看護",
   "看管", "看漲", "看跌", "看似", "看台", "看更", "看板", "小看",
   "眼看", "看好", "看淡",
@@ -158,7 +158,7 @@ const PHRASES = {
   上週: "上星期",
   下週: "下星期",
   本週: "今個星期",
-  // Demonstratives — explicit 這/那+classifier whitelist (the bare 這->呢 /
+  // Demonstratives, explicit 這/那+classifier whitelist (the bare 這->呢 /
   // 那->嗰 rules were removed: 呢/嗰 need a classifier, and bare news 這
   // subjects like 這意味著 became ungrammatical 呢意味著).
   這個: "呢個",
@@ -205,7 +205,7 @@ const PHRASES = {
   他們: "佢哋",
   她們: "佢哋",
   咱們: "我哋",
-  // Negation — the safe spoken-negation wins live HERE, as whole phrases
+  // Negation. The safe spoken-negation wins live HERE, as whole phrases
   // (the single-char 不->唔 rule was removed after the audit).
   不知道: "唔知",
   不會: "唔會",
@@ -250,8 +250,8 @@ const PHRASES = {
   外面: "出面",
 };
 
-// Single-character conversions — only the ones the audit judged net-positive
-// for news register. (Removed as net-negative: 不, 這, 那.)
+// Single-character conversions. Only the ones the audit judged net-positive
+// for news register. (Removed as net-negative: 不，這，那.)
 const CHARS = {
   是: "係",
   的: "嘅",
@@ -260,7 +260,7 @@ const CHARS = {
   她: "佢",
   和: "同",
   與: "同",
-  說: "話", // quotative — HK speech reporting uses 話, not 講
+  說: "話", // quotative: HK speech reporting uses 話, not 講
   很: "好",
   也: "都",
   亦: "都",
@@ -335,7 +335,7 @@ export function toColloquialSegments(text) {
           if (next === undefined || FINAL_PUNCT.has(next)) repl = "喇";
         }
         if (repl === slice) {
-          plain += slice; // identity/PROTECT — part of the unchanged run
+          plain += slice; // identity/PROTECT, part of the unchanged run
         } else {
           flushPlain();
           segs.push({ f: slice, c: repl });

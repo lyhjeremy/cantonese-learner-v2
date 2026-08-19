@@ -1,4 +1,4 @@
-// app.js — the karaoke reader: data loading, side-by-side + interleaved panes,
+// app.js. The karaoke reader: data loading, side-by-side + interleaved panes,
 // jyutping ruby, aligned written↔spoken phrase segments (tap to compare),
 // auto-play, the everyday-conversations curriculum, transport, toggles,
 // keyboard shortcuts, tri-lingual UI, and graceful degradation for missing
@@ -141,8 +141,7 @@ function scenarioAsArticle(sc, cat) {
   return {
     id: sc.id,
     conversation: true,
-    emoji: sc.emoji || "💬",
-    title: (sc.title && (sc.title[state.lang] ?? sc.title.en)) || sc.id,
+        title: (sc.title && (sc.title[state.lang] ?? sc.title.en)) || sc.id,
     source: catTitle ? `${t("convSection", state.lang)} · ${catTitle}` : t("convSection", state.lang),
     url: "",
     converted: true,
@@ -171,7 +170,7 @@ function renderList() {
 
   const list = $("#cards");
   list.innerHTML = "";
-  $("#list-title").textContent = `${t("newsSection", state.lang)} — ${t("pickArticle", state.lang)}`;
+  $("#list-title").textContent = `${t("newsSection", state.lang)}: ${t("pickArticle", state.lang)}`;
   state.lessons.articles.forEach((a) => {
     const card = el("button", "card");
     card.appendChild(el("h3", "card-title", forScript(a.title)));
@@ -179,7 +178,7 @@ function renderList() {
     meta.appendChild(el("span", "src", a.source || ""));
     meta.appendChild(el("span", "cnt", `${a.sentences.length} · ${t("colloquial", state.lang)}`));
     card.appendChild(meta);
-    // "Unavailable" only when a real rewrite backend failed — not for the
+    // "Unavailable" only when a real rewrite backend failed, not for the
     // rule-based path, where no-change just means nothing needed swapping.
     if (a.converted === false && a.method !== "rules" && state.lessons.method !== "rules") {
       card.appendChild(el("div", "warn", t("conversionUnavailable", state.lang)));
@@ -200,7 +199,6 @@ function renderList() {
     cats.forEach((cat) => {
       const card = el("button", "card conv-card");
       const head = el("div", "conv-head");
-      head.appendChild(el("span", "conv-emoji", cat.emoji || "💬"));
       head.appendChild(el("h3", "card-title", cat.title[state.lang] ?? cat.title.en));
       card.appendChild(head);
       const meta = el("div", "card-meta");
@@ -223,14 +221,12 @@ function openCategory(cat) {
   $("#reader").hidden = true;
   $("#catpage").hidden = false;
   $("#cat-back").textContent = t("back", state.lang);
-  $("#cat-emoji").textContent = cat.emoji || "💬";
   $("#cat-title").textContent = cat.title[state.lang] ?? cat.title.en;
   const cards = $("#cat-cards");
   cards.innerHTML = "";
   cat.scenarios.forEach((sc) => {
     const card = el("button", "card conv-card");
     const head = el("div", "conv-head");
-    head.appendChild(el("span", "conv-emoji", sc.emoji || "💬"));
     head.appendChild(el("h3", "card-title", (sc.title && (sc.title[state.lang] ?? sc.title.en)) || sc.id));
     card.appendChild(head);
     const meta = el("div", "card-meta");
@@ -329,7 +325,7 @@ function renderColloquial(sentence, marks, withSegs = false) {
       const ch = dispChars[i] ?? origCh;
       const isCjk = /[㐀-䶿一-鿿豈-﫿]/.test(ch);
       // Each character is a uniform, fixed-width cell: jyutping row on top,
-      // glyph below — consistent gaps regardless of jyutping length.
+      // glyph below, consistent gaps regardless of jyutping length.
       const cell = el("span", "cc" + (isCjk ? "" : " punct"));
       cell.appendChild(el("span", "jp", isCjk ? jy[charOffset] || "" : ""));
       cell.appendChild(el("span", "hz", ch));
@@ -443,7 +439,7 @@ function renderReader(marks) {
   hint.hidden = !(cur.pairs && cur.pairs.some((p) => p.f !== p.c));
   hint.textContent = t("tapHint", state.lang);
 
-  // Keep the current sentence centred in EVERY visible pane — written and
+  // Keep the current sentence centred in EVERY visible pane, written and
   // spoken must stay in lockstep. Scrolls only the pane's own scrollbar
   // (never the page), so the two sides can't drift apart.
   for (const pane of [formalPane, ccPane, ilPane]) {
@@ -454,7 +450,7 @@ function renderReader(marks) {
 }
 
 // Scroll a pane so its .current sentence sits in the vertical centre. Uses
-// rect deltas against the pane's own scroll position — scrollIntoView() would
+// rect deltas against the pane's own scroll position. ScrollIntoView() would
 // also scroll ancestors/the page, which is what let the panes drift.
 function centerCurrent(pane) {
   const cur = pane.querySelector(".current");
@@ -566,7 +562,7 @@ async function play() {
   await speak(forScript(s.colloquial || s.formal), state.speed);
 }
 
-// Auto-play: listen through the whole article hands-free — each sentence is
+// Auto-play: listen through the whole article hands-free. Each sentence is
 // spoken, then the reader advances, until the end (or the learner stops it).
 async function toggleAutoplay() {
   if (state.autoplay) {
@@ -627,7 +623,7 @@ async function record() {
   const result = gradeText(forScript(s.colloquial || s.formal), heard, normalizeChar, jyutpingOf);
   showFeedback(result, heard);
   renderReader(result.marks); // repaint colloquial with green/amber/red marks
-  // No auto-advance — the learner moves on manually with Next (→) when ready.
+  // No auto-advance. The learner moves on manually with Next (→) when ready.
 }
 
 function stopRecord() {
@@ -640,7 +636,7 @@ function showFeedback(result, heard) {
   fb.innerHTML = "";
   const pct = Math.round(result.accuracy * 100);
   const row = el("div", "score-row");
-  // Informational only — colour is a gentle cue, not a pass/fail gate.
+  // Informational only. Colour is a gentle cue, not a pass/fail gate.
   const badge = el("span", "score" + (pct >= 80 ? " good" : " mid"), `${t("score", state.lang)}: ${pct}%`);
   row.appendChild(badge);
   fb.appendChild(row);
@@ -694,7 +690,7 @@ function updateControls() {
 
 function applyTheme() {
   document.documentElement.dataset.theme = state.theme;
-  $("#theme-btn").textContent = state.theme === "dark" ? "☀︎" : "☾";
+  $("#theme-btn").textContent = state.theme === "dark" ? "Light" : "Dark";
 }
 
 function renderLangButtons() {

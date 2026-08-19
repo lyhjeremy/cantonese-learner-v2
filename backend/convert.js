@@ -1,25 +1,25 @@
-// convert.js — formal written Chinese -> spoken (HK TV-news-anchor) Cantonese
+// convert.js, formal written Chinese -> spoken (HK TV-news-anchor) Cantonese
 // via the Anthropic SDK. Called once per article per day, server-side, in the
 // GitHub Actions build. Never from the browser.
 //
 // V2 pipeline (when an ANTHROPIC_API_KEY is configured):
-//   1. REWRITE  — Claude rewrites each formal sentence into natural anchor
+//   1. REWRITE, Claude rewrites each formal sentence into natural anchor
 //                 Cantonese AND emits aligned phrase pairs [{f, c}, ...] whose
 //                 f-side concatenates exactly to the formal sentence and c-side
 //                 to the colloquial one (drives the tap-to-compare UI).
-//   2. VERIFY   — a second, independent Claude pass cross-checks every rewrite
+//   2. VERIFY. A second, independent Claude pass cross-checks every rewrite
 //                 (natural spoken Cantonese? meaning/numbers preserved? no
 //                 mangled particles like 唔足?) and repairs anything it flags.
 //
 // Structured outputs (output_config.format) guarantee schema-valid JSON, and
-// pair alignment is re-validated in code — anything invalid fails soft (pairs
+// pair alignment is re-validated in code, anything invalid fails soft (pairs
 // dropped / whole article falls back to the rule-based converter).
 
 import Anthropic from "@anthropic-ai/sdk";
 import { chunkTextForLearning } from "./chunk.js";
 import { normalizeDigits } from "../frontend/numbers.js";
 
-// Opus 4.8 — the most capable Opus-tier model, for the highest-quality rewrite.
+// Opus 4.8. The most capable Opus-tier model, for the highest-quality rewrite.
 // (Cost is cents/day at ~12 articles × 2 passes; the owner sets a monthly cap.)
 export const CONVERT_MODEL = "claude-opus-4-8";
 
@@ -103,18 +103,18 @@ const VERIFY_SCHEMA = {
 
 const REWRITE_SYSTEM = `You rewrite formal written Chinese news into spoken Hong Kong TV-news-anchor Cantonese.
 
-Register: exactly how a Hong Kong TV news anchor SPEAKS a bulletin aloud — natural spoken Cantonese with spoken words/particles where an anchor would use them (係, 嘅, 咗, 呢個, 而家, 話, 佢哋…), but still polished and professional. NOT stiff read-off-the-page written Chinese, and NOT street slang. Restructure the wording where a real anchor would; formal compounds an anchor keeps (不足, 不斷, 是否, 參與…) stay as they are — never mechanically swap characters inside a compound (不足 must NEVER become 唔足).
+Register: exactly how a Hong Kong TV news anchor SPEAKS a bulletin aloud: natural spoken Cantonese with spoken words/particles where an anchor would use them (係，嘅，咗，呢個，而家，話，佢哋…), but still polished and professional. NOT stiff read-off-the-page written Chinese, and NOT street slang. Restructure the wording where a real anchor would; formal compounds an anchor keeps (不足，不斷，是否，參與…) stay as they are, never mechanically swap characters inside a compound (不足 must NEVER become 唔足).
 
 Rules:
 - Keep numbers (as digits), company names, personal names, and financial/technical terms EXACTLY as in the original.
-- Output one colloquial sentence per formal sentence, in the same order — strict 1:1, same count.
+- Output one colloquial sentence per formal sentence, in the same order: strict 1:1, same count.
 - For every sentence also output "pairs": the two sentences split into short aligned phrase segments, in order. Joining all "f" values MUST reproduce the formal sentence character-for-character (including punctuation); joining all "c" values MUST reproduce your colloquial sentence character-for-character. Segment at natural phrase boundaries (a few characters each). If a phrase is dropped, use an empty "c"; if inserted, use an empty "f".`;
 
 const VERIFY_SYSTEM = `You are an independent native Hong Kong Cantonese reviewer checking machine-produced rewrites of written Chinese news into spoken TV-news-anchor Cantonese. Judge each rewrite strictly:
 
-1. NATURAL — is it genuinely how a HK news anchor would SAY it aloud? Flag word-swapped written Chinese, Mandarin-flavoured phrasing, and above all mangled compounds (e.g. 唔足 for 不足, 其佢 for 其他, 參同 for 參與 — these are always wrong).
-2. FAITHFUL — meaning preserved exactly; numbers, names, and technical terms unchanged.
-3. REGISTER — polished anchor speech, not street slang, not stiff written Chinese.
+1. NATURAL. Is it genuinely how a HK news anchor would SAY it aloud? Flag word-swapped written Chinese, Mandarin-flavoured phrasing, and above all mangled compounds (e.g. 唔足 for 不足，其佢 for 其他，參同 for 參與, these are always wrong).
+2. FAITHFUL, meaning preserved exactly; numbers, names, and technical terms unchanged.
+3. REGISTER: polished anchor speech, not street slang, not stiff written Chinese.
 
 For each item return ok=true if it passes all three. If it fails, return ok=false with "fixed" (your corrected anchor-Cantonese sentence) and "fixed_pairs" (the corrected sentence aligned to the ORIGINAL formal sentence as phrase segments: joining "f" values reproduces the formal sentence exactly; joining "c" values reproduces your fixed sentence exactly). When ok=true, set fixed and fixed_pairs to null.`;
 
@@ -257,7 +257,7 @@ export async function convertArticle(formals, client, opts = {}) {
   if (!rewrites) return null;
   const verdict = await verifyRewrites(formals, rewrites, client, opts);
   if (!verdict) {
-    // Verifier unavailable — ship the (unchecked) rewrites rather than fail.
+    // Verifier unavailable, ship the (unchecked) rewrites rather than fail.
     return { sentences: rewrites, verified: false, repaired: 0 };
   }
   return {

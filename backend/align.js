@@ -1,5 +1,5 @@
-// align.js — deterministic written↔spoken phrase alignment. Given a formal
-// sentence and its colloquial rewrite (from ANY source — an LLM that can't be
+// align.js, deterministic written↔spoken phrase alignment. Given a formal
+// sentence and its colloquial rewrite (from ANY source. An LLM that can't be
 // trusted to emit aligned pairs, or a repaired sentence), produce the
 // {f, c} segment pairs that power the tap-to-compare UI, via a character-level
 // LCS alignment. Invariants: concat(f) === formal, concat(c) === colloquial.
@@ -66,7 +66,7 @@ export function alignPairs(formal, colloquial) {
   }
 
   // Merge one-character identity islands sandwiched between changed segments
-  // (LCS artifacts — a stray shared 一/個 inside a rewritten phrase).
+  // (LCS artifacts. A stray shared 一/個 inside a rewritten phrase).
   for (let x = 1; x < segs.length - 1; x++) {
     const s = segs[x];
     const prev = segs[x - 1];

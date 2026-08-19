@@ -1,16 +1,16 @@
-# Cantonese Finance Learner — Full Project Overview & Build Spec
+# Cantonese Finance Learner: Full Project Overview & Build Spec
 
 > **Note:** this is the *original* build spec. The app that was actually built
-> differs in several places to make it free and zero-setup — it uses **RTHK RSS
+> differs in several places to make it free and zero-setup. It uses **RTHK RSS
 > feeds** (not GNews), a **daily GitHub Actions job** (not a Cloudflare Worker),
 > and the **browser's own speech engine** (not edge-tts / Whisper). See
 > **[`README.md`](./README.md)** for how the shipped app actually works.
 
 ---
 
-## ✅ V2 build status & handoff (updated 2026-07-06)
+## V2 build status & handoff (updated 2026-07-06)
 
-**Status: V2 built, tested, and published.** This repo is **V2** — a fork of
+**Status: V2 built, tested, and published.** This repo is **V2.** A fork of
 [cantonese-learner](https://github.com/lyhjeremy/cantonese-learner) (V1, which
 stays live and untouched). The README describes the current state; this spec is
 kept for the original rationale.
@@ -23,20 +23,20 @@ kept for the original rationale.
 **What V2 added over V1**
 1. A three-tier rewrite ladder with a review pass at every tier: Claude
    (Opus 4.8, if a key is added) ▸ **GitHub Models free tier** (the current
-   default — zero cost, runs on the workflow's own token: GPT-4.1 rewriter
+   default. Zero cost, runs on the workflow's own token: GPT-4.1 rewriter
    with a few-shot restructure-don't-swap prompt, GPT-4.1-mini fallback +
    reviewer, per-model daily-quota circuit breakers, and a rule-converter
    floor for any sentence the model leaves untouched) ▸ an audited rule
    converter (phrase whitelists, quote guard, sentence-final 了→喇). Aligned
    written↔spoken phrase pairs come from the model or a character-LCS aligner.
 1b. Pre-synthesised neural Cantonese audio for every sentence (edge-tts zh-HK;
-   anchor voice for news, per-speaker voices for dialogues) — browser TTS is
+   anchor voice for news, per-speaker voices for dialogues). Browser TTS is
    only the offline fallback.
 2. Context-aware numeral readings (2020年→二零二零年, 2020個→二千零二十個,
    15%→百分之十五) with jyutping, TTS, and digit-tolerant grading.
 3. An everyday-conversations curriculum: 8 categories × 12 scenarios each
    (96 dialogues, 982 lines) with per-category sub-pages, speaker-voiced
-   neural audio, and English glosses — authored and cross-checked by
+   neural audio, and English glosses, authored and cross-checked by
    independent AI reviewers (naturalness / consistency / HK realism).
 4. Tap-to-compare phrase segments + an interleaved mobile view.
 5. Auto-play (hands-free listen-through).
@@ -71,13 +71,13 @@ category, layer purity, no digits), pair alignment, and the daily build output.
 
 ## 1. What this project is (in one paragraph)
 
-A **web app** (so friends can just open a link — hosted on GitHub Pages, with a
+A **web app** (so friends can just open a link: hosted on GitHub Pages, with a
 tiny serverless backend) that every morning fetches the day's **top 3–5
 financial news articles in Chinese**, and turns each into a **karaoke-style
 Cantonese speaking lesson**. The screen shows the article **side by side**: the
 **formal written Chinese** on the left and a **spoken-Cantonese ("porh-tung"
 news-anchor style) rewrite** on the right, with **jyutping romanisation under
-every character**. The learner steps through it **one sentence at a time** —
+every character**. The learner steps through it **one sentence at a time**:
 listen to it read aloud in Cantonese (edge-tts `zh-HK`), record themselves
 saying it, and get **character-level green/red feedback** with an accuracy score
 (offline Whisper). At **≥ 90 %** it **auto-advances**; otherwise they replay,
@@ -89,23 +89,23 @@ stays server-side; users never see it).
 
 ## 2. Relationship to the sibling projects (what to reuse vs. what's new)
 
-**Reuse the *ideas / patterns* (not the Python line-for-line — this is a web app):**
+**Reuse the *ideas / patterns* (not the Python line-for-line. This is a web app):**
 
-- **Sentence chunking with smart packing** — the Mandarin Reader's
+- **Sentence chunking with smart packing.** The Mandarin Reader's
   `chunk_text_for_learning()`: split on CJK terminators (。！？；…) **and** commas/
   colons (，、：), then re-pack fragments that are too short into speakable units.
   Port this logic to JS/TS on the backend.
-- **CJK language logic** — `cjk_fraction()`, character counting, Chinese speech-
+- **CJK language logic.** `cjk_fraction()`, character counting, Chinese speech-
   rate assumptions.
-- **edge-tts synthesis contract** — retry + atomic write + **skip-if-cached**.
+- **edge-tts synthesis contract.** Retry + atomic write + **skip-if-cached**.
   Per-sentence audio, cached by a hash of (text + voice + speed).
-- **Offline Whisper grading** — record → transcribe locally → **character-level
+- **Offline Whisper grading.** Record → transcribe locally → **character-level
   compare** → green/red → accuracy %.
-- **Script-aware, lenient grading** — the Mandarin Reader learned that Whisper
+- **Script-aware, lenient grading.** The Mandarin Reader learned that Whisper
   often returns Traditional even for Simplified input, so grade in a *normalised*
   script (学 == 學) and be **lenient** (right sound / wrong character counts as a
   soft/amber match). Do the same here.
-- **Karaoke read-along UX** — current sentence big & highlighted; surrounding
+- **Karaoke read-along UX.** Current sentence big & highlighted; surrounding
   context dimmed; keyboard shortcuts printed on the buttons (from the modern
   `mandarin_learner_gui_v2.py`).
 
@@ -118,7 +118,7 @@ stays server-side; users never see it).
 - **Cantonese**, not Mandarin: `zh-HK` voices, **jyutping** (not pinyin),
   Cantonese-aware grading.
 - **Side-by-side** formal vs. colloquial display (always visible, not a toggle).
-- **A real web app** with a **serverless backend** to hide the API key — the
+- **A real web app** with a **serverless backend** to hide the API key. The
   siblings were local desktop/CLI apps.
 - **Tri-lingual UI** (English / Traditional / Simplified) for all labels.
 
@@ -131,15 +131,15 @@ These are settled. Build to them.
 **Content**
 - **One** free news source to start (see §5: **GNews** free tier). Fetch the
   **top 3–5** Chinese-language finance/business articles.
-- **We** pick the 3–5 (top of the feed) — the user does **not** choose from a
+- **We** pick the 3–5 (top of the feed), the user does **not** choose from a
   huge list. The user *does* pick **which of those 3–5** to open.
 - **Daily fetch at ~06:00** (owner's local time), automatically. Store that
   day's set. A rolling few days of cache is fine; don't hoard.
 
 **Text rendering**
 - **Side by side, always:** left = **formal written** article; right =
-  **spoken-Cantonese** rewrite. Not a toggle — both permanently visible.
-- **Register for the rewrite:** **Hong Kong TV-news anchor** Cantonese — *between*
+  **spoken-Cantonese** rewrite. Not a toggle. Both permanently visible.
+- **Register for the rewrite:** **Hong Kong TV-news anchor** Cantonese, *between*
   stiff written Chinese and street-casual. Natural to listen to, still polished.
   (Not overly colloquial.)
 - **Jyutping under every character** on the Cantonese side (learners need to know
@@ -153,7 +153,7 @@ These are settled. Build to them.
 - **Script:** Traditional ⇄ Simplified (OpenCC-equivalent in JS).
 - **Voice:** male / female `zh-HK`.
 - **Speed:** 0.75× / 1.0× / 1.25×.
-- **UI language:** English / Traditional / Simplified — user chooses; all three
+- **UI language:** English / Traditional / Simplified, user chooses; all three
   supported.
 
 **Speaking loop**
@@ -168,11 +168,11 @@ These are settled. Build to them.
 - No user accounts, no login. Progress/resume is **nice-to-have only**, and if
   done, keep it purely client-side (`localStorage`). Do **not** build a user DB.
 - No paid APIs of any kind. If an `zh-HK` edge-tts voice sounds poor, note it and
-  we'll swap the TTS later — don't block the build on it.
+  we'll swap the TTS later. Don't block the build on it.
 
 ---
 
-## 4. Architecture — keep a clean 3-layer split (same discipline as the siblings)
+## 4. Architecture: keep a clean 3-layer split (same discipline as the siblings)
 
 ```
                         ┌───────────────────────────────────────────┐
@@ -187,7 +187,7 @@ These are settled. Build to them.
                                         │ fetch() JSON
                                         ▼
                         ┌───────────────────────────────────────────┐
-   Serverless           │  BACKEND  (serverless fn — Cloudflare       │
+   Serverless           │  BACKEND  (serverless fn, Cloudflare       │
    (hides API key,      │  Worker / Vercel / Netlify function)        │
    runs the daily cron) │  • GET /api/today   → today's lessons JSON  │
                         │  • daily cron 06:00 → fetch news, convert,  │
@@ -212,7 +212,7 @@ These are settled. Build to them.
 2. **Spend control.** All Claude calls happen **once per day** on the server
    (the cron), not per-user-per-sentence. The converted result is **cached**, so
    ten friends reading the same article cost the **same** as one. This is the
-   single biggest cost lever — see §7.
+   single biggest cost lever, see §7.
 
 **Cheapest hosting that satisfies both:** a **Cloudflare Worker + Workers KV**
 (generous free tier, built-in cron triggers, built-in KV cache) or **Vercel/
@@ -249,7 +249,7 @@ cantonese-finance-learner/
 - **Free tier: 100 requests/day, no credit card.** We need ~1 request/day, so
   we're wildly within budget.
 - Serves **Chinese-language** articles with `lang=zh`, and its China top-headlines
-  demonstrably return finance/markets stories (期货, 证券, 黄金/白银, etc.).
+  demonstrably return finance/markets stories (期货，证券，黄金/白银, etc.).
 - Clean JSON: `title, description, content, url, image, publishedAt, lang, source`.
 
 **Endpoint pattern**
@@ -269,8 +269,8 @@ CJK (`cjk_fraction` ≥ 0.5) and (b) have enough body text to be worth studying
 **Caveats to bake in (learned from the news-API landscape):**
 - The GNews **free tier truncates `content`** (a snippet, not always the whole
   article) and is **dev/personal-use** oriented. For a few friends studying,
-  that's fine — and a snippet of a few sentences is *plenty* for a daily lesson.
-  If fuller text is ever wanted, that's a later, paid concern — don't block on it.
+  that's fine, and a snippet of a few sentences is *plenty* for a daily lesson.
+  If fuller text is ever wanted, that's a later, paid concern. Don't block on it.
 - Always store the **`url`** and **`source.name`** and show a "read original at
   source" link + attribution. Don't reproduce whole articles beyond the
   study snippet; link out for the full piece.
@@ -298,7 +298,7 @@ For each article, a list of **sentence units**, each with:
 }
 ```
 - Do the **sentence chunking on the server first** (§ port of `chunk_text_for_
-  learning`), then send chunks to Claude for the rewrite — this keeps sentence
+  learning`), then send chunks to Claude for the rewrite. This keeps sentence
   alignment exact between the two panes. (Alternatively let Claude both split and
   rewrite; splitting-first is more controllable.)
 - Provide the **jyutping** either from Claude or, more cheaply/reliably, from a
@@ -307,10 +307,10 @@ For each article, a list of **sentence units**, each with:
 
 **Prompt design for the rewrite (the register is the whole game):**
 Instruct Claude to rewrite each formal sentence into **Hong Kong TV-news-anchor
-spoken Cantonese** — natural to say aloud, using spoken particles/words where a
-news reader would (係, 嘅, 咗, 呢個, 而家…), **without** going full street-slang.
+spoken Cantonese**: natural to say aloud, using spoken particles/words where a
+news reader would (係，嘅，咗，呢個，而家…), **without** going full street-slang.
 Keep numbers, company names, and financial terms intact. Preserve meaning
-exactly. Output must stay parallel — one colloquial sentence per formal sentence.
+exactly. Output must stay parallel, one colloquial sentence per formal sentence.
 
 **Worked examples to include in the prompt (few-shot), matching the owner's taste:**
 - Formal: 「該公司宣布季度收益增長15%」
@@ -318,7 +318,7 @@ exactly. Output must stay parallel — one colloquial sentence per formal senten
 - Formal: 「市場分析人士指出該趨勢預示著潛在的經濟風險」
   → Anchor Cantonese: 「市場分析員話呢個趨勢可能反映經濟有潛在風險」
 
-(Note the target sits *between* the two registers — polished, but the way it's
+(Note the target sits *between* the two registers: polished, but the way it's
 actually *spoken* on a HK news broadcast, not read verbatim off the page.)
 
 **Cost & spend control:** one day's 5 articles is on the order of a few thousand
@@ -339,19 +339,19 @@ input + output tokens total → **fractions of a US cent per day**. Even so:
   its **paragraph** is shown at normal/dimmed size for context. Sentences before/
   after scroll like karaoke.
 - **Transport bar** with keyboard-key labels on the buttons:
-  - **Play** (Space) — play the current sentence's cached `zh-HK` audio.
-  - **Record** (R) — capture mic via `MediaRecorder`.
+  - **Play** (Space). Play the current sentence's cached `zh-HK` audio.
+  - **Record** (R). Capture mic via `MediaRecorder`.
   - grade on stop → paint each character green/red on the colloquial side, show %.
   - **Replay** / **Re-record** / **Next** (→) / **Prev** (←).
   - Voice male/female, Speed 0.75/1.0/1.25, Script Trad/Simp, UI-lang selector.
 - **Auto-advance** to the next sentence when score ≥ 90 %.
 - **On-device grading:** run Whisper in the browser (whisper.cpp WASM or
-  `transformers.js` `whisper-base`/`small`) so **no audio leaves the machine** —
-  matches the siblings' privacy stance and keeps the backend free of audio.
+  `transformers.js` `whisper-base`/`small`) so **no audio leaves the machine**.
+  Matches the siblings' privacy stance and keeps the backend free of audio.
   Configure it for **Cantonese** (`yue`/`zh`). Grade with the **lenient, script-
   normalised** comparison ported from the Mandarin Reader.
 - **Audio source:** simplest is to have the **cron pre-synthesize** each
-  sentence's `zh-HK` audio (both voices, three speeds is 6 files — or synth on
+  sentence's `zh-HK` audio (both voices, three speeds is 6 files, or synth on
   first request and cache) and serve the mp3s from KV/blob; the browser just
   plays a URL. This keeps `edge-tts` server-side and the frontend a pure static
   site. (If you'd rather, a serverless `/api/tts?...` that streams+caches works
@@ -359,7 +359,7 @@ input + output tokens total → **fractions of a US cent per day**. Even so:
 - **Aesthetic:** clean, modern, Apple-/premium-product feel. Lots of whitespace,
   restrained type scale, one accent colour, light **and** dark mode. Big legible
   CJK type (auto CJK font stack); jyutping in a smaller, lighter weight above/
-  below each glyph. This is a **finance-professional** audience — make it look
+  below each glyph. This is a **finance-professional** audience, make it look
   like a polished product, not a class project.
 
 ---
@@ -380,23 +380,23 @@ Every hard dependency should fail *soft*, disabling only its own feature:
 
 ## 9. Build order (suggested for the Claude Code session)
 
-1. **Backend skeleton** — Cloudflare Worker with `/api/today` returning a
+1. **Backend skeleton.** Cloudflare Worker with `/api/today` returning a
    hard-coded sample lesson JSON; get GitHub-Pages frontend talking to it.
-2. **News fetch** (`news.js`) — GNews call + CJK/length filtering + pick 3–5.
-3. **Chunking** (`chunk.js`) — port `chunk_text_for_learning` to JS; unit-test on
+2. **News fetch** (`news.js`). GNews call + CJK/length filtering + pick 3–5.
+3. **Chunking** (`chunk.js`). Port `chunk_text_for_learning` to JS; unit-test on
    a sample article.
-4. **Conversion** (`convert.js`) — Claude Haiku call with the few-shot rewrite
+4. **Conversion** (`convert.js`). Claude Haiku call with the few-shot rewrite
    prompt; strict-JSON parse; wire jyutping from a local dict.
-5. **Daily cron + KV cache** — assemble today's lessons once at 06:00, cache;
+5. **Daily cron + KV cache.** Assemble today's lessons once at 06:00, cache;
    `/api/today` serves cache.
 6. **Pre-synthesize audio** in the cron (edge-tts `zh-HK`, 2 voices × 3 speeds or
    on-demand+cache); store mp3 URLs in the lesson JSON.
-7. **Frontend reader** — side-by-side panes, jyutping, current-sentence
+7. **Frontend reader.** Side-by-side panes, jyutping, current-sentence
    highlight, whole-paragraph context, toggles, shortcut-labelled transport.
-8. **On-device Whisper grading** — MediaRecorder → WASM Whisper (Cantonese) →
+8. **On-device Whisper grading.** MediaRecorder → WASM Whisper (Cantonese) →
    lenient script-normalised char grading → green/red + % → auto-advance ≥ 90 %.
-9. **Tri-lingual UI** — En / Trad / Simp label tables + selector.
-10. **Polish** — dark/light, responsive, empty/error states, README + docs/
+9. **Tri-lingual UI.** En / Trad / Simp label tables + selector.
+10. **Polish.** Dark/light, responsive, empty/error states, README + docs/
     screenshots, deploy (Pages + Worker), share the link.
 
 ---
@@ -407,14 +407,14 @@ Every hard dependency should fail *soft*, disabling only its own feature:
   serverless env vars / Wrangler secrets. Never in frontend code, never in the
   repo, never in the JSON sent to the browser.
 - **Claude calls: daily + cached only.** Per-user or per-sentence calls would
-  multiply cost for no benefit — the rewrite is identical for everyone.
+  multiply cost for no benefit. The rewrite is identical for everyone.
 - **Cron timezone.** Cloudflare cron is UTC; 06:00 HKT = `0 22 * * *` UTC.
-- **edge-tts is an unofficial free endpoint** — rate-limited & occasionally
+- **edge-tts is an unofficial free endpoint.** Rate-limited & occasionally
   flaky; keep the retry/atomic/skip-cache pattern, and pre-synthesize in the cron
   rather than live per keystroke.
-- **Whisper Cantonese accuracy** is lower than Mandarin — that's *why* grading is
+- **Whisper Cantonese accuracy** is lower than Mandarin. That's *why* grading is
   **lenient** and script-normalised. Don't tune it strict.
-- **GNews free `content` is truncated** and dev-tier — fine for a study snippet;
+- **GNews free `content` is truncated** and dev-tier, fine for a study snippet;
   always link to the original and attribute the source; don't reproduce whole
   articles.
 - **CORS:** the Worker must send permissive CORS headers so the Pages origin can

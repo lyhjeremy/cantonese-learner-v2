@@ -1,4 +1,4 @@
-// chunk.js — CJK sentence chunking + packing, ported to JS from the Mandarin
+// chunk.js: CJK sentence chunking + packing, ported to JS from the Mandarin
 // Reader's `chunk_text_for_learning`. Pure, dependency-free ES module so the
 // Cloudflare Worker AND the Node unit tests can both import it.
 

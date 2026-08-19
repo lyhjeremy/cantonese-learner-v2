@@ -1,24 +1,26 @@
 # Cantonese Learner V2
 
-> 📖 **Product overview:** https://lyhjeremy.github.io/cantonese-learner-v2/overview/
+Design and copy follow [these standards](https://github.com/lyhjeremy/lyhjeremy/blob/main/DESIGN_STANDARDS.md).
 
-**Learn to *speak* Cantonese from today's real Hong Kong news — and from the
+> **Product overview:** https://lyhjeremy.github.io/cantonese-learner-v2/overview/
+
+**Learn to *speak* Cantonese from today's real Hong Kong news, and from the
 conversations you'll actually have living there.**
 
 Every day the app pulls a fresh batch of genuine RTHK news stories, rewrites
 each one the way a **Hong Kong TV anchor would say it aloud**, prints
 **jyutping** (romanised pronunciation) above every character, reads it to you,
-and grades you — character by character — when you read it back. New in V2: a
+and grades you, character by character, when you read it back. New in V2: a
 curated **everyday-conversations curriculum** (cha chaan teng, taxis, the
 office, portfolio reviews…), **auto-play** for hands-free listening, numbers
 you can finally pronounce, and a **tap-to-compare** view that shows exactly
 which written phrase became which spoken phrase.
 
-**▶️ Try it: https://lyhjeremy.github.io/cantonese-learner-v2/**
+**▶ Try it: https://lyhjeremy.github.io/cantonese-learner-v2/**
 *(V1 remains live at https://lyhjeremy.github.io/cantonese-learner/)*
 
 No sign-up, no install, no keys. Use **Chrome** for the speaking/scoring
-feature — other browsers can listen and read.
+feature. Other browsers can listen and read.
 
 ![The reader on a Bain Capital story: written Chinese on the left, spoken Cantonese with jyutping on the right, 4% spelled out as 百分之四, and the tap-to-compare hint below.](docs/reader-light.png)
 
@@ -26,7 +28,7 @@ feature — other browsers can listen and read.
 
 ## What's new in V2
 
-1. **Much better Cantonese — by default, for free.** Every sentence is
+1. **Much better Cantonese, by default, for free.** Every sentence is
    rewritten into genuinely natural anchor-Cantonese by an LLM and then
    cross-checked by a second, independent review pass that hunts for exactly
    the class of error rule converters make (不足 mechanically becoming 唔足,
@@ -48,20 +50,20 @@ feature — other browsers can listen and read.
    anchor voice, conversations voiced with a distinct voice per speaker, and a
    pitch-preserving speed control. The browser's built-in voice is only an
    offline fallback.
-4. **Everyday Hong Kong conversations — a full curriculum.** 96 scenario
+4. **Everyday Hong Kong conversations, a full curriculum.** 96 scenario
    dialogues (982 lines) organised into 8 categories of 12 scenarios each,
-   every category with its own sub-page: 🍽️ eating & drinking (cha chaan
+   every category with its own sub-page: eating & drinking (cha chaan
    teng, dim sum, hotpot, siu mei, dessert shops, street food, splitting the
-   bill…), 🚇 getting around (taxi, MTR, minibus, Star Ferry, the tram,
-   ride-hailing, the cross-border coach…), 🛍️ shopping (wet market, clothes,
+   bill…), getting around (taxi, MTR, minibus, Star Ferry, the tram,
+   ride-hailing, the cross-border coach…), shopping (wet market, clothes,
    Ladies' Market bargaining, returns, Carousell meetups, the optician…),
-   👥 friends & small talk (greetings, weekend plans, karaoke, weddings,
-   football banter, Mid-Autumn visits…), 💼 office life (meetings, sick
+   friends & small talk (greetings, weekend plans, karaoke, weddings,
+   football banter, Mid-Autumn visits…), office life (meetings, sick
    leave, video-call trouble, deck feedback, farewell gatherings…),
-   📈 finance & deals (portfolio reviews, deal negotiation, due diligence,
-   earnings calls, mortgages, audits…), 🏠 home & services (flat viewing,
+   finance & deals (portfolio reviews, deal negotiation, due diligence,
+   earnings calls, mortgages, audits…), home & services (flat viewing,
    moving day, broadband installation, the locksmith, pest control…), and
-   🏥 health & weather (doctor, dentist, physio, Chinese medicine, A&E,
+   health & weather (doctor, dentist, physio, Chinese medicine, A&E,
    typhoon days…). Every line has speaker labels, an English gloss, neural
    audio with a distinct voice per speaker, and the same listen → speak →
    grade loop as the news. All content was written and then cross-checked by
@@ -70,26 +72,25 @@ feature — other browsers can listen and read.
 5. **Tap to compare written ↔ spoken.** The rewrite now emits *aligned phrase
    pairs*: tap any underlined phrase in either pane and its counterpart lights
    up in the other, so you can see precisely that 認為 became 覺得. On phones,
-   the two stacked panes are replaced by an **interleaved view** — each written
+   the two stacked panes are replaced by an **interleaved view.** Each written
    line sits directly above its spoken version, so nothing to scroll between.
 6. **Auto-play.** Press `A` (or the Auto button) and the whole article plays
-   through hands-free, sentence by sentence — a podcast mode for shadowing or
+   through hands-free, sentence by sentence. A podcast mode for shadowing or
    passive listening. Any manual action stops it.
 7. **Bain-relevant news, automatically.** Alongside RTHK, the build reserves
-   slots for a second source: a WeChat 公眾號 RSS bridge when configured, or —
-   with zero setup — a web-scrape of fresh Chinese-language **Bain Capital
+   slots for a second source: a WeChat 公眾號 RSS bridge when configured, or, with zero setup, a web-scrape of fresh Chinese-language **Bain Capital
    coverage** (Google News → real publisher pages), so the lessons cover the
    world your colleagues actually work in (see below).
 
 ## How you use it
 
 1. Open the link. You'll see today's ~12 news articles plus the 8
-   conversation categories below them — tap a category for its scenarios.
+   conversation categories below them, tap a category for its scenarios.
 2. Tap one. The reader shows the news the way it's **written** on the left and
    the way an anchor **says** it on the right, jyutping over every character.
    On a phone you get the interleaved view instead.
 3. For each sentence: **Play** (`Space`) to hear it, **Auto** (`A`) to let it
-   run, **Record** (`R`) to say it back — each character lights up green /
+   run, **Record** (`R`) to say it back. Each character lights up green /
    amber / red with an overall score. `→` to move on.
 4. Tap an underlined phrase to see its written↔spoken match. Adjust speed,
    Traditional/Simplified, and interface language (English / 繁體 / 简体) to
@@ -138,28 +139,28 @@ falls back to the browser voice for that sentence.
 ### The rewrite ladder (three tiers, best available wins)
 
 1. **Claude rewrite + verifier** (`ANTHROPIC_API_KEY` secret; a few tens of
-   cents/day) — two structured-output calls per article: a rewrite that emits
+   cents/day), two structured-output calls per article: a rewrite that emits
    semantically aligned phrase pairs, then an independent reviewer that repairs
    anything unnatural. Labels the day `llm+verify`.
-2. **GitHub Models rewrite + review pass** — **completely free and automatic**:
+2. **GitHub Models rewrite + review pass**, **completely free and automatic**:
    public-repo Actions can call GitHub's model inference with the workflow's
    own `GITHUB_TOKEN` (`permissions: models: read`), no key and no billing.
    The rewriter is **GPT-4.1** (free "high" tier) driven by a few-shot prompt
-   that demands genuinely restructured spoken Cantonese — not character swaps;
+   that demands genuinely restructured spoken Cantonese, not character swaps;
    if its daily quota runs dry mid-build, each remaining batch falls back to
    GPT-4.1-mini (a separate free quota) before dropping to rules. A
    GPT-4.1-mini native-reviewer pass then repairs mangled compounds and
-   meaning drift — and is explicitly forbidden from making a rewrite *less*
+   meaning drift, and is explicitly forbidden from making a rewrite *less*
    colloquial. Any sentence the model leaves untouched gets the rule converter
    as a floor. Calls are serialised with back-off and a per-model daily-quota
    circuit breaker; tap-to-compare pairs are computed locally with a
    character-LCS aligner. Override the rewriter with a `GH_MODELS_MODEL`
    variable (default `openai/gpt-4.1`).
-3. **Hardened rule converter** — the last-resort fallback, rebuilt after a
+3. **Hardened rule converter.** The last-resort fallback, rebuilt after a
    two-reviewer audit against real output: risky single-character rules
-   (不→唔, 這→呢, 那→嗰) are replaced by explicit phrase whitelists, quoted
+   (不→唔，這→呢，那→嗰) are replaced by explicit phrase whitelists, quoted
    spans (「」《》) are never touched, sentence-final 了 becomes 喇, and the
-   protect table covers transliterations (巴塞羅那, 馬耳他), official-body
+   protect table covers transliterations (巴塞羅那，馬耳他), official-body
    names, and 表示+attitude-noun collocations.
 
 ### Numbers, precisely
@@ -177,9 +178,9 @@ runs the *recogniser's* output through the same engine, so whether Chrome hears
 `content/conversations-src.json` is the hand-authored source (written Chinese +
 spoken Cantonese + English, speaker by speaker): 8 categories × 12 scenarios,
 96 dialogues / 982 lines. Every batch of content was **cross-checked by
-independent AI reviewers** — one judging native naturalness of the Cantonese,
+independent AI reviewers**, one judging native naturalness of the Cantonese,
 one verifying the three languages say the same thing and checking
-real-Hong-Kong accuracy (prices, Octopus, MTR, code-switching habits) — before
+real-Hong-Kong accuracy (prices, Octopus, MTR, code-switching habits), before
 being baked to `frontend/data/conversations.json` with jyutping via
 `npm run build:conversations` (which also enforces the 12-per-category floor,
 no digits, and no Cantonese-only characters in the written layer).
@@ -194,29 +195,29 @@ source, resolved in this order:
    Wechat2RSS, or similar). Set the bridge's feed URL as a repo **secret**
    named `WECHAT_FEED_URL` (plus an optional repo **variable**
    `WECHAT_SOURCE_NAME` for the card label). Note: the public Wechat2RSS
-   instance only serves its own fixed account list — a custom 公眾號 needs a
+   instance only serves its own fixed account list. A custom 公眾號 needs a
    self-hosted or paid bridge, and if the content actually lives in someone's
    *Moments* (朋友圈) rather than a subscribable 公眾號, no bridge can reach it.
 2. **Web-scrape fallback (default, zero setup).** With no bridge configured,
    the build scrapes the public web instead: it queries Google News (zh-HK)
    for **貝恩資本** (Bain Capital) coverage, resolves each result to the real
    publisher URL, extracts the article body, and converts it exactly like RTHK
-   news — labelled "Bain Capital 新聞" on the cards. Change the topic with a
+   news, labelled "Bain Capital 新聞" on the cards. Change the topic with a
    `BAIN_NEWS_QUERY` secret/variable, or set it to `off` to disable.
 
 Scraped pages don't always contain the story: some publishers serve a
 stale-page interstitial ("網頁已經閒置了一段時間… 請重新載入頁面") or only
 boilerplate to non-JS clients. `backend/junk.js` pattern-filters those
-paragraphs — reload banners, editorial disclaimers, cookie/paywall prompts,
-copyright footers — at extraction time *and* as a final guard over every
+paragraphs: reload banners, editorial disclaimers, cookie/paywall prompts,
+copyright footers, at extraction time *and* as a final guard over every
 source; an article with no real prose left is dropped rather than published.
 
 Both paths fail soft: if a feed breaks or finds nothing that day, the build
 carries on RTHK-only and nothing else is affected.
 
-> ⚠️ **A note on confidentiality:** anything the build ingests is published on
+> **A note on confidentiality:** anything the build ingests is published on
 > the public Pages site. Only feed it 公眾號 content that's acceptable to
-> republish — or make the repo private (GitHub Pages on a private repo needs a
+> republish, or make the repo private (GitHub Pages on a private repo needs a
 > paid plan) before wiring up a non-public feed.
 
 ---
@@ -248,7 +249,7 @@ Actions):
 
 | Name | Type | Required? | Purpose |
 |---|---|---|---|
-| *(nothing)* | — | — | Free tier already active: GitHub Models rewrite + neural audio need NO setup |
+| *(nothing)* | n/a |, | Free tier already active: GitHub Models rewrite + neural audio need NO setup |
 | `ANTHROPIC_API_KEY` | secret | optional | Upgrade the rewrite to Claude + independent verifier |
 | `GH_MODELS_MODEL` | variable | optional | Change the free rewrite model (default `openai/gpt-4.1`; falls back to `openai/gpt-4.1-mini`) |
 | `WECHAT_FEED_URL` | secret | optional | RSS-bridge URL for the WeChat 公眾號 feed (overrides the web-scrape fallback) |
@@ -303,6 +304,6 @@ tests/               node:test unit tests + Playwright e2e
 ## Credits
 
 Built on the V1 [cantonese-learner](https://github.com/lyhjeremy/cantonese-learner).
-News content © RTHK — lessons link back to the original articles. Jyutping via
+News content © RTHK, lessons link back to the original articles. Jyutping via
 [to-jyutping](https://www.npmjs.com/package/to-jyutping); Traditional⇄Simplified
 via OpenCC. Rewrite/verification by Claude (Anthropic).

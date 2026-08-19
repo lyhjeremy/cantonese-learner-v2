@@ -1,4 +1,4 @@
-// numbers.js — context-aware Arabic-numeral → Chinese-character readings, the
+// numbers.js: context-aware Arabic-numeral → Chinese-character readings, the
 // way a Hong Kong news anchor says them aloud. Dependency-free ES module shared
 // by the browser (grader normalisation) and the Node build (spelling out the
 // numbers in the spoken pane so jyutping / TTS / grading all work on them).
@@ -25,7 +25,7 @@ export function cardinalReading(digits) {
   const s = String(digits).replace(/^0+(?=\d)/, "");
   if (!/^\d+$/.test(s)) return digitsReading(digits);
   if (s === "0") return "零";
-  if (s.length > 16) return digitsReading(s); // beyond 兆兆 — just spell it
+  if (s.length > 16) return digitsReading(s); // beyond 兆兆, just spell it
 
   // Split into 4-digit sections from the right.
   const sections = [];
@@ -85,8 +85,8 @@ export function decimalReading(intPart, fracPart) {
 
 // Characters that mark the preceding number as a YEAR when it has 3+ digits.
 const YEAR_SUFFIX = "年";
-// Range connectors between two numbers (2020至2021年 — both read as years).
-const RANGE_CONNECTORS = new Set(["至", "到", "-", "–", "—", "－", "~", "～"]);
+// Range connectors between two numbers (2020至2021年, both read as years).
+const RANGE_CONNECTORS = new Set(["至", "到", "-", "–", "n/a", "－", "~", "～"]); // ledger-allow: emdash (functional character set)
 
 function nextMeaningfulChar(text, from) {
   for (let i = from; i < text.length; i++) {
@@ -116,7 +116,7 @@ function readNumber(raw, following) {
   let { ch, index } = nextMeaningfulChar(following, 0);
 
   // Look through a range connector to the unit after the second number:
-  // "2020至2021年" — the 至2021年 tells us 2020 is a year too.
+  // "2020至2021年". The 至2021年 tells us 2020 is a year too.
   let viaRange = false;
   if (RANGE_CONNECTORS.has(ch)) {
     const rest = following.slice(index + 1);
@@ -131,8 +131,8 @@ function readNumber(raw, following) {
   }
 
   // Years: a 3+ digit number followed by 年 (directly, or through a range
-  // connector) reads digit-by-digit — 2020年 -> 二零二零年, 1997年 -> 一九九七年.
-  // 2-digit + 年 stays cardinal (五年, 三十年 — durations / decades).
+  // connector) reads digit-by-digit, 2020年 -> 二零二零年, 1997年 -> 一九九七年.
+  // 2-digit + 年 stays cardinal (五年，三十年, durations / decades).
   void viaRange;
   if (ch === YEAR_SUFFIX && !hasComma && intPart.length >= 3) {
     return digitsReading(intPart);
@@ -164,18 +164,18 @@ export function spellOutNumbers(text, lookahead = "") {
     out += s.slice(last, start);
     const following = full.slice(start + raw.length);
     let reading = readNumber(raw, following);
-    // Codes and tickers — a number straight after a colon (TYO:9433) reads
+    // Codes and tickers. A number straight after a colon (TYO:9433) reads
     // digit-by-digit, never as a quantity.
     const before = s.slice(0, start);
     if (/[:：]$/.test(before) && !raw.includes(".") && !raw.endsWith("%")) {
       reading = digitsReading(raw.replace(/,/g, ""));
     }
-    // Special case: a short number that is the SECOND half of a year range —
+    // Special case: a short number that is the SECOND half of a year range.
     // "2020至21年" -> 二零二零至二一年 (the 21 reads digit-by-digit too).
     if (
       /^\d{1,2}$/.test(raw) &&
       nextMeaningfulChar(following, 0).ch === YEAR_SUFFIX &&
-      /\d{3,4}\s*[至到\-–—－~～]\s*$/.test(s.slice(0, start))
+      /\d{3,4}\s*[至到\-–—－~～]\s*$/.test(s.slice(0, start)) // ledger-allow: emdash (regex class)
     ) {
       reading = digitsReading(raw);
     }
@@ -208,7 +208,7 @@ export function splitByNumbers(text) {
 
 // Normalise LLM-produced digit typography on the SPOKEN side so the number
 // reader sees clean runs: full-width digits/percent, and full-width commas or
-// dots INSIDE a number (3，384 → 3,384 — otherwise the run splits and reads
+// dots INSIDE a number (3，384 → 3,384. Otherwise the run splits and reads
 // as two separate numbers).
 export function normalizeDigits(text) {
   let s = String(text || "");

@@ -1,4 +1,4 @@
-// rss.js — KEYLESS news ingestion from an RSS feed (no API key). Parses items,
+// rss.js: KEYLESS news ingestion from an RSS feed (no API key). Parses items,
 // cleans the text, and selects studyable Chinese finance stories. Designed for
 // RTHK's Chinese finance feed but works with any RSS 2.0 feed.
 
@@ -6,7 +6,7 @@ import { cjkFraction, cjkCount } from "./chunk.js";
 
 // Free, keyless RTHK Chinese feeds across topics. We pool all of them and pick a
 // balanced spread (round-robin across sources in the build), so lessons cover
-// local HK news, greater-China, world, finance, and sport — not just finance.
+// local HK news, greater-China, world, finance, and sport, not just finance.
 // (RTHK has no separate arts/culture express feed; sport carries the lighter,
 // cultural stories.)
 export const NEWS_FEEDS = [
@@ -83,7 +83,7 @@ export function cleanHtmlBody(raw) {
 
 // Study body = the article text ONLY (the description here; the full story body
 // is fetched later in the build). The title is deliberately excluded so it's
-// never spoken/graded — it's shown separately as the reader heading.
+// never spoken/graded. It's shown separately as the reader heading.
 export function itemBody(item) {
   return (item.description || "").trim();
 }

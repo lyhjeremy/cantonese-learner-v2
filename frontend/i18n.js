@@ -1,4 +1,4 @@
-// i18n.js — tri-lingual UI labels: English / Traditional / Simplified.
+// i18n.js, tri-lingual UI labels: English / Traditional / Simplified.
 // The learner picks the UI language; all three are first-class.
 
 export const LANGS = ["en", "hant", "hans"];
@@ -31,7 +31,7 @@ export const STR = {
   simp: { en: "Simplified", hant: "簡體", hans: "简体" },
   uiLang: { en: "Language", hant: "介面語言", hans: "界面语言" },
   listening: {
-    en: "Listening… take your time — press R when you're done",
+    en: "Listening… take your time: press R when you're done",
     hant: "聆聽緊…慢慢嚟，講完㩒 R 完成",
     hans: "聆听中…慢慢来，讲完按 R 完成",
   },
@@ -40,14 +40,14 @@ export const STR = {
   readOriginal: { en: "Read original at source", hant: "閱讀原文", hans: "阅读原文" },
   loading: { en: "Loading today's lessons…", hant: "載入緊今日課程…", hans: "载入今日课程…" },
   offlineDemo: {
-    en: "Offline demo — curated sample lessons (no live news / no API key).",
-    hant: "離線示範 — 精選示例課程（非即時新聞，無需 API key）。",
-    hans: "离线演示 — 精选示例课程（非实时新闻，无需 API key）。",
+    en: "Offline demo: curated sample lessons (no live news / no API key).",
+    hant: "離線示範，精選示例課程（非即時新聞，無需 API key）。",
+    hans: "离线演示，精选示例课程（非实时新闻，无需 API key）。",
   },
   conversionUnavailable: {
-    en: "Cantonese conversion unavailable — showing formal text.",
-    hant: "粵語轉換暫時無法提供 — 顯示書面語。",
-    hans: "粤语转换暂时无法提供 — 显示书面语。",
+    en: "Cantonese conversion unavailable, showing formal text.",
+    hant: "粵語轉換暫時無法提供，顯示書面語。",
+    hans: "粤语转换暂时无法提供：显示书面语。",
   },
   newsSection: { en: "Today's news", hant: "今日新聞", hans: "今日新闻" },
   convSection: {
@@ -56,15 +56,15 @@ export const STR = {
     hans: "香港日常会话",
   },
   convBlurb: {
-    en: "Order at a cha chaan teng, take a taxi, survive the office — one line at a time.",
-    hant: "茶餐廳點餐、搭的士、返工傾偈 — 一句一句學。",
-    hans: "茶餐厅点餐、搭的士、上班聊天 — 一句一句学。",
+    en: "Order at a cha chaan teng, take a taxi, survive the office, one line at a time.",
+    hant: "茶餐廳點餐、搭的士、返工傾偈，一句一句學。",
+    hans: "茶餐厅点餐、搭的士、上班聊天——一句一句学。", // ledger-allow: emdash (Chinese typography)
   },
   autoplay: { en: "Auto", hant: "自動播放", hans: "自动播放" },
   verifiedNote: {
-    en: "✓ Cantonese cross-checked by an independent AI reviewer",
-    hant: "✓ 粵語已由獨立 AI 審核員覆核",
-    hans: "✓ 粤语已由独立 AI 审核员复核",
+    en: "Cantonese cross-checked by an independent AI reviewer",
+    hant: "粵語已由獨立 AI 審核員覆核",
+    hans: "粤语已由独立 AI 审核员复核",
   },
   tapHint: {
     en: "Tap an underlined phrase to see its written ↔ spoken match.",
@@ -80,14 +80,14 @@ export const STR = {
     hans: (l) => ({ 1: "入门", 2: "进阶", 3: "高级" })[l] || "",
   },
   noTts: {
-    en: "No zh-HK voice in this browser — install a Cantonese voice, or try Chrome/Safari.",
-    hant: "此瀏覽器沒有粵語語音 — 請安裝粵語語音，或試用 Chrome/Safari。",
-    hans: "此浏览器没有粤语语音 — 请安装粤语语音，或试用 Chrome/Safari。",
+    en: "No zh-HK voice in this browser: install a Cantonese voice, or try Chrome/Safari.",
+    hant: "此瀏覽器沒有粵語語音，請安裝粵語語音，或試用 Chrome/Safari。",
+    hans: "此浏览器没有粤语语音，请安装粤语语音，或试用 Chrome/Safari。",
   },
   nonCantoneseVoice: {
-    en: (v) => `No Cantonese voice found — using “${v}”, which may not be Cantonese. Install a zh-HK voice for best results.`,
-    hant: (v) => `搵唔到粵語語音 — 而家用緊「${v}」，可能唔係粵語。安裝 zh-HK 語音效果最好。`,
-    hans: (v) => `找不到粤语语音 — 正在使用「${v}」，可能不是粤语。安装 zh-HK 语音效果最好。`,
+    en: (v) => `No Cantonese voice found, using “${v}”, which may not be Cantonese. Install a zh-HK voice for best results.`,
+    hant: (v) => `搵唔到粵語語音，而家用緊「${v}」，可能唔係粵語。安裝 zh-HK 語音效果最好。`,
+    hans: (v) => `找不到粤语语音，正在使用「${v}」，可能不是粤语。安装 zh-HK 语音效果最好。`,
   },
   noAsr: {
     en: "Speech grading needs Chrome (SpeechRecognition). Listening & reading still work.",
