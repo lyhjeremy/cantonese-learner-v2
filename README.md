@@ -1,102 +1,29 @@
 # Cantonese Learner V2
 
+A static web app, rebuilt every morning, that turns the day's Hong Kong news into spoken-Cantonese reading practice: written Chinese beside an LLM rewrite in spoken Cantonese, jyutping over every character, neural audio, and per-character grading when you read aloud. It also has 96 everyday scenario dialogues.
+
+[Live app](https://lyhjeremy.github.io/cantonese-learner-v2/) · [Write-up](https://lyhjeremy.github.io/cantonese-learner-v2/overview/) · [V1](https://lyhjeremy.github.io/cantonese-learner/)
+
 Design and copy follow [these standards](https://github.com/lyhjeremy/lyhjeremy/blob/main/DESIGN_STANDARDS.md).
 
-> **Product overview:** https://lyhjeremy.github.io/cantonese-learner-v2/overview/
+![The reader on a Bain Capital story: written Chinese on the left, spoken Cantonese with jyutping on the right, 4% read out as 百分之四, and the tap-to-compare hint below](docs/reader-light.png)
 
-**Learn to *speak* Cantonese from today's real Hong Kong news, and from the
-conversations you'll actually have living there.**
+## At a glance
 
-Every day the app pulls a fresh batch of genuine RTHK news stories, rewrites
-each one the way a **Hong Kong TV anchor would say it aloud**, prints
-**jyutping** (romanised pronunciation) above every character, reads it to you,
-and grades you, character by character, when you read it back. New in V2: a
-curated **everyday-conversations curriculum** (cha chaan teng, taxis, the
-office, portfolio reviews…), **auto-play** for hands-free listening, numbers
-you can finally pronounce, and a **tap-to-compare** view that shows exactly
-which written phrase became which spoken phrase.
+- About 12 news lessons a day from RTHK (five topics) plus a second source, rewritten by GPT-4.1 on GitHub Models and checked by a GPT-4.1-mini review pass, at no cost. An optional `ANTHROPIC_API_KEY` switches both passes to Claude.
+- 96 scenario dialogues, 982 lines, in 8 categories of 12 (counted from `content/conversations-src.json`).
+- Every sentence pre-rendered as neural zh-HK audio with edge-tts, one voice per speaker in dialogues.
+- No backend: GitHub Actions builds the lessons at 06:00 Hong Kong time and publishes `frontend/` to GitHub Pages.
+- 11 test files: `node:test` unit tests and a Playwright end-to-end test.
 
-**▶ Try it: https://lyhjeremy.github.io/cantonese-learner-v2/**
-*(V1 remains live at https://lyhjeremy.github.io/cantonese-learner/)*
-
-No sign-up, no install, no keys. Use **Chrome** for the speaking/scoring
-feature. Other browsers can listen and read.
-
-![The reader on a Bain Capital story: written Chinese on the left, spoken Cantonese with jyutping on the right, 4% spelled out as 百分之四, and the tap-to-compare hint below.](docs/reader-light.png)
-
----
-
-## What's new in V2
-
-1. **Much better Cantonese, by default, for free.** Every sentence is
-   rewritten into genuinely natural anchor-Cantonese by an LLM and then
-   cross-checked by a second, independent review pass that hunts for exactly
-   the class of error rule converters make (不足 mechanically becoming 唔足,
-   其他 becoming 其佢…). This runs at **zero cost** on GitHub's free model
-   inference; adding an `ANTHROPIC_API_KEY` upgrades both passes to Claude
-   (Opus 4.8) with semantically aligned phrase pairs and a green
-   "cross-checked" banner. The last-resort rule converter was itself rebuilt
-   from a two-reviewer audit (phrase whitelists instead of risky
-   single-character swaps, quoted names never touched).
-2. **Numbers you can pronounce.** Arabic numerals used to have no jyutping and
-   no reliable reading. V2 spells every number out on the spoken side, the way
-   an anchor reads it **in context**: `2020年` → 二零二零年 (year, digit by
-   digit) but `2020個` → 二千零二十個 (quantity, as a cardinal); `15%` →
-   百分之十五; `54.1` → 五十四點一; `2846 3222` → digit by digit. Every
-   character gets jyutping, the voice reads it correctly, and saying the
-   number correctly scores green.
-3. **A real voice, not a robot.** Every sentence ships with pre-synthesised
-   **neural Cantonese audio** (Microsoft's free zh-HK voices): news read by an
-   anchor voice, conversations voiced with a distinct voice per speaker, and a
-   pitch-preserving speed control. The browser's built-in voice is only an
-   offline fallback.
-4. **Everyday Hong Kong conversations, a full curriculum.** 96 scenario
-   dialogues (982 lines) organised into 8 categories of 12 scenarios each,
-   every category with its own sub-page: eating & drinking (cha chaan
-   teng, dim sum, hotpot, siu mei, dessert shops, street food, splitting the
-   bill…), getting around (taxi, MTR, minibus, Star Ferry, the tram,
-   ride-hailing, the cross-border coach…), shopping (wet market, clothes,
-   Ladies' Market bargaining, returns, Carousell meetups, the optician…),
-   friends & small talk (greetings, weekend plans, karaoke, weddings,
-   football banter, Mid-Autumn visits…), office life (meetings, sick
-   leave, video-call trouble, deck feedback, farewell gatherings…),
-   finance & deals (portfolio reviews, deal negotiation, due diligence,
-   earnings calls, mortgages, audits…), home & services (flat viewing,
-   moving day, broadband installation, the locksmith, pest control…), and
-   health & weather (doctor, dentist, physio, Chinese medicine, A&E,
-   typhoon days…). Every line has speaker labels, an English gloss, neural
-   audio with a distinct voice per speaker, and the same listen → speak →
-   grade loop as the news. All content was written and then cross-checked by
-   independent AI reviewers for native naturalness, three-layer consistency,
-   and real-HK accuracy.
-5. **Tap to compare written ↔ spoken.** The rewrite now emits *aligned phrase
-   pairs*: tap any underlined phrase in either pane and its counterpart lights
-   up in the other, so you can see precisely that 認為 became 覺得. On phones,
-   the two stacked panes are replaced by an **interleaved view.** Each written
-   line sits directly above its spoken version, so nothing to scroll between.
-6. **Auto-play.** Press `A` (or the Auto button) and the whole article plays
-   through hands-free, sentence by sentence. A podcast mode for shadowing or
-   passive listening. Any manual action stops it.
-7. **Bain-relevant news, automatically.** Alongside RTHK, the build reserves
-   slots for a second source: a WeChat 公眾號 RSS bridge when configured, or, with zero setup, a web-scrape of fresh Chinese-language **Bain Capital
-   coverage** (Google News → real publisher pages), so the lessons cover the
-   world your colleagues actually work in (see below).
+No sign-up, install or key. Use Chrome for the speaking and grading feature; other browsers can listen and read.
 
 ## How you use it
 
-1. Open the link. You'll see today's ~12 news articles plus the 8
-   conversation categories below them, tap a category for its scenarios.
-2. Tap one. The reader shows the news the way it's **written** on the left and
-   the way an anchor **says** it on the right, jyutping over every character.
-   On a phone you get the interleaved view instead.
-3. For each sentence: **Play** (`Space`) to hear it, **Auto** (`A`) to let it
-   run, **Record** (`R`) to say it back. Each character lights up green /
-   amber / red with an overall score. `→` to move on.
-4. Tap an underlined phrase to see its written↔spoken match. Adjust speed,
-   Traditional/Simplified, and interface language (English / 繁體 / 简体) to
-   taste.
-
----
+1. Open the app. The day's news is listed above the 8 conversation categories.
+2. Open a lesson. Written Chinese sits on the left and spoken Cantonese on the right, with jyutping over every character. Phones get an interleaved view, each written line above its spoken version.
+3. For each sentence: Play (`Space`), Auto-play the whole lesson (`A`), Record (`R`) to read it back. Each character is marked green, amber (a homophone) or red, with an overall score. `→` moves on.
+4. Tap an underlined phrase to see its written and spoken counterparts highlighted together. Speed, Traditional or Simplified script, and an English, 繁體 or 简体 interface are all adjustable.
 
 ## How it works
 
@@ -117,110 +44,53 @@ GitHub Actions (daily cron, 06:00 HKT)                Browser (GitHub Pages, sta
 └──────────────────────────────────────────┘          └──────────────────────────────┘
 ```
 
-- **No backend server.** GitHub Actions is the cron + build server; the site is
-  static files. Nothing to deploy, pay for, or keep alive.
-- **Everything fails soft.** No API key → hardened rule-based conversion. News
-  fetch fails → bundled sample lessons. No Cantonese voice / no speech
-  recognition → those features hide themselves.
-- **Voices and grading run in the visitor's browser.** Your friends cost you
-  nothing; nobody's audio leaves their machine.
+- No backend server. GitHub Actions is the cron job and build server; the site is static files.
+- Everything fails soft. No API key means the rule converter; a failed news fetch means bundled sample lessons; a clip that can't be synthesized falls back to the browser voice for that sentence; missing speech recognition hides the Record button.
+- Grading runs in the browser through the Web Speech API (`yue-Hant-HK`). In Chrome, that API sends the recording to Google's speech service.
 
-### Natural audio, for free (the V2.1 fix)
+### The rewrite ladder (best available tier wins)
 
-The browser's built-in Cantonese voice is robotic and mangles intonation, so
-the daily build now **pre-synthesises every sentence** with Microsoft's free
-neural zh-HK voices via `edge-tts` (the engine the sibling Mandarin Reader
-uses) and ships the MP3s as static files. News is read by a female anchor
-voice; conversation scenarios give each speaker their own voice, so dialogues
-sound like two people. The speed control uses pitch-preserving `playbackRate`.
-Synthesis is retry + atomic + fail-soft: any clip that can't be made simply
-falls back to the browser voice for that sentence.
+1. Claude rewrite and verifier (`ANTHROPIC_API_KEY` secret, Claude Opus 4.8): two structured-output calls per article, a rewrite that returns aligned phrase pairs and an independent reviewer that repairs anything unnatural. The day is labeled `llm+verify`.
+2. GitHub Models (free, automatic): public-repo Actions can call GitHub's model inference with the workflow's own `GITHUB_TOKEN` (`permissions: models: read`). GPT-4.1 rewrites from a few-shot prompt that asks for restructured spoken Cantonese; if its daily quota runs out mid-build, remaining batches fall back to GPT-4.1-mini. A GPT-4.1-mini review pass then repairs mangled compounds and meaning drift and may not make a line less colloquial. Sentences the model leaves untouched get the rule converter as a floor. Calls are serialized with back-off and a per-model quota circuit breaker. Phrase pairs come from a local character-LCS aligner. `GH_MODELS_MODEL` overrides the rewriter.
+3. Rule converter: the last resort, rebuilt after a two-reviewer audit of real output. Single-character rules (不 to 唔, 這 to 呢, 那 to 嗰) gave way to phrase whitelists, quoted spans (「」《》) are never touched, sentence-final 了 becomes 喇, and a protect table covers transliterations, official-body names and 表示 collocations.
 
-### The rewrite ladder (three tiers, best available wins)
+### Numbers
 
-1. **Claude rewrite + verifier** (`ANTHROPIC_API_KEY` secret; a few tens of
-   cents/day), two structured-output calls per article: a rewrite that emits
-   semantically aligned phrase pairs, then an independent reviewer that repairs
-   anything unnatural. Labels the day `llm+verify`.
-2. **GitHub Models rewrite + review pass**, **completely free and automatic**:
-   public-repo Actions can call GitHub's model inference with the workflow's
-   own `GITHUB_TOKEN` (`permissions: models: read`), no key and no billing.
-   The rewriter is **GPT-4.1** (free "high" tier) driven by a few-shot prompt
-   that demands genuinely restructured spoken Cantonese, not character swaps;
-   if its daily quota runs dry mid-build, each remaining batch falls back to
-   GPT-4.1-mini (a separate free quota) before dropping to rules. A
-   GPT-4.1-mini native-reviewer pass then repairs mangled compounds and
-   meaning drift, and is explicitly forbidden from making a rewrite *less*
-   colloquial. Any sentence the model leaves untouched gets the rule converter
-   as a floor. Calls are serialised with back-off and a per-model daily-quota
-   circuit breaker; tap-to-compare pairs are computed locally with a
-   character-LCS aligner. Override the rewriter with a `GH_MODELS_MODEL`
-   variable (default `openai/gpt-4.1`).
-3. **Hardened rule converter.** The last-resort fallback, rebuilt after a
-   two-reviewer audit against real output: risky single-character rules
-   (不→唔，這→呢，那→嗰) are replaced by explicit phrase whitelists, quoted
-   spans (「」《》) are never touched, sentence-final 了 becomes 喇, and the
-   protect table covers transliterations (巴塞羅那，馬耳他), official-body
-   names, and 表示+attitude-noun collocations.
+`frontend/numbers.js` is a dependency-free reading engine shared by the build and the browser. Output of `spellOutNumbers()`:
 
-### Numbers, precisely
+| Input | Reading | Rule |
+|---|---|---|
+| `2020年` | 二零二零年 | year, digit by digit |
+| `2020個` | 二千零二十個 | quantity, cardinal |
+| `15%` | 百分之十五 | percentage |
+| `54.1` | 五十四點一 | decimal |
+| `28463222` | 二八四六三二二二 | long digit run (phone number) |
 
-`frontend/numbers.js` is a dependency-free reading engine shared by the build
-and the browser: years (3+ digits before 年, including ranges like 2020至21年)
-read digit-by-digit; quantities read as cardinals with 萬/億 grouping and
-correct 零 insertion; percentages, decimals, comma-grouped numbers, and long
-unit-less digit runs (phone numbers) each get their own treatment. The grader
-runs the *recogniser's* output through the same engine, so whether Chrome hears
-"二零二零年" or "2020年", a correct reading scores green.
+The grader runs the recognizer's output through the same engine, so a correct reading scores green whether Chrome hears 二零二零年 or 2020年. Known gap: a space-separated number such as `2846 3222` is read as two cardinals.
+
+### Natural audio
+
+The browser's built-in Cantonese voice is robotic, so the daily build pre-synthesizes every sentence with Microsoft's free zh-HK neural voices through edge-tts (`scripts/build_audio.py`) and ships the MP3s as static files. News uses a female anchor voice; dialogues give each speaker a different voice. Speed control uses pitch-preserving `playbackRate`. Synthesis retries, writes atomically and fails soft.
 
 ### The conversations curriculum
 
-`content/conversations-src.json` is the hand-authored source (written Chinese +
-spoken Cantonese + English, speaker by speaker): 8 categories × 12 scenarios,
-96 dialogues / 982 lines. Every batch of content was **cross-checked by
-independent AI reviewers**, one judging native naturalness of the Cantonese,
-one verifying the three languages say the same thing and checking
-real-Hong-Kong accuracy (prices, Octopus, MTR, code-switching habits), before
-being baked to `frontend/data/conversations.json` with jyutping via
-`npm run build:conversations` (which also enforces the 12-per-category floor,
-no digits, and no Cantonese-only characters in the written layer).
+`content/conversations-src.json` is the hand-authored source: written Chinese, spoken Cantonese and English, speaker by speaker, 8 categories × 12 scenarios, 96 dialogues and 982 lines. Each batch was checked by separate AI review passes, one for natural Cantonese and one for agreement between the three languages and Hong Kong accuracy (prices, Octopus, MTR, code-switching), before `npm run build:conversations` baked it to `frontend/data/conversations.json` with jyutping. That script enforces the 12-per-category floor, no digits, and no Cantonese-only characters in the written layer.
 
-### The Bain news lessons (works out of the box)
+### The second news source
 
-The daily build reserves up to 4 lesson slots for a second, Bain-relevant
-source, resolved in this order:
+Up to 4 lesson slots go to a second source:
 
-1. **WeChat 公眾號 bridge (preferred when configured).** WeChat has no public
-   API, so 公眾號 content can only be ingested through an RSS bridge (WeRSS,
-   Wechat2RSS, or similar). Set the bridge's feed URL as a repo **secret**
-   named `WECHAT_FEED_URL` (plus an optional repo **variable**
-   `WECHAT_SOURCE_NAME` for the card label). Note: the public Wechat2RSS
-   instance only serves its own fixed account list. A custom 公眾號 needs a
-   self-hosted or paid bridge, and if the content actually lives in someone's
-   *Moments* (朋友圈) rather than a subscribable 公眾號, no bridge can reach it.
-2. **Web-scrape fallback (default, zero setup).** With no bridge configured,
-   the build scrapes the public web instead: it queries Google News (zh-HK)
-   for **貝恩資本** (Bain Capital) coverage, resolves each result to the real
-   publisher URL, extracts the article body, and converts it exactly like RTHK
-   news, labelled "Bain Capital 新聞" on the cards. Change the topic with a
-   `BAIN_NEWS_QUERY` secret/variable, or set it to `off` to disable.
+1. A WeChat 公眾號 RSS bridge, if `WECHAT_FEED_URL` is set (WeChat has no public API, so a bridge such as WeRSS or Wechat2RSS is the only route).
+2. Otherwise, with no setup, a scrape of Google News (zh-HK) for 貝恩資本 (Bain Capital) coverage, resolved to the publisher's page and converted like RTHK news. `BAIN_NEWS_QUERY` changes the query; `off` disables it.
 
-Scraped pages don't always contain the story: some publishers serve a
-stale-page interstitial ("網頁已經閒置了一段時間… 請重新載入頁面") or only
-boilerplate to non-JS clients. `backend/junk.js` pattern-filters those
-paragraphs: reload banners, editorial disclaimers, cookie/paywall prompts,
-copyright footers, at extraction time *and* as a final guard over every
-source; an article with no real prose left is dropped rather than published.
+`backend/junk.js` filters stale-page banners, disclaimers, cookie and paywall prompts and copyright footers; an article with no real prose left is dropped. If either source fails, the build continues with RTHK only. Anything the build ingests is published on the public site, so only connect feeds that are fine to republish.
 
-Both paths fail soft: if a feed breaks or finds nothing that day, the build
-carries on RTHK-only and nothing else is affected.
+## Limitations
 
-> **A note on confidentiality:** anything the build ingests is published on
-> the public Pages site. Only feed it 公眾號 content that's acceptable to
-> republish, or make the repo private (GitHub Pages on a private repo needs a
-> paid plan) before wiring up a non-public feed.
-
----
+- Grading needs Chrome, and Chrome's speech recognition runs on Google's servers.
+- The spoken Cantonese in news lessons is machine-written and machine-reviewed. The review pass cuts errors but does not remove them.
+- News lessons are rebuilt daily and not archived.
+- Space-separated digit groups are read as cardinals (see Numbers).
 
 ## Run it locally
 
@@ -244,12 +114,11 @@ publishes `frontend/` to GitHub Pages, then re-runs daily at 06:00 HKT.
 `keepalive.yml` makes a tiny commit twice a month so GitHub never auto-disables
 the schedule.
 
-**Secrets/variables to configure** (repo → Settings → Secrets and variables →
-Actions):
+Secrets and variables (repo → Settings → Secrets and variables → Actions):
 
 | Name | Type | Required? | Purpose |
 |---|---|---|---|
-| *(nothing)* | n/a |, | Free tier already active: GitHub Models rewrite + neural audio need NO setup |
+| *(nothing)* | n/a | n/a | The free tier (GitHub Models rewrite and neural audio) needs no setup |
 | `ANTHROPIC_API_KEY` | secret | optional | Upgrade the rewrite to Claude + independent verifier |
 | `GH_MODELS_MODEL` | variable | optional | Change the free rewrite model (default `openai/gpt-4.1`; falls back to `openai/gpt-4.1-mini`) |
 | `WECHAT_FEED_URL` | secret | optional | RSS-bridge URL for the WeChat 公眾號 feed (overrides the web-scrape fallback) |
@@ -306,4 +175,8 @@ tests/               node:test unit tests + Playwright e2e
 Built on the V1 [cantonese-learner](https://github.com/lyhjeremy/cantonese-learner).
 News content © RTHK, lessons link back to the original articles. Jyutping via
 [to-jyutping](https://www.npmjs.com/package/to-jyutping); Traditional⇄Simplified
-via OpenCC. Rewrite/verification by Claude (Anthropic).
+via OpenCC. Rewrites by GPT-4.1 on GitHub Models, or Claude when a key is set.
+
+## License
+
+[MIT](LICENSE) © 2026 Jeremy Lee
