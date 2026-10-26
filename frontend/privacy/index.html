@@ -32,7 +32,7 @@ footer a{margin-right:16px}
 </style>
 </head>
 <body><div class="wrap">
-<p class="meta">Last updated 2026-08-18</p>
+<p class="meta">Last updated 2026-10-26</p>
 <h1>Privacy</h1>
 <p>Cantonese Learner has no accounts, no sign-up, no advertising and no tracking cookies. This page says what actually happens to data rather than what would be legally permissible.</p>
 <h2>What this page is</h2>
@@ -40,12 +40,14 @@ footer a{margin-right:16px}
 <h2>What is collected</h2>
 <p>No account, no sign-up and no tracking cookies. Your settings and progress live in your browser's local storage and are never uploaded.</p>
 <h2>Your microphone</h2>
-<p>Speech grading runs entirely inside your browser using a local speech model. Recorded audio is never uploaded, never stored, and never leaves your device. The browser will ask your permission the first time, and the feature simply does not work if you decline.</p>
+<p>Speech grading uses your browser's built-in speech recognition (the Web Speech API, available in Chrome). In Chrome, that recognition runs on Google's servers: while you hold the record button, your audio is sent to Google, which returns the recognized text. This site never receives, stores or sees the audio or the text; the comparison against the lesson line happens in your browser. Google's handling of that audio is covered by Google's own privacy policy. The browser asks your permission the first time, and listening and reading keep working if you decline.</p>
 <h2>Third parties</h2>
 <ul>
 <li><strong>GitHub Pages.</strong> Serves the site. It records standard web request logs, including your IP address.</li>
 <li><strong>GitHub Models.</strong> Rewrites news sentences into spoken Cantonese during the scheduled build. It never sees anything you type or say.</li>
-<li><strong>News sources.</strong> Public Hong Kong news feeds are read during the scheduled build to assemble each day's lesson.</li>
+<li><strong>Google, for speech recognition.</strong> Receives your recorded audio when you use speech grading in Chrome, as described above.</li>
+<li><strong>News sources.</strong> Public Hong Kong news feeds, found through Google News, are read during the scheduled build to assemble each day's lesson.</li>
+<li><strong>Microsoft Edge text-to-speech.</strong> Generates the lesson audio during the scheduled build. It receives lesson text only, never anything from you.</li>
 </ul>
 <p>Fonts are served from this site, so no font provider is contacted and no content delivery network is involved. There is no analytics provider of any kind.</p>
 <h2>Children</h2>
