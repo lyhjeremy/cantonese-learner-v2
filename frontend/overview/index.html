@@ -346,10 +346,10 @@
     <p class="eyebrow">The problem</p>
     <h2>You can read the paper and still miss the evening news</h2>
     <p>
-      A learner who reads Hong Kong newspapers can still struggle with spoken
-      Cantonese, because the two registers use different words and grammar. The
-      app puts both on screen and makes the mapping between them the thing you
-      study.
+      In Hong Kong you read one register and hear another: newspapers are in written Chinese, while the evening news is spoken in Cantonese, with
+      different words and different grammar. A learner can manage the first and
+      still lose the thread of the second. The app puts both on screen and makes the
+      mapping between them the thing you study.
     </p>
     <figure>
       <img width="2560" height="1800" class="shot" src="reader-light.png" fetchpriority="high"
@@ -386,8 +386,8 @@
     <p class="eyebrow">Quality</p>
     <h2>A rewrite ladder with a review pass</h2>
     <p>
-      Mechanical written-to-spoken conversion produces errors a learner can't spot:
-      single-character rules turn 不足 into 唔足 and 其他 into 其佢. So the build
+      Mechanical written-to-spoken conversion makes errors a learner can't spot
+      (single-character rules turn 不足 into 唔足 and 其他 into 其佢), so the build
       uses the best tier available:
     </p>
     <dl class="specs">
@@ -461,8 +461,7 @@
       Up to four lesson slots go to a second source: a WeChat RSS bridge if one is
       configured, otherwise a scrape of Google News for Chinese-language Bain
       Capital coverage. <code>backend/junk.js</code> filters reload banners,
-      disclaimers and paywall prompts, and an article with no real prose left is
-      dropped. The repo has unit tests with <code>node:test</code> and a Playwright
+      disclaimers and paywall prompts, and an article left with nothing but boilerplate is dropped. The repo has unit tests with <code>node:test</code> and a Playwright
       end-to-end test that renders the app headless.
     </p>
   </section>
@@ -477,8 +476,8 @@
     </p>
     <p>
       The spoken Cantonese in news lessons is machine-written and machine-reviewed.
-      The review pass and the rebuilt rule converter cut errors; they do not
-      remove them. Treat it as practice material, and trust your ear when a line
+      The review pass and the rebuilt rule converter cut errors without removing
+      them all. Treat it as practice material, and trust your ear when a line
       sounds wrong.
     </p>
     <p>

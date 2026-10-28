@@ -1,10 +1,11 @@
 # Cantonese Finance Learner: Full Project Overview & Build Spec
 
-> **Note:** this is the *original* build spec. The app that was actually built
-> differs in several places to make it free and zero-setup. It uses **RTHK RSS
-> feeds** (not GNews), a **daily GitHub Actions job** (not a Cloudflare Worker),
-> and the **browser's own speech engine** (not edge-tts / Whisper). See
-> **[`README.md`](./README.md)** for how the shipped app actually works.
+> **Note:** this is the *original* build spec. The shipped app changed several
+> things to make it free and zero-setup: it reads **RTHK RSS feeds** where the
+> spec planned GNews, runs as a **daily GitHub Actions job** where the spec had
+> a Cloudflare Worker, and grades with the **browser's own speech recognition**
+> where the spec had Whisper. Audio is pre-rendered with edge-tts during the
+> daily build. See **[`README.md`](./README.md)** for how the shipped app works.
 
 ---
 
@@ -46,8 +47,7 @@ kept for the original rationale.
 7. A boilerplate/junk filter (`backend/junk.js`) over every scraped body:
    stale-page interstitials ("網頁已經閒置…請重新載入"), editorial
    disclaimers, cookie/paywall prompts and copyright footers are stripped at
-   extraction time and again as a final build guard; an article with no real
-   prose left is dropped instead of published.
+   extraction time and again as a final build guard; an article left with nothing but boilerplate is dropped and never published.
 
 **Verification:** 107 unit + Playwright e2e tests green; data validator covers
 sample lessons, the 8-category conversations curriculum (≥12 scenarios per
@@ -109,7 +109,7 @@ stays server-side; users never see it).
   context dimmed; keyboard shortcuts printed on the buttons (from the modern
   `mandarin_learner_gui_v2.py`).
 
-**What's genuinely NEW in this project:**
+**What's NEW in this project:**
 
 - **Live daily news ingestion** (not a user-supplied EPUB) from **one free news
   API**, cached per-day.
@@ -118,7 +118,7 @@ stays server-side; users never see it).
 - **Cantonese**, not Mandarin: `zh-HK` voices, **jyutping** (not pinyin),
   Cantonese-aware grading.
 - **Side-by-side** formal vs. colloquial display (always visible, not a toggle).
-- **A real web app** with a **serverless backend** to hide the API key. The
+- **A web app** with a **serverless backend** to hide the API key. The
   siblings were local desktop/CLI apps.
 - **Tri-lingual UI** (English / Traditional / Simplified) for all labels.
 

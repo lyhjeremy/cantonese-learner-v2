@@ -13,7 +13,7 @@ Design and copy follow [these standards](https://github.com/lyhjeremy/lyhjeremy/
 - About 12 news lessons a day from RTHK (five topics) plus a second source, rewritten by GPT-4.1 on GitHub Models and checked by a GPT-4.1-mini review pass, at no cost. An optional `ANTHROPIC_API_KEY` switches both passes to Claude.
 - 96 scenario dialogues, 982 lines, in 8 categories of 12 (counted from `content/conversations-src.json`).
 - Every sentence pre-rendered as neural zh-HK audio with edge-tts, one voice per speaker in dialogues.
-- No backend: GitHub Actions builds the lessons at 06:00 Hong Kong time and publishes `frontend/` to GitHub Pages.
+- GitHub Actions builds the lessons at 06:00 Hong Kong time and publishes `frontend/` to GitHub Pages; there is no backend.
 - 11 test files: `node:test` unit tests and a Playwright end-to-end test.
 
 No sign-up, install or key. Use Chrome for the speaking and grading feature; other browsers can listen and read.
@@ -44,7 +44,7 @@ GitHub Actions (daily cron, 06:00 HKT)                Browser (GitHub Pages, sta
 └──────────────────────────────────────────┘          └──────────────────────────────┘
 ```
 
-- No backend server. GitHub Actions is the cron job and build server; the site is static files.
+- GitHub Actions is both the cron job and the build server, and the site is static files, so there is no backend server to keep running.
 - Everything fails soft. No API key means the rule converter; a failed news fetch means bundled sample lessons; a clip that can't be synthesized falls back to the browser voice for that sentence; missing speech recognition hides the Record button.
 - Grading runs in the browser through the Web Speech API (`yue-Hant-HK`). In Chrome, that API sends the recording to Google's speech service.
 
@@ -52,7 +52,7 @@ GitHub Actions (daily cron, 06:00 HKT)                Browser (GitHub Pages, sta
 
 1. Claude rewrite and verifier (`ANTHROPIC_API_KEY` secret, Claude Opus 4.8): two structured-output calls per article, a rewrite that returns aligned phrase pairs and an independent reviewer that repairs anything unnatural. The day is labeled `llm+verify`.
 2. GitHub Models (free, automatic): public-repo Actions can call GitHub's model inference with the workflow's own `GITHUB_TOKEN` (`permissions: models: read`). GPT-4.1 rewrites from a few-shot prompt that asks for restructured spoken Cantonese; if its daily quota runs out mid-build, remaining batches fall back to GPT-4.1-mini. A GPT-4.1-mini review pass then repairs mangled compounds and meaning drift and may not make a line less colloquial. Sentences the model leaves untouched get the rule converter as a floor. Calls are serialized with back-off and a per-model quota circuit breaker. Phrase pairs come from a local character-LCS aligner. `GH_MODELS_MODEL` overrides the rewriter.
-3. Rule converter: the last resort, rebuilt after a two-reviewer audit of real output. Single-character rules (不 to 唔, 這 to 呢, 那 to 嗰) gave way to phrase whitelists, quoted spans (「」《》) are never touched, sentence-final 了 becomes 喇, and a protect table covers transliterations, official-body names and 表示 collocations.
+3. Rule converter: the last resort, rebuilt after two reviewers audited its output. Single-character rules (不 to 唔, 這 to 呢, 那 to 嗰) gave way to phrase whitelists, quoted spans (「」《》) are never touched, sentence-final 了 becomes 喇, and a protect table covers transliterations, official-body names and 表示 collocations.
 
 ### Numbers
 
@@ -70,7 +70,7 @@ The grader runs the recognizer's output through the same engine, so a correct re
 
 ### Natural audio
 
-The browser's built-in Cantonese voice is robotic, so the daily build pre-synthesizes every sentence with Microsoft's free zh-HK neural voices through edge-tts (`scripts/build_audio.py`) and ships the MP3s as static files. News uses a female anchor voice; dialogues give each speaker a different voice. Speed control uses pitch-preserving `playbackRate`. Synthesis retries, writes atomically and fails soft.
+The browser's built-in Cantonese voice sounds robotic, so the daily build pre-synthesizes every sentence with Microsoft's free zh-HK neural voices through edge-tts (`scripts/build_audio.py`) and ships the MP3s as static files. News uses a female anchor voice; dialogues give each speaker a different voice. Speed control uses pitch-preserving `playbackRate`. Synthesis retries, writes atomically and fails soft.
 
 ### The conversations curriculum
 
@@ -83,7 +83,7 @@ Up to 4 lesson slots go to a second source:
 1. A WeChat 公眾號 RSS bridge, if `WECHAT_FEED_URL` is set (WeChat has no public API, so a bridge such as WeRSS or Wechat2RSS is the only route).
 2. Otherwise, with no setup, a scrape of Google News (zh-HK) for 貝恩資本 (Bain Capital) coverage, resolved to the publisher's page and converted like RTHK news. `BAIN_NEWS_QUERY` changes the query; `off` disables it.
 
-`backend/junk.js` filters stale-page banners, disclaimers, cookie and paywall prompts and copyright footers; an article with no real prose left is dropped. If either source fails, the build continues with RTHK only. Anything the build ingests is published on the public site, so only connect feeds that are fine to republish.
+`backend/junk.js` filters stale-page banners, disclaimers, cookie and paywall prompts and copyright footers; an article left with nothing but boilerplate is dropped. If either source fails, the build continues with RTHK only. Anything the build ingests is published on the public site, so only connect feeds that are fine to republish.
 
 ## Limitations
 
