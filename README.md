@@ -1,5 +1,7 @@
 # Cantonese Learner V2
 
+[![tests](https://github.com/lyhjeremy/cantonese-learner-v2/actions/workflows/tests.yml/badge.svg)](https://github.com/lyhjeremy/cantonese-learner-v2/actions/workflows/tests.yml)
+
 A static web app, rebuilt every morning, that turns the day's Hong Kong news into spoken-Cantonese reading practice: written Chinese beside an LLM rewrite in spoken Cantonese, jyutping over every character, neural audio, and per-character grading when you read aloud. It also has 96 everyday scenario dialogues.
 
 [Live app](https://lyhjeremy.github.io/cantonese-learner-v2/) · [Write-up](https://lyhjeremy.github.io/cantonese-learner-v2/overview/) · [V1](https://lyhjeremy.github.io/cantonese-learner/)

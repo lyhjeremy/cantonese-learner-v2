@@ -1,0 +1,23 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  node-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Runtime dependencies only. Playwright is a dev dependency and its
+      # browser is a large download, so the browser tests in
+      # tests/e2e.test.mjs skip themselves here. The unit tests stub every
+      # network and LLM call.
+      - run: npm install --omit=dev --no-audit --no-fund
+      - run: npm test
