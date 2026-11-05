@@ -286,6 +286,22 @@
 </style>
 </head>
 <body>
+<style>
+  /* At a glance, ruled like the written/spoken pairs table */
+  .glance { margin: 40px 0 0; border-top: 2px solid var(--ink); }
+  .glance h2 { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 20px; color: var(--muted); margin: 10px 0 2px; max-width: none; }
+  .glance dl { margin: 0; }
+  .glance dl > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 2px 22px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .glance dt { font-family: var(--display); font-style: italic; font-size: 17px; color: var(--accent); }
+  .glance dd { margin: 0; font-family: var(--sans); font-size: 15.5px; line-height: 1.5; color: var(--ink2); }
+  .glance dd b { color: var(--ink); }
+  .runs { margin: 22px 0 0; border-top: 1px solid var(--rule); }
+  .runs > div { display: grid; grid-template-columns: minmax(0, 12rem) 4rem minmax(0, 1fr); gap: 2px 18px; padding: 10px 0; border-bottom: 1px solid var(--rule); align-items: baseline; font-family: var(--sans); font-size: 15px; color: var(--ink2); }
+  .runs .n { font-family: var(--display); font-size: 24px; color: var(--accent); text-align: right; font-variant-numeric: tabular-nums; }
+  .runs b { color: var(--ink); }
+  @media (max-width: 640px) { .glance dl > div { grid-template-columns: 1fr; } .runs > div { grid-template-columns: 1fr 3.5rem; } .runs > div > :last-child { grid-column: 1 / -1; } }
+</style>
+
 <div class="wrap">
   <header class="masthead">
     <div class="logo">Cantonese Learner V2</div>
@@ -299,9 +315,11 @@
     <p class="hero-sub">
       Written Chinese and spoken Cantonese differ in vocabulary and grammar: 認為 on
       the page is 覺得 out loud. Every morning a GitHub Actions job pulls RTHK
-      stories, has an LLM rewrite each sentence into spoken Cantonese, runs a second
-      review pass, adds jyutping over every character and records neural zh-HK
-      audio. The app shows the written and spoken versions side by side and grades
+      stories, converts each sentence into spoken Cantonese, adds jyutping over every
+      character and records neural zh-HK audio. The conversion is meant to be an LLM
+      rewrite with a second review pass, but the build logs show it has fallen back
+      to the rule-based converter on all 95 builds GitHub still keeps, since 7 August
+      2026. The app shows the written and spoken versions side by side and grades
       you character by character when you read aloud. It also has 96 scenario
       dialogues, from a cha chaan teng breakfast to an earnings call.
     </p>
@@ -344,8 +362,8 @@
       </div>
       <div class="claim">
         <div class="n">2 passes</div>
-        <p>per news sentence: a GPT-4.1 rewrite, then a GPT-4.1-mini review that
-           repairs mangled compounds and meaning drift.</p>
+        <p>per news sentence as designed: a GPT-4.1 rewrite, then a GPT-4.1-mini
+           review. Neither has run in the 95 logged builds; see below.</p>
       </div>
       <div class="claim">
         <div class="n">$0</div>
@@ -358,6 +376,20 @@
            republishes the lessons.</p>
       </div>
     </div>
+
+    <section class="glance" aria-labelledby="glance-h">
+      <h2 id="glance-h">At a glance</h2>
+      <dl>
+        <div><dt>Task</dt><dd>Rewrite about 12 news stories a day, sentence by sentence, from written Chinese into spoken Cantonese</dd></div>
+        <div><dt>Evidence</dt><dd>The logs of all 95 daily builds GitHub keeps, 7 August to 5 November 2026 (<code>eval/build_logs/</code>). No scored set of rewrites exists</dd></div>
+        <div><dt>Baseline</dt><dd>The rule-based converter, the bottom rung of the ladder</dd></div>
+        <div><dt>Result</dt><dd>The LLM tier ran on <b>0 of 95</b> builds; every build shipped the rule-based conversion, and <code>today.json</code> says so</dd></div>
+        <div><dt>Cost per article</dt><dd><b>$0</b>: no LLM call succeeded. The LLM tier's cost and latency could not be measured, because its endpoint no longer answers</dd></div>
+        <div><dt>Latency</dt><dd>The whole build step for 12 articles (fetch, convert, jyutping): <b>58 s</b> median, 112 s slowest; per article it is not logged</dd></div>
+        <div><dt>Review catch rate</dt><dd>Unknown. The review pass never ran in a kept log, and the pipeline does not record what a review changes</dd></div>
+        <div><dt>Main failure</dt><dd>A silent fallback. Until 20 September both models returned HTTP 410; since 22 September the endpoint answers 200 with the plain text "OK", the JSON parse throws, and the code returns null without logging</dd></div>
+      </dl>
+    </section>
   </section>
 </div>
 
@@ -414,9 +446,35 @@
     </p>
     <dl class="specs">
       <div class="spec"><dt>Claude</dt><dd>With an <code>ANTHROPIC_API_KEY</code> secret: a rewrite that returns aligned phrase pairs, then an independent verifier call. The day is labeled <code>llm+verify</code></dd></div>
-      <div class="spec"><dt>GitHub Models</dt><dd>The default, free: GPT-4.1 with a few-shot prompt that asks for restructured spoken Cantonese, falling back to GPT-4.1-mini when the daily quota runs out, then a GPT-4.1-mini review pass that may not make a line less colloquial. Calls are serialized with back-off and a per-model quota circuit breaker</dd></div>
+      <div class="spec"><dt>GitHub Models</dt><dd>The default, free, and not working since at least August 2026 (next section): GPT-4.1 with a few-shot prompt that asks for restructured spoken Cantonese, falling back to GPT-4.1-mini when the daily quota runs out, then a GPT-4.1-mini review pass that may not make a line less colloquial. Calls are serialized with back-off and a per-model quota circuit breaker</dd></div>
       <div class="spec"><dt>Rules</dt><dd>The last resort, rebuilt after an audit of real output: phrase whitelists in place of single-character swaps (不 to 唔, 這 to 呢), quoted names in 「」 and 《》 left alone, sentence-final 了 to 喇</dd></div>
     </dl>
+  </section>
+
+  <section class="stop stop--warn" id="build-logs">
+    <p class="eyebrow">What the build ran</p>
+    <h2>95 builds, 95 rule-based conversions</h2>
+    <p>
+      <code>scripts/build-lessons.mjs</code> prints one summary line per build, such as
+      "Wrote today.json: 12 articles, 282 sentences (rewrite: rules)", and one line per failed
+      GitHub Models call. <code>eval/build_logs/scan.py</code> reads that line from every build
+      log GitHub still keeps:
+    </p>
+    <div class="runs" role="table" aria-label="Daily builds by what the rewrite step did">
+      <div role="row"><b role="cell">7 Aug to 20 Sep 2026</b><span class="n" role="cell">46</span><span role="cell">builds where GPT-4.1 and GPT-4.1-mini both returned HTTP 410 on all 12 articles; rules used</span></div>
+      <div role="row"><b role="cell">22 Sep to 5 Nov 2026</b><span class="n" role="cell">49</span><span role="cell">builds with no error line and rules used: the endpoint now replies 200 with a plain-text "OK", which the parser rejects</span></div>
+      <div role="row"><b role="cell">Used the LLM tier</b><span class="n" role="cell">0</span><span role="cell">of 95</span></div>
+    </div>
+    <p style="margin-top:16px">
+      The "OK" reply was reproduced on 2026-11-05 with a request shaped like the pipeline's
+      (saved in <code>eval/build_logs/summary.json</code>). <code>chat()</code> in
+      <code>backend/ghmodels.js</code> catches every exception and returns null, and the
+      ladder then drops to the rules, so the site kept publishing and nothing flagged
+      the change. The lessons are labeled honestly: each day's <code>today.json</code> carries
+      <code>"method": "rules"</code> and the note "Auto-converted to Cantonese (rule-based,
+      rough)". So the news lessons on the live site are the rule converter's output, and
+      the review pass described above has had nothing to review.
+    </p>
   </section>
 
   <section class="stop">
@@ -504,10 +562,11 @@
       that API sends the recording to Google's speech service for recognition.
     </p>
     <p>
-      The spoken Cantonese in news lessons is machine-written and machine-reviewed.
-      The review pass and the rebuilt rule converter cut errors without removing
-      them all. Treat it as practice material, and trust your ear when a line
-      sounds wrong.
+      The spoken Cantonese in news lessons is machine-written. Since at least August
+      2026 it has come from the rule converter alone, which swaps phrases and does not
+      restructure grammar, so it reads closer to written Chinese than a real anchor
+      would. Treat it as practice material, and trust your ear when a line sounds
+      wrong.
     </p>
     <p>
       News lessons are rebuilt every day and not archived. Space-separated digit

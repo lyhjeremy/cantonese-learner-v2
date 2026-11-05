@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-05",
+  "builds_with_logs": 95,
+  "first": "2026-08-07T22:27:37Z",
+  "last": "2026-11-05T07:09:27Z",
+  "tier_counts": {
+    "rules": 95
+  },
+  "github_models_error_pattern": {
+    "HTTP 410 on both models": 46,
+    "no error line": 49
+  },
+  "articles_per_build": {
+    "12": 95
+  },
+  "build_step_s_median": 58.0,
+  "build_step_s_max": 112.0,
+  "endpoint_probe": {
+    "date": "2026-11-05",
+    "request": "POST https://models.github.ai/inference/chat/completions, model openai/gpt-4.1, same body shape as backend/ghmodels.js, personal gh token",
+    "status": "HTTP/2 200",
+    "content_type": "text/plain",
+    "body": "OK",
+    "effect": "chat() in backend/ghmodels.js calls res.json() on this body, the parse throws, the catch returns null, and the build falls back to rules without logging anything"
+  }
+}

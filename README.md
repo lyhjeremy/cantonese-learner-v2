@@ -2,7 +2,8 @@
 
 [![tests](https://github.com/lyhjeremy/cantonese-learner-v2/actions/workflows/tests.yml/badge.svg)](https://github.com/lyhjeremy/cantonese-learner-v2/actions/workflows/tests.yml)
 
-A static web app, rebuilt every morning, that turns the day's Hong Kong news into spoken-Cantonese reading practice: written Chinese beside an LLM rewrite in spoken Cantonese, jyutping over every character, neural audio, and per-character grading when you read aloud. It also has 96 everyday scenario dialogues.
+A static web app, rebuilt every morning, that turns the day's Hong Kong news into spoken-Cantonese reading practice: written Chinese beside a spoken-Cantonese version, jyutping over every character, neural audio, and per-character grading when you read aloud. It also has 96 everyday scenario dialogues.
+The spoken version is meant to come from an LLM rewrite plus a review pass, but all 95 daily builds whose logs GitHub keeps (7 August to 5 November 2026) fell back to the rule-based converter: GitHub Models returned HTTP 410 until 20 September and has answered with a plain-text "OK" since. Details in [`eval/build_logs/`](eval/build_logs/).
 
 [Live app](https://lyhjeremy.github.io/cantonese-learner-v2/) · [Write-up](https://lyhjeremy.github.io/cantonese-learner-v2/overview/) · [V1](https://lyhjeremy.github.io/cantonese-learner/)
 
@@ -12,13 +13,25 @@ Design and copy follow [these standards](https://github.com/lyhjeremy/lyhjeremy/
 
 ## At a glance
 
-- About 12 news lessons a day from RTHK (five topics) plus a second source, rewritten by GPT-4.1 on GitHub Models and checked by a GPT-4.1-mini review pass, at no cost. An optional `ANTHROPIC_API_KEY` switches both passes to Claude.
+- About 12 news lessons a day from RTHK (five topics) plus a second source. The code rewrites them with GPT-4.1 on GitHub Models and checks them with a GPT-4.1-mini review pass, at no cost, and an optional `ANTHROPIC_API_KEY` switches both passes to Claude. In practice every build since at least 7 August 2026 has used the rule-based converter, because the GitHub Models calls fail (see below).
 - 96 scenario dialogues, 982 lines, in 8 categories of 12 (counted from `content/conversations-src.json`).
 - Every sentence pre-rendered as neural zh-HK audio with edge-tts, one voice per speaker in dialogues.
 - GitHub Actions builds the lessons at 06:00 Hong Kong time and publishes `frontend/` to GitHub Pages; there is no backend.
 - 11 test files: `node:test` unit tests and a Playwright end-to-end test.
 
 No sign-up, install or key. Use Chrome for the speaking and grading feature; other browsers can listen and read.
+
+## What the build logs show
+
+`python3 eval/build_logs/scan.py` downloads the log of every successful Pages build GitHub still keeps and reads the summary line `build-lessons.mjs` prints. On 2026-11-05 that was 95 builds, from 2026-08-07 to 2026-11-05:
+
+| Builds | What happened |
+|---|---|
+| 46, to 2026-09-20 | GPT-4.1 and GPT-4.1-mini both returned HTTP 410 for all 12 articles; rules used |
+| 49, from 2026-09-22 | No error line; rules used. The endpoint now answers HTTP 200 with the plain text `OK`, which `chat()` in `backend/ghmodels.js` fails to parse and silently turns into null |
+| 0 | Used the LLM tier |
+
+So the cost per article is $0, and the LLM tier's cost and latency could not be measured. The whole "Build today's lessons" step (fetch, convert and jyutping for 12 articles) took 58 s median and 112 s at most. The review pass's catch rate is unknown: it never ran in a kept log, and the pipeline does not log what a review changes. Each day's `today.json` is labeled `"method": "rules"`, so the app itself tells readers. Per-build rows are in `eval/build_logs/builds.csv`, and a probe of the endpoint is in `eval/build_logs/summary.json`.
 
 ## How you use it
 

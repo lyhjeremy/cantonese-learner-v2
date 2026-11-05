@@ -1,0 +1,96 @@
+run_id,event,created_at,articles,sentences,tier,github_models_errors,build_step_s
+31223886979,schedule,2026-08-07T22:27:37Z,12,288,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,61.0
+31281481000,schedule,2026-08-08T22:20:53Z,12,312,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,67.0
+31339225171,schedule,2026-08-09T22:22:26Z,12,271,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,64.0
+31438529470,schedule,2026-08-10T22:29:46Z,12,325,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,62.0
+31543010281,schedule,2026-08-11T22:34:37Z,12,272,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,67.0
+31647435735,schedule,2026-08-12T22:33:14Z,12,328,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,67.0
+31750458854,schedule,2026-08-13T22:33:48Z,12,499,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,66.0
+31845871622,schedule,2026-08-14T22:15:05Z,12,375,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,68.0
+31911575052,schedule,2026-08-15T22:13:33Z,12,468,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,61.0
+31975755755,schedule,2026-08-16T22:13:32Z,12,500,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,74.0
+32075287295,schedule,2026-08-17T22:16:56Z,12,553,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,58.0
+32191847422,schedule,2026-08-18T22:15:23Z,12,548,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,65.0
+32218540019,push,2026-08-19T05:12:09Z,12,520,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,69.0
+32308101069,schedule,2026-08-19T22:17:12Z,12,434,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,67.0
+32423738463,schedule,2026-08-20T22:19:30Z,12,483,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,72.0
+32532261227,schedule,2026-08-21T22:16:19Z,12,456,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,65.0
+32601876541,schedule,2026-08-22T22:14:22Z,12,410,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,67.0
+32669986514,schedule,2026-08-23T22:14:35Z,12,265,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,67.0
+32784002068,schedule,2026-08-24T22:18:15Z,12,325,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,66.0
+32905559129,schedule,2026-08-25T22:19:08Z,12,431,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,70.0
+33034317294,schedule,2026-08-27T02:46:23Z,12,275,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,65.0
+33146149403,schedule,2026-08-28T05:53:44Z,12,330,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,68.0
+33231400689,schedule,2026-08-29T03:26:28Z,12,305,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,61.0
+33281841438,schedule,2026-08-29T23:48:34Z,12,292,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,82.0
+33343603734,schedule,2026-08-31T00:07:03Z,12,342,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,65.0
+33456716758,schedule,2026-09-01T00:55:42Z,12,444,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,63.0
+33572246642,schedule,2026-09-01T23:43:00Z,12,373,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,63.0
+33696494666,schedule,2026-09-02T23:44:56Z,12,413,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,61.0
+33818840178,schedule,2026-09-03T23:43:50Z,12,408,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,66.0
+33930166612,schedule,2026-09-04T23:36:50Z,12,427,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,74.0
+33998772333,schedule,2026-09-05T23:28:44Z,12,512,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,59.0
+34066746958,schedule,2026-09-06T23:23:23Z,12,391,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,66.0
+34171494702,schedule,2026-09-07T23:52:59Z,12,409,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,68.0
+34292153241,schedule,2026-09-08T23:46:48Z,12,466,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,63.0
+34418252652,schedule,2026-09-09T23:44:37Z,12,386,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,64.0
+34542909097,schedule,2026-09-10T23:36:32Z,12,441,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,63.0
+34659316704,schedule,2026-09-11T23:46:37Z,12,423,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,65.0
+34725955151,schedule,2026-09-12T23:38:40Z,12,412,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,64.0
+34790820987,schedule,2026-09-13T23:49:53Z,12,373,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,67.0
+34911878835,schedule,2026-09-15T00:07:51Z,12,373,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,64.0
+35037599804,schedule,2026-09-15T23:52:49Z,12,325,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,63.0
+35164663594,schedule,2026-09-16T23:59:44Z,12,463,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,71.0
+35288576188,schedule,2026-09-17T23:50:04Z,12,313,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,64.0
+35407052883,schedule,2026-09-18T23:47:46Z,12,355,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,63.0
+35477152598,schedule,2026-09-19T23:49:33Z,12,302,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,68.0
+35545609929,schedule,2026-09-20T23:46:04Z,12,266,rules,openai/gpt-4.1 HTTP 410 x12; openai/gpt-4.1-mini HTTP 410 x12,67.0
+35672106429,schedule,2026-09-22T00:28:34Z,12,298,rules,,34.0
+35799753579,schedule,2026-09-22T23:56:13Z,12,396,rules,,36.0
+35937128018,schedule,2026-09-24T00:09:46Z,12,461,rules,,37.0
+36076408470,schedule,2026-09-25T00:11:49Z,12,447,rules,,35.0
+36204362555,schedule,2026-09-26T00:18:35Z,12,334,rules,,39.0
+36281445455,schedule,2026-09-27T00:05:38Z,12,473,rules,,33.0
+36361400473,schedule,2026-09-28T00:13:25Z,12,447,rules,,34.0
+36507619424,schedule,2026-09-29T01:22:53Z,12,448,rules,,36.0
+36652729162,schedule,2026-09-30T00:56:42Z,12,477,rules,,40.0
+36798876723,schedule,2026-10-01T00:59:11Z,12,327,rules,,34.0
+36949913386,schedule,2026-10-02T01:13:42Z,12,383,rules,,39.0
+37083828055,schedule,2026-10-03T00:51:58Z,12,296,rules,,40.0
+37164474527,schedule,2026-10-04T00:17:10Z,12,345,rules,,34.0
+37247224614,schedule,2026-10-05T00:21:43Z,12,349,rules,,40.0
+37402003217,schedule,2026-10-06T02:00:25Z,12,332,rules,,39.0
+37555725375,schedule,2026-10-07T01:10:02Z,12,331,rules,,44.0
+37713115684,schedule,2026-10-08T01:28:39Z,12,345,rules,,45.0
+37870657133,schedule,2026-10-09T01:37:16Z,12,352,rules,,36.0
+38013138439,schedule,2026-10-10T01:25:44Z,12,413,rules,,42.0
+38099022168,schedule,2026-10-11T00:36:48Z,12,388,rules,,36.0
+38189730953,schedule,2026-10-12T00:53:16Z,12,423,rules,,40.0
+38338571574,schedule,2026-10-13T02:47:26Z,12,329,rules,,39.0
+38492164767,schedule,2026-10-14T00:47:44Z,12,307,rules,,58.0
+38658803794,schedule,2026-10-15T00:13:39Z,12,239,rules,,37.0
+38826877592,schedule,2026-10-15T23:59:50Z,12,284,rules,,37.0
+38984723689,schedule,2026-10-17T00:05:24Z,12,263,rules,,38.0
+39080005592,schedule,2026-10-17T23:41:44Z,12,295,rules,,35.0
+39178169891,schedule,2026-10-18T23:50:23Z,12,263,rules,,38.0
+39350141116,schedule,2026-10-20T00:51:47Z,12,398,rules,,34.0
+39520514236,schedule,2026-10-21T00:18:26Z,12,285,rules,,39.0
+39699119013,schedule,2026-10-22T00:20:38Z,12,397,rules,,34.0
+39877425804,schedule,2026-10-23T00:19:26Z,12,329,rules,,42.0
+40043601074,schedule,2026-10-24T00:10:02Z,12,426,rules,,35.0
+40144631653,schedule,2026-10-24T23:54:52Z,12,450,rules,,40.0
+40245963754,schedule,2026-10-25T23:42:22Z,12,485,rules,,36.0
+40295928512,push,2026-10-26T08:57:36Z,12,390,rules,,40.0
+40296944005,push,2026-10-26T09:05:48Z,12,442,rules,,41.0
+40430105963,schedule,2026-10-27T01:01:54Z,12,425,rules,,42.0
+40611488478,schedule,2026-10-28T00:52:03Z,12,477,rules,,112.0
+40655787136,push,2026-10-28T08:18:00Z,12,518,rules,,38.0
+40800604167,schedule,2026-10-29T01:28:08Z,12,340,rules,,43.0
+40986122870,schedule,2026-10-30T01:29:08Z,12,290,rules,,38.0
+41154793909,schedule,2026-10-31T01:19:34Z,12,421,rules,,39.0
+41257473516,schedule,2026-11-01T00:36:20Z,12,460,rules,,35.0
+41370999819,schedule,2026-11-02T01:09:54Z,12,485,rules,,35.0
+41570913542,schedule,2026-11-03T03:13:38Z,12,366,rules,,31.0
+41756509393,schedule,2026-11-04T01:48:06Z,12,310,rules,,47.0
+41951808893,schedule,2026-11-05T01:55:58Z,12,282,rules,,36.0
+41985241008,push,2026-11-05T07:09:27Z,12,315,rules,,34.0
