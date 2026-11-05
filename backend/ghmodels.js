@@ -75,6 +75,19 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 // fallback model (a different tier) keeps working after the primary trips.
 const quotaExhausted = new Set();
 
+// Since about 2026-09-20 the endpoint has answered every request with HTTP 200
+// and a plain-text "OK" instead of a completion. Treat any non-JSON success as
+// "service unavailable": say so loudly (also as a GitHub Actions warning) and
+// stop calling it for the rest of the build, so the fallback is visible.
+let serviceDown = false;
+function reportDown(detail) {
+  if (serviceDown) return;
+  serviceDown = true;
+  const msg = `GitHub Models returned ${detail}; the LLM rewrite tier is unavailable and this build uses the rule-based converter`;
+  console.log(`  github-models: ${msg}`);
+  if (process.env.GITHUB_ACTIONS) console.log(`::warning title=LLM rewrite unavailable::${msg}`);
+}
+
 // The free tier enforces small per-minute request caps, so ALL calls in the
 // process are strictly serialised through this queue, and 429/5xx responses
 // back off (honouring retry-after) before retrying.
@@ -87,7 +100,7 @@ function enqueue(fn) {
 
 async function chat(system, user, { token, model = GH_MODEL, retries = 3, retryDelayMs = 15000 }, fetchImpl) {
   return enqueue(async () => {
-    if (quotaExhausted.has(model)) return null;
+    if (serviceDown || quotaExhausted.has(model)) return null;
     try {
       for (let attempt = 0; attempt <= retries; attempt++) {
         const res = await fetchImpl(GH_MODELS_ENDPOINT, {
@@ -134,12 +147,19 @@ async function chat(system, user, { token, model = GH_MODEL, retries = 3, retryD
           console.log(`  github-models: ${model} HTTP ${res.status}`);
           return null;
         }
+        const ctype = res.headers?.get?.("content-type") || "";
+        if (ctype && !/json/i.test(ctype)) {
+          const body = typeof res.text === "function" ? String(await res.text()).slice(0, 40) : "";
+          reportDown(`HTTP ${res.status} ${ctype.split(";")[0]} ${JSON.stringify(body)}`);
+          return null;
+        }
         const data = await res.json();
         const text = data?.choices?.[0]?.message?.content || "";
         return parseStrictJson(text);
       }
       return null;
-    } catch {
+    } catch (err) {
+      console.log(`  github-models: ${model} call failed: ${err?.message || err}`);
       return null;
     }
   });

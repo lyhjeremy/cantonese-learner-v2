@@ -112,3 +112,18 @@ test("daily-quota circuit breaker: after retries exhaust on 429, later calls ski
   assert.equal(out2, null);
   assert.equal(calls.length, before, "no further HTTP calls after the breaker trips");
 });
+
+// Keep this test last: it trips the module-level "service down" flag.
+test("ghConvertSentences: a plain-text 200 marks the service down and stops calling it", async () => {
+  const calls = [];
+  const fetchImpl = async (url, opts) => {
+    calls.push(url);
+    return { ok: true, status: 200, headers: { get: (h) => (h === "content-type" ? "text/plain; charset=utf-8" : null) }, text: async () => "OK", json: async () => { throw new Error("not json"); } };
+  };
+  const first = await ghConvertSentences(["市場造好。"], { token: "tok", review: false }, fetchImpl);
+  assert.equal(first, null);
+  const n = calls.length;
+  const second = await ghConvertSentences(["市場造好。"], { token: "tok", review: false }, fetchImpl);
+  assert.equal(second, null);
+  assert.equal(calls.length, n, "no further calls once the service is marked down");
+});
