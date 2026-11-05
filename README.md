@@ -110,11 +110,14 @@ Up to 4 lesson slots go to a second source:
 ## Run it locally
 
 ```bash
+git clone https://github.com/lyhjeremy/cantonese-learner-v2 && cd cantonese-learner-v2
 npm install          # deps for the builders + tests
 npm run serve        # serves the app at http://localhost:5173
 npm run build:news   # fetch + convert today's lessons (keyless without a key)
 npm run build:conversations   # regenerate conversations.json from the source
 ```
+
+Without `ANTHROPIC_API_KEY` or a `GITHUB_TOKEN` that can call GitHub Models, a local `build:news` falls back to the rule-based converter. (A `gh auth token` token fell back to the rules in a test on 2026-11-05.) The Pages workflow uses its own `GITHUB_TOKEN`.
 
 To exercise the Claude rewrite locally:
 
@@ -143,6 +146,7 @@ Secrets and variables (repo → Settings → Secrets and variables → Actions):
 ## Tests
 
 ```bash
+npx playwright install chromium   # once, for the e2e tests
 npm test             # unit (chunking, rules, rewrite+verify mocked, grader,
                      #       rss + wechat fixture, numbers) + Playwright e2e
 npm run test:unit
